@@ -1,11 +1,8 @@
 [![Review Assignment Due Date]([x]https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/INcAwgxk)
 # Portfolio project IDATT1003
-This file uses Mark Down syntax. For more information see [here]([x]https://www.markdownguide.org/basic-syntax/).
 
-[//]: # (TODO: Fill inn your name and student ID)
-
-STUDENT NAME = "Your name"  
-STUDENT ID = "Your ID"
+STUDENT NAME = "Mats Orpia Vestvik"  
+STUDENT ID = "587996"
 
 ## Project description
 
