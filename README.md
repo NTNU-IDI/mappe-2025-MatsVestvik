@@ -7,10 +7,12 @@ STUDENT ID = "587996"
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
+This is a Diary program
 
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+Coming soon
 
 ## Link to repository
 
