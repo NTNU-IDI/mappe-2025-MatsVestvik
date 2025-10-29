@@ -1,37 +1,30 @@
-public class DiaryEntry {
-    private final String author;
-    private final String entry;
-    private final int dayinmonth;
-    private final int month;
-    private final int year;
+public class DiaryEntry{
+    private String content;
+    private Author author;
+    private final int dd;
+    private final int mm;
+    private final int yyyy;
 
-    DiaryEntry(String author, String entry, int dayinmonth, int month, int year){
-        this.author = author;
-        this.entry = entry;
-        this.dayinmonth = dayinmonth;
-        this.month = month;
-        this.year = year;
+    DiaryEntry(String content, int dd, int mm, int yyyy){
+        this.content = content;
+        this.dd = dd;
+        this.mm = mm;
+        this.yyyy= yyyy;
     }
 
-    //get motoder sortert som variablene på toppen
-    public String getAuthor(){return this.author;}
+    public String getContent() {return content;}
+    public int getDd() {return dd;}
+    public int getMm() {return mm;}
+    public int getYyyy() {return yyyy;}
 
-    public String getEntry(){return this.entry;}
-
-    public int getDayinmonth(){return this.dayinmonth;}
-
-    public int getMonth(){return this.month;}
-
-    public int getYear(){return this.year;}
-
-    //quality of life metoder
     public String getDate(){
-        return getDayinmonth()+" / "+getMonth()+" / "+getYear();
+        return dd+"/"+mm+"-"+yyyy;
     }
 
-    public void printDiary(){
-        System.out.println(this.author + "     " + getDate() +  "\n\n" + this.entry);
+    public void printEntry(){
+        System.out.println(getDate());
+        System.out.println(getContent());
     }
 
-
+    
 }
