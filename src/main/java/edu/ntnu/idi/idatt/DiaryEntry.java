@@ -1,3 +1,4 @@
+package main.java.edu.ntnu.idi.idatt;
 public class DiaryEntry{
     private String content;
 

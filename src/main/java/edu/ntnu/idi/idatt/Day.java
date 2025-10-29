@@ -1,3 +1,4 @@
+package main.java.edu.ntnu.idi.idatt;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,6 +10,11 @@ public class Day {
     Day(){
         entries = new ArrayList<>();
         this.date = LocalDateTime.now(); 
+    }
+
+    public void addEntry(String content){
+        DiaryEntry newEntry = new DiaryEntry(content);
+        entries.add(newEntry);
     }
 
     public LocalDateTime getDate() {return date;}
