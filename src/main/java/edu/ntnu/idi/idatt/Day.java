@@ -4,26 +4,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Day {
-    private List<DiaryEntry> entries;
+    private List<String> entries;
     private LocalDateTime date;
+    private final String id;
 
-    Day(){
+    Day(String id){
+        this.id = id;
         entries = new ArrayList<>();
         this.date = LocalDateTime.now(); 
     }
 
+    public String getId() {return id;}
+
     public void addEntry(String content){
-        DiaryEntry newEntry = new DiaryEntry(content);
-        entries.add(newEntry);
+        entries.add(content);
     }
 
     public LocalDateTime getDate() {return date;}
-    public List<DiaryEntry> getEntries() {return entries;}
 
     public void printDay(){
         for(int i = 0; i< entries.size(); i++){
             System.out.println("-----------------------------------");
-            System.out.println(entries.get(i).getContent());
+            System.out.println(entries.get(i));
             System.out.println();
         }
     }
