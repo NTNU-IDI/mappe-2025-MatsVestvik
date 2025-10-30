@@ -20,6 +20,6 @@ public class Day {
     public LocalDateTime getDate() {return date;}
 
     public void printDay(){
-        System.out.println(this.entry);
+        System.out.println(entry);
     }
 }

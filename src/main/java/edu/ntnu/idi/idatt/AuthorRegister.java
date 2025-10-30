@@ -29,8 +29,9 @@ public class AuthorRegister {
                         """);
                 }
                 else{
-                    Day newDay = new Day(ID);
-                    days.put(ID, newDay);
+                    authors.get(i).addDay();
+                    System.out.println(authors.get(i).getDaysSize());
+                    System.out.println("day added succesfully");
                 }
                 return;
             }
@@ -46,9 +47,9 @@ public class AuthorRegister {
         for(int i = 0; i < authors.size(); i++){// går igjennom alle authors
             if (auth.equalsIgnoreCase(authors.get(i).getName())) {//author exists
                 String ID =  authors.get(i).getDaysSize() + authors.get(i).getName();//creates the day ID
-                Day day = days.get(ID);
                 if (days.containsKey(ID)){ //day with ID
-                    day.addEntry(entry);
+                    authors.get(i).addEntry(entry);
+                    System.out.println("entry added succesfully");
                 }
                 else{
                     System.out.println("""
@@ -67,7 +68,9 @@ public class AuthorRegister {
     }
 
     public void printAll(){
+        System.out.println("Printing....");
         for(int i = 0; i< authors.size(); i++){
+            System.out.println("Printing....");
             authors.get(i).printAll();
         }
     }
