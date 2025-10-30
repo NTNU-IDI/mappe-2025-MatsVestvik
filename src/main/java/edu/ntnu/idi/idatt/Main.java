@@ -8,6 +8,11 @@ public class Main{
         register.addNewAuthor("Birgitte");
         register.addNewAuthor("Adrian");
 
-        register.printAllAuthors();
+        //register.printAllAuthors();
+
+        register.addDay("Mats");
+
+        register.addContentToDay("Mats", "This is the content");
+        register.printAll();
     }
 }
