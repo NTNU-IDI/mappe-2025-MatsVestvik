@@ -16,10 +16,8 @@ public class Author {
     public String getName() {return name;}
     public int getDaysSize() {return days.size();}
 
-    public void addDay(){
-        String id = days.size() + this.name;
-        Day newDay = new Day(id);
-        days.add(newDay);
+    public void addDay(Day day){
+        days.add(day);
     }
 
     public void addEntry(String content){

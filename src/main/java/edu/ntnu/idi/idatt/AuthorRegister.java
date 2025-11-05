@@ -29,7 +29,8 @@ public class AuthorRegister {
                         """);
                 }
                 else{
-                    authors.get(i).addDay();
+                    Day newday = new Day(ID);
+                    days.put(auth, newday);
                     System.out.println(authors.get(i).getDaysSize());
                     System.out.println("day added succesfully");
                 }
@@ -43,20 +44,10 @@ public class AuthorRegister {
                     """); 
     }
 
-    public void addContentToDay(String auth, String entry){
-        for(int i = 0; i < authors.size(); i++){// går igjennom alle authors
-            if (auth.equalsIgnoreCase(authors.get(i).getName())) {//author exists
-                String ID =  authors.get(i).getDaysSize() + authors.get(i).getName();//creates the day ID
-                if (days.containsKey(ID)){ //day with ID
-                    authors.get(i).addEntry(entry);
-                    System.out.println("entry added succesfully");
-                }
-                else{
-                    System.out.println("""
-                            This day does not exist for this author.
-                            Please create new day.
-                            """);
-                }
+    public void addContentToDay(String content, String auth){
+        for(int i = 0; i < authors.size(); i++){
+            if (auth.equalsIgnoreCase(authors.get(i).getName())) {
+                authors.get(i).addEntry(content);
             }
         }
     } 

@@ -12,7 +12,7 @@ public class Main{
 
         register.addDay("Mats");
 
-        register.addContentToDay("Mats", "This is the content :):):):)");
+        register.addContentToDay("This is content", "Mats");
         register.printAll();
     }
 }
