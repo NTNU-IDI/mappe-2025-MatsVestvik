@@ -21,7 +21,8 @@ public class AuthorRegister {
     public void addDay(String auth){
         for(int i = 0; i < authors.size(); i++){
             if (auth.equalsIgnoreCase(authors.get(i).getName())) {
-                String ID =  authors.get(i).getDaysSize() + authors.get(i).getName();
+                String ID = authors.get(i).getDaysSize() + authors.get(i).getName();
+                
                 if (days.containsKey(ID)){
                     System.out.println("""
                         This day already exists for this author.
@@ -30,15 +31,15 @@ public class AuthorRegister {
                 }
                 else{
                     Day newday = new Day(ID);
-                    days.put(auth, newday);
-                    System.out.println(authors.get(i).getDaysSize());
-                    System.out.println("day added succesfully");
+                    days.put(ID, newday); 
+                    authors.get(i).addDay(newday); 
+                    System.out.println();
+                    System.out.println("day added successfully");
                 }
                 return;
             }
-
         }
-       System.out.println("""
+        System.out.println("""
                     This author does not exist.
                     Please create new author or try again.
                     """); 
@@ -59,9 +60,7 @@ public class AuthorRegister {
     }
 
     public void printAll(){
-        System.out.println("Printing....");
         for(int i = 0; i< authors.size(); i++){
-            System.out.println("Printing....");
             authors.get(i).printAll();
         }
     }

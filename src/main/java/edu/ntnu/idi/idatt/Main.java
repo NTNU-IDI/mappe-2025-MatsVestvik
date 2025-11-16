@@ -11,6 +11,7 @@ public class Main{
         //register.printAllAuthors();
 
         register.addDay("Mats");
+        register.addDay("Birgitte");
 
         register.addContentToDay("This is content", "Mats");
         register.printAll();
