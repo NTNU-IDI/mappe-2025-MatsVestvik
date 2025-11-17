@@ -55,8 +55,10 @@ public class AuthorRegister {
     } 
 
     public void printAllAuthors(){
-        for(Author author:authors){
-            System.out.println(author.getName());
+        System.out.println("Authors: ");
+        for(int i = 0; i<authors.size(); i++){
+            int num = i+1;
+            System.out.println(num+". "+authors.get(i).getName());
         }
     }
 
@@ -83,8 +85,6 @@ public class AuthorRegister {
                 System.out.println("Failed to delete file: " + author.getName());
             }
         }
-        
-        // Then clear the entire collection at once
         authors.clear();
     }
 
