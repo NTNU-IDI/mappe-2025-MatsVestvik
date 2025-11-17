@@ -18,7 +18,7 @@ public class Day {
 
     public void addEntry(String content, String name){
         try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-            writer.write(content+"\n");
+            writer.write(","+content+"\n");
         }catch(IOException e){
             System.out.println("Something went wrong please try again");
         } 

@@ -1,5 +1,6 @@
 package main.java.edu.ntnu.idi.idatt;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -57,6 +58,34 @@ public class AuthorRegister {
         for(Author author:authors){
             System.out.println(author.getName());
         }
+    }
+
+    public void deleteAuthor(String auth) {
+        
+        File file = new File("src\\main\\resources\\entries\\"+auth+".csv");
+        
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
+
+        authors.removeIf(author -> author.getName().equals(auth));
+    }
+
+    public void reset() {
+        
+        for (Author author : authors) {
+            File file = new File("src\\main\\resources\\entries\\" + author.getName() + ".csv");
+            if (file.delete()) {
+                System.out.println("File deleted successfully: " + author.getName());
+            } else {
+                System.out.println("Failed to delete file: " + author.getName());
+            }
+        }
+        
+        // Then clear the entire collection at once
+        authors.clear();
     }
 
     public void printAll(){

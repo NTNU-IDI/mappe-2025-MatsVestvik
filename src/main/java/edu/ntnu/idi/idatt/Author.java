@@ -32,8 +32,7 @@ public class Author {
         days.add(day);
 
         try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-            writer.write("____________________________________________");
-            writer.write(day.getDate().toString() +"        "+ name + "\n\n");
+            writer.write(day.getDate().toString() +","+ name);
         }catch(IOException e){
             System.out.println("Something went wrong please try again");
         } 
