@@ -18,7 +18,7 @@ public class Author {
         this.name = name;
         days = new ArrayList<>();
 
-        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv")){
+        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
             
         }catch(IOException e){
             System.out.println("Something went wrong please try again");
@@ -30,6 +30,13 @@ public class Author {
 
     public void addDay(Day day){
         days.add(day);
+
+        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
+            writer.write("____________________________________________");
+            writer.write(day.getDate().toString() +"        "+ name + "\n\n");
+        }catch(IOException e){
+            System.out.println("Something went wrong please try again");
+        } 
     }
 
     public void addEntry(String content){

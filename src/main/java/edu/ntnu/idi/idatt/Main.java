@@ -14,6 +14,5 @@ public class Main{
         register.addDay("Birgitte");
 
         register.addContentToDay("This is content", "Mats");
-        register.printAll();
     }
 }
