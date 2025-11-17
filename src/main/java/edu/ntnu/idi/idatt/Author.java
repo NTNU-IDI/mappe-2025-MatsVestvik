@@ -1,13 +1,12 @@
 package main.java.edu.ntnu.idi.idatt;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Author {
     private String name;
@@ -28,14 +27,45 @@ public class Author {
     public String getName() {return name;}
     public int getDaysSize() {return days.size();}
 
-    public void addDay(Day day){
-        days.add(day);
+    public boolean searchDays(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String targetDate = date.format(formatter);
+        
+        try(BufferedReader br = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+name+".csv"))){
+            String line;
+    
+            while ((line = br.readLine()) != null) {
+                
+                String[] values = line.split(",");
+                if (values.length > 0) {
+                    String rowDate = values[0].trim();
+                    if (rowDate.equals(targetDate)) {
+                        return true; // Date exists
+                    }
+                }
+            }
+        } catch(IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+        return false; // Date doesn't exist
+    }
 
-        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-            writer.write(day.getDate().toString() +","+ name);
-        }catch(IOException e){
-            System.out.println("Something went wrong please try again");
-        } 
+    public void addDay(Day day){
+
+        if (searchDays(day.getDate())) {
+            System.out.println("this day already exists");
+        }
+        else{
+                
+            days.add(day);
+
+            try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
+                writer.write(day.getDate().toString() +","+ name);
+            }catch(IOException e){
+                System.out.println("Something went wrong please try again");
+            } 
+        }
+    
     }
 
     public void addEntry(String content){
