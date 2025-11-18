@@ -55,7 +55,17 @@ public class MenuBoxes {
         scanner = new Scanner(System.in);
         int ePin = scanner.nextInt();
 
-        if (ePin == )
+        if (ePin == 1){
+            System.out.println("----------------------------------------");
+            System.out.println("    Welcome " + register.getAuthor(input-1));
+            System.out.println("""
+                        What do you want to do today?
+                        """);
+            System.out.println("----------------------------------------");
+        }
+        else{
+            System.out.println("    entered pin was incorrect. Plese try again");
+        }
         scanner.close();
     }
 }

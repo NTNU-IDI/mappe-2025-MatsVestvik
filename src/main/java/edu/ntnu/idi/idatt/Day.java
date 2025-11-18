@@ -6,15 +6,23 @@ import java.time.LocalDate;
 
 public class Day {
     private String entry;
-    private LocalDate date;
+    private String date;
     private final String id;
 
-    Day(String id){
+    Day(String id, String entry){
         this.id = id;
-        this.date = LocalDate.now();
+        this.entry = entry;
+        this.date = LocalDate.now().toString();
+    }
+
+    Day(String id, String date, String entry){
+        this.id = id;
+        this.entry = entry;
+        this.date = date;
     }
 
     public String getId() {return id;}
+    public String getContent() {return this.entry;}
 
     public void addEntry(String content, String name){
         try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
@@ -24,7 +32,7 @@ public class Day {
         } 
     }
 
-    public LocalDate getDate() {return date;}
+    public String getDate() {return date;}
 
     public void printDay(){
         System.out.println(entry);

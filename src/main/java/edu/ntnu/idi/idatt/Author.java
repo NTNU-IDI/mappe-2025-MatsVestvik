@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +26,8 @@ public class Author {
     public String getName() {return name;}
     public int getDaysSize() {return days.size();}
 
-    public boolean searchDays(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String targetDate = date.format(formatter);
+    public boolean searchDays(String date) {
+        String targetDate = date;
         
         try(BufferedReader br = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+name+".csv"))){
             String line;
@@ -53,14 +51,15 @@ public class Author {
     public void addDay(Day day){
 
         if (searchDays(day.getDate())) {
-            System.out.println("this day already exists");
+            System.out.println("this day is already in csv");
         }
         else{
                 
             days.add(day);
 
             try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-                writer.write(day.getDate().toString() +","+ name);
+                writer.write(day.getDate().toString() +","+ name+","+day.getContent()+"\n");
+                System.out.println("succsessfully wrote to csv");
             }catch(IOException e){
                 System.out.println("Something went wrong please try again");
             } 
@@ -70,7 +69,7 @@ public class Author {
 
     public void addEntry(String content){
         for(int i = 0; i < days.size(); i++){
-            if(LocalDate.now().equals(days.get(i).getDate())){
+            if(LocalDate.now().toString().equals(days.get(i).getDate())){
                 days.get(i).addEntry(content, this.name);
             }
         }

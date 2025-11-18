@@ -20,6 +20,7 @@ public class AuthorRegister {
         Initialize initialize = new Initialize();
         initialize.initializeAuthorsFromCSV(authors);
         initializeDaysFromCSV();
+        System.out.println("------------------");
     }
 
     public void initializeDaysFromCSV(){
@@ -31,7 +32,8 @@ public class AuthorRegister {
                     String[] values = line.split(",");
                     if (values.length > 0) {
                         String rowDate = values[0].trim();
-                        addDay(author.getName(), rowDate);
+                        String rowEntry = values[2].trim();
+                        addDay(author.getName(), rowDate, rowEntry);
                     }
 
                 }
@@ -41,20 +43,28 @@ public class AuthorRegister {
         }
     }
 
-    public void addNewAuthor(String name){
+    public void addNewAuthor(String name) {
+        for (Author author : authors) {
+            if (author.getName().equals(name)) {
+                System.out.println("This author already exists");
+                return;
+            }
+        }
+        
         Author newAuthor = new Author(name);
         authors.add(newAuthor);
+        System.out.println("adding new author...");
     }
 
     public boolean searchDays(String auth, LocalDate date){
         for(Author author:authors){
             if(author.getName().equals(auth)){
-                return author.searchDays(date);
+                return author.searchDays(date.toString());
             }
         }
         return false;
     }
-    public void addDay(String auth, String date){
+    public void addDay(String auth, String date, String content){
         for(int i = 0; i < authors.size(); i++){
             if (auth.equalsIgnoreCase(authors.get(i).getName())) {
                 String ID = date + authors.get(i).getName();
@@ -66,11 +76,10 @@ public class AuthorRegister {
                         """);
                 }
                 else{
-                    Day newday = new Day(ID);
+                    Day newday = new Day(ID, date, content);
                     days.put(ID, newday); 
                     authors.get(i).addDay(newday); 
-                    System.out.println();
-                    System.out.println("day added successfully");
+                    System.out.println("day added successfully to map");
                 }
                 return;
             }
@@ -82,7 +91,7 @@ public class AuthorRegister {
     }
     
 
-    public void addDayToday(String auth){
+    public void addDayToday(String auth, String content){
         for(int i = 0; i < authors.size(); i++){
             if (auth.equalsIgnoreCase(authors.get(i).getName())) {
                 String ID = LocalDate.now() + authors.get(i).getName();
@@ -94,7 +103,7 @@ public class AuthorRegister {
                         """);
                 }
                 else{
-                    Day newday = new Day(ID);
+                    Day newday = new Day(ID, content);
                     days.put(ID, newday); 
                     authors.get(i).addDay(newday); 
                     System.out.println();
@@ -173,9 +182,27 @@ public class AuthorRegister {
         return authors.get(pos).getName();
     }
 
+    public void printDaysAuthor(String author){
+        try(BufferedReader br = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+author+".csv"))){
+            String line;
+    
+            while ((line = br.readLine()) != null) {
+                
+                String[] values = line.split(",");
+                if (values.length > 0) {
+                    String rowDate = values[0].trim();
+                    System.out.println(rowDate);
+                }
+            }
+        } catch(IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public void printAll(){
         for(int i = 0; i< authors.size(); i++){
-            authors.get(i).printAll();
+            System.out.println(authors.get(i).getName());
+            printDaysAuthor(authors.get(i).getName());
         }
     }
 }
