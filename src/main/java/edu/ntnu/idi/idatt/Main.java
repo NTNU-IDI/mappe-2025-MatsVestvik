@@ -6,12 +6,12 @@ public class Main{
 
         
         register.addNewAuthor("Birgitte");
-        //register.addNewAuthor("Mats");
+        register.addNewAuthor("Mats");
 
         //register.printAllAuthors();
 
-        //.addDay("Mats", "2025-08-12", "This is content");
-        //.addDayToday("Mats", "This is also some content");
+        register.addDay("Mats", "2025-08-12", "This is content");
+        register.addDayToday("Mats", "This is also some content");
         //register.addDay("Birgitte", "2025-08-30");
 
         //register.addContentToDay("This is content", "Mats");
@@ -26,5 +26,6 @@ public class Main{
         //boxes.welcome(register);
 
         register.printAll();
+        ClearCSV.clear();
     }
 }
