@@ -25,11 +25,7 @@ public class Day {
     public String getContent() {return this.entry;}
 
     public void addEntry(String content, String name){
-        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-            writer.write(","+content+"\n");
-        }catch(IOException e){
-            System.out.println("Something went wrong please try again");
-        } 
+        
     }
 
     public String getDate() {return date;}

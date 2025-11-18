@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Save {
     public static void saveToCSV(List<Author> authors, HashMap<String, Day> days){
+        ClearCSV.clear();
         for (Author author : authors){
             try(FileWriter writer = new FileWriter("src/main/resources/entries/"+author.getName()+".csv", true)){
                 for (int i = 0; i < author.getDaysSize(); i++){

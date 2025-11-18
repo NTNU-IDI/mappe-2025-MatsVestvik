@@ -48,7 +48,7 @@ public class MenuBoxes {
 
     public void loginHandling(int input, AuthorRegister register){
         System.out.println("----------------------------------------");
-        System.out.println("    You have selected " + register.getAuthor(input-1));
+        System.out.println("    You have selected " + register.getAuthorName(input-1));
         System.out.println("    Please enter your pin:");
         System.out.println("----------------------------------------");
 
@@ -57,7 +57,7 @@ public class MenuBoxes {
 
         if (ePin == 1){
             System.out.println("----------------------------------------");
-            System.out.println("    Welcome " + register.getAuthor(input-1));
+            System.out.println("    Welcome " + register.getAuthorName(input-1));
             System.out.println("""
                         What do you want to do today?
                         """);

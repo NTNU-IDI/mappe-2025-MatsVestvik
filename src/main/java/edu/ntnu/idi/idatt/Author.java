@@ -15,12 +15,6 @@ public class Author {
     Author(String name){
         this.name = name;
         days = new ArrayList<>();
-
-        try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-            
-        }catch(IOException e){
-            System.out.println("Something went wrong please try again");
-        } 
     }
 
     public String getName() {return name;}
@@ -29,51 +23,20 @@ public class Author {
     public List<Day> getListDays() {return days;}
 
     public boolean searchDays(String date) {
-        String targetDate = date;
-        
-        try(BufferedReader br = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+name+".csv"))){
-            String line;
-    
-            while ((line = br.readLine()) != null) {
-                
-                String[] values = line.split(",");
-                if (values.length > 0) {
-                    String rowDate = values[0].trim();
-                    if (rowDate.equals(targetDate)) {
-                        return true; // Date exists
-                    }
-                }
+        for (Day day : days){
+            if (day.getDate().equals(date)) {
+                return true;
             }
-        } catch(IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
         }
-        return false; // Date doesn't exist
+        return false;
     }
 
     public void addDay(Day day){
-
-        if (searchDays(day.getDate())) {
-            System.out.println("this day is already in csv");
+        if (searchDays(name)) {
+            System.out.println("This day already exists");
         }
         else{
-                
             days.add(day);
-
-            try(FileWriter writer = new FileWriter("src/main/resources/entries/"+name+".csv", true)){
-                writer.write(day.getDate().toString() +","+ name+","+day.getContent()+"\n");
-                System.out.println("succsessfully wrote to csv");
-            }catch(IOException e){
-                System.out.println("Something went wrong please try again");
-            } 
-        }
-    
-    }
-
-    public void addEntry(String content){
-        for(int i = 0; i < days.size(); i++){
-            if(LocalDate.now().toString().equals(days.get(i).getDate())){
-                days.get(i).addEntry(content, this.name);
-            }
         }
     }
 
