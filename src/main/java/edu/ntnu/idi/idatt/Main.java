@@ -5,13 +5,13 @@ public class Main{
         AuthorRegister register = new AuthorRegister();
 
         
-
-        register.addNewAuthor("Mats");
+        register.addNewAuthor("Birgitte");
+        //register.addNewAuthor("Mats");
 
         //register.printAllAuthors();
 
-        register.addDay("Mats", "2025-08-12", "This is content");
-        register.addDayToday("Mats", "This is also some content");
+        //.addDay("Mats", "2025-08-12", "This is content");
+        //.addDayToday("Mats", "This is also some content");
         //register.addDay("Birgitte", "2025-08-30");
 
         //register.addContentToDay("This is content", "Mats");
