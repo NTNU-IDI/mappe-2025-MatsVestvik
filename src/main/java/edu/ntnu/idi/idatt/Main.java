@@ -1,5 +1,7 @@
 package main.java.edu.ntnu.idi.idatt;
 
+import java.util.Scanner;
+
 public class Main{
     public static void main(String[] args) {
         AuthorRegister register = new AuthorRegister();
@@ -19,6 +21,9 @@ public class Main{
         //register.addContentToDay("add some more after", "Mats");
 
  
-        register.printAllAuthors();
+        //register.printAllAuthors();
+
+        MenuBoxes boxes = new MenuBoxes();
+        boxes.welcome(register);
     }
 }

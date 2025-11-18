@@ -17,37 +17,12 @@ public class AuthorRegister {
         authors = new ArrayList<>();
         days = new HashMap<>();
 
-        initializeAuthorsFromCSV();
+        Initialize initialize = new Initialize();
+        initialize.initializeAuthorsFromCSV(authors);
         initializeDaysFromCSV();
     }
 
-    private void initializeAuthorsFromCSV() {
-        String entriesDirectory = "src/main/resources/entries/";
-        File dir = new File(entriesDirectory);
-        
-        // Get all CSV files
-        File[] csvFiles = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".csv"));
-        
-        if (csvFiles == null || csvFiles.length == 0) {
-            System.out.println("No author CSV files found.");
-            return;
-        }
-        
-        // Create Author objects for each CSV file
-        for (File csvFile : csvFiles) {
-            String fileName = csvFile.getName();
-            String authorName = fileName.substring(0, fileName.lastIndexOf('.'));
-            
-            // Create and add the author
-            Author author = new Author(authorName);
-            authors.add(author);
-            System.out.println("Loaded author: " + authorName);
-        }
-        
-        System.out.println("AuthorRegister initialized with " + authors.size() + " authors.");
-    }
-
-    private void initializeDaysFromCSV(){
+    public void initializeDaysFromCSV(){
         for(Author author:authors){
             try(BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+author.getName()+".csv"))){
                 String line;
@@ -143,11 +118,14 @@ public class AuthorRegister {
     } 
 
     public void printAllAuthors(){
-        System.out.println("Authors: ");
+        int exitcounter = 1;
         for(int i = 0; i<authors.size(); i++){
             int num = i+1;
-            System.out.println(num+". "+authors.get(i).getName());
+            System.out.println("    "+num+". "+authors.get(i).getName());
+            exitcounter++;
         }
+
+        System.out.println("    "+exitcounter + ". Exit");
     }
 
     public void deleteAuthor(String auth) {
@@ -189,6 +167,10 @@ public class AuthorRegister {
         // Clear the authors list
         authors.clear();
         System.out.println("All authors cleared from memory.");
+    }
+
+    public String getAuthor(int pos){
+        return authors.get(pos).getName();
     }
 
     public void printAll(){

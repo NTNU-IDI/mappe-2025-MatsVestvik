@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Author {
     private String name;
-    //private String password;
+    //private int pin;
     private List<Day> days;
 
     Author(String name){
