@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.HashMap;
 
 public class AuthorRegister {
-    private List<Author> authors;
-    private HashMap<String, Day> days;
+    private static List<Author> authors;
+    private static HashMap<String, Day> days;
 
     AuthorRegister(){
         authors = new ArrayList<>();
@@ -19,6 +19,9 @@ public class AuthorRegister {
 
         Load load = new Load(authors, days);
     }
+
+    public static List<Author> getAuthors(){ return authors;}
+    public static HashMap<String, Day> getDays(){ return days;}
 
     public void addNewAuthor(String name) {
         for (Author author : authors) {

@@ -25,7 +25,8 @@ public class Main{
         //MenuBoxes boxes = new MenuBoxes();
         //boxes.welcome(register);
 
-        register.printAll();
+        //register.printAll();
         ClearCSV.clear();
+        Save.saveToCSV(AuthorRegister.getAuthors(), AuthorRegister.getDays());
     }
 }

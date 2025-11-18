@@ -26,6 +26,8 @@ public class Author {
     public String getName() {return name;}
     public int getDaysSize() {return days.size();}
 
+    public List<Day> getListDays() {return days;}
+
     public boolean searchDays(String date) {
         String targetDate = date;
         
