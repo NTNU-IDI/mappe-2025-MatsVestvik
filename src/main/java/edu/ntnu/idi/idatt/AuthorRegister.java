@@ -17,30 +17,7 @@ public class AuthorRegister {
         authors = new ArrayList<>();
         days = new HashMap<>();
 
-        Initialize initialize = new Initialize();
-        initialize.initializeAuthorsFromCSV(authors);
-        initializeDaysFromCSV();
-        System.out.println("------------------");
-    }
-
-    public void initializeDaysFromCSV(){
-        for(Author author:authors){
-            try(BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+author.getName()+".csv"))){
-                String line;
-        
-                while ((line = reader.readLine()) != null) {
-                    String[] values = line.split(",");
-                    if (values.length > 0) {
-                        String rowDate = values[0].trim();
-                        String rowEntry = values[2].trim();
-                        addDay(author.getName(), rowDate, rowEntry);
-                    }
-
-                }
-            }catch(IOException e){
-                System.out.println("something went wrong");
-            }
-        }
+        Load load = new Load(authors, days);
     }
 
     public void addNewAuthor(String name) {
