@@ -47,9 +47,8 @@ public class Author {
     }
 
     public void printAll(){
-        for(int i = 0 ; i < days.size(); i++){
-            System.out.println(days.get(i).getDate());
-            days.get(i).printDay();
+        for(Day day: days){
+            System.out.println(day.getDate());
         }
     }
 }

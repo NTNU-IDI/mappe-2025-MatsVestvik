@@ -80,7 +80,7 @@ public class MenuBoxes {
     public void whatTodayHandling(int choice, String author, AuthorRegister register){
         switch (choice) {
             case 1 -> writeTodaysEntry(author, register);
-            //case 2 -> editExistingDay();
+            case 2 -> editExistingDay(author, register);
             //case 3 -> addSpecificDate();
             //case 4 -> exit();
             default -> System.out.println("Something went wrong, please try again");
@@ -94,6 +94,10 @@ public class MenuBoxes {
         String content = scanner.nextLine();
         register.addDay(author, LocalDate.now().toString(), content);
         System.out.println("----------------------------------------");
+    }
+
+    public void editExistingDay(String author, AuthorRegister register){
+        register.getAuthorByName(author).printAll();
     }
 
     public void createNewUser(AuthorRegister register){
