@@ -77,7 +77,7 @@ public class MenuBoxes {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
                 
-                if (choice == 4) {
+                if (choice == 5) {
                     inUserMenu = false;
                     System.out.println("Logging out...");
                 } else {
