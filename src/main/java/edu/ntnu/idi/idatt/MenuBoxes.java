@@ -10,7 +10,7 @@ public class MenuBoxes {
     private boolean running = true;
 
     MenuBoxes(){
-
+        scanner = new Scanner(System.in); // Initialize scanner once
     }
 
     public void welcome(AuthorRegister register){
@@ -24,10 +24,9 @@ public class MenuBoxes {
                     3. Exit
                 ----------------------------------------
                     """);
-            scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
             welcomeHandling(choice, register);
-            scanner.close();
         }
     }
 
@@ -45,10 +44,9 @@ public class MenuBoxes {
         System.out.println("    Choose a user:");
         register.printAllAuthors();
         System.out.println("----------------------------------------");
-        scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
         loginHandling(choice, register);
-        scanner.close();
     }
 
     public void loginHandling(int input, AuthorRegister register){
@@ -57,37 +55,47 @@ public class MenuBoxes {
         System.out.println("    Please enter your pin:");
         System.out.println("----------------------------------------");
 
-        scanner = new Scanner(System.in);
         int ePin = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
         if (ePin == 1){
             System.out.println("----------------------------------------");
             System.out.println("    Welcome " + register.getAuthorName(input-1));
-            System.out.println("""
+            
+            boolean inUserMenu = true;
+            while (inUserMenu) {
+                System.out.println("""
                             What do you want to do today?
                             1. Write todays entry
                             2. Edit existing day
                             3. Add specific date
-                            4. Exit
+                            4. Delete my account
+                            5. Logout
                         ----------------------------------------
                             """);
 
-            scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            whatTodayHandling(choice, register.getAuthorName(input-1), register);
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                
+                if (choice == 4) {
+                    inUserMenu = false;
+                    System.out.println("Logging out...");
+                } else {
+                    whatTodayHandling(choice, register.getAuthorName(input-1), register);
+                }
+            }
         }
         else{
-            System.out.println("    entered pin was incorrect. Plese try again");
+            System.out.println("    entered pin was incorrect. Please try again");
         }
-        scanner.close();
     }
 
     public void whatTodayHandling(int choice, String author, AuthorRegister register){
         switch (choice) {
             case 1 -> writeTodaysEntry(author, register);
             case 2 -> editExistingDay(author, register);
-            //case 3 -> addSpecificDate();
-            //case 4 -> exit();
+            case 3 -> addSpecificDate(author, register);
+            case 4 -> deleteAccount(author, register);
             default -> System.out.println("Something went wrong, please try again");
         }
     }
@@ -95,9 +103,9 @@ public class MenuBoxes {
     public void writeTodaysEntry(String author, AuthorRegister register){
         System.out.println("----------------------------------------");
         System.out.println("      What is on your mind today: ");
-        scanner = new Scanner(System.in);
         String content = scanner.nextLine();
         register.addDay(author, LocalDate.now().toString(), content);
+        System.out.println("Entry saved for today!");
         System.out.println("----------------------------------------");
     }
 
@@ -106,18 +114,43 @@ public class MenuBoxes {
         register.getAuthorByName(author).printAll();
         System.out.println("----------------------------------------");
         System.out.print("  Type in the date of the day you want to edit: ");
-        scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         System.out.print("  Type in the new entry for this day: ");
         String entry = scanner.nextLine();
         register.editDay(choice, entry, author);
+        System.out.println("Entry updated successfully!");
         System.out.println("----------------------------------------");
+    }
+
+    public void addSpecificDate(String author, AuthorRegister register){
+        System.out.println("----------------------------------------");
+        System.out.print("  Enter the date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.println("      What is on your mind for " + date + ": ");
+        String content = scanner.nextLine();
+        register.addDay(author, date, content);
+        System.out.println("Entry saved for " + date + "!");
+        System.out.println("----------------------------------------");
+    }
+
+    public void deleteAccount(String author, AuthorRegister register){
+        System.out.println("""
+                    Warning you are about to delete your account
+                    Type your username to confirm
+                """);
+        String username = scanner.nextLine();
+        if(username.equals(author)){
+            register.deleteAuthor(author);
+            System.out.println("    Account delted");
+        }
+        else{
+            System.out.println("    What you typed did not match your username");
+        }
     }
 
     public void createNewUser(AuthorRegister register){
         System.out.println("----------------------------------------");
         System.out.print("  Please enter your name: ");
-        scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         register.addNewAuthor(name);
         System.out.println("    Welcome to the system " + name);
@@ -125,6 +158,9 @@ public class MenuBoxes {
     }
 
     public void exit(AuthorRegister register){
+        running = false;
         Save.saveToCSV(register.getAuthors(), register.getDays());
+        scanner.close();
+        System.out.println("Goodbye!");
     }
 }
