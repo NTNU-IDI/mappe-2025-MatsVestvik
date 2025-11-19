@@ -23,11 +23,11 @@ public class Main{
  
         //register.printAllAuthors();
 
-        //MenuBoxes boxes = new MenuBoxes();
-        //boxes.welcome(register);
+        MenuBoxes boxes = new MenuBoxes();
+        boxes.welcome(register);
 
-        register.printAllAuthors();
-        register.printDaysAuthor(AuthorRegister.getAuthorByName("Mats"));
+        //register.printAllAuthors();
+        //register.printDaysAuthor(AuthorRegister.getAuthorByName("Mats"));
 
         //register.printAll();
         Save.saveToCSV(AuthorRegister.getAuthors(), AuthorRegister.getDays());
