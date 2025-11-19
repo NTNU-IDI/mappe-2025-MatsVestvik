@@ -1,37 +1,41 @@
 package main.java.edu.ntnu.idi.idatt;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class MenuBoxes {
 
     Scanner scanner;
+    private boolean running = true;
 
     MenuBoxes(){
 
     }
 
     public void welcome(AuthorRegister register){
-        System.out.println("""
-            ----------------------------------------
-                Welcome to this diary program
-                Choose an option:
-                1. Login existing user
-                2. Create new user
-                3. Exit
-            ----------------------------------------
-                """);
-        scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        welcomeHandling(choice, register);
-        scanner.close();
+        while (running) {
+            System.out.println("""
+                ----------------------------------------
+                    Welcome to this diary program
+                    Choose an option:
+                    1. Login existing user
+                    2. Create new user
+                    3. Exit
+                ----------------------------------------
+                    """);
+            scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            welcomeHandling(choice, register);
+            scanner.close();
+        }
     }
 
     public void welcomeHandling(int input, AuthorRegister register){
         switch (input) {
             case 1 -> login(register);
             case 2 -> createNewUser(register);
-            //case 3 -> exit();
+            case 3 -> exit(register);
             default -> System.out.println("Something went wrong, please try again");
         }
     }
@@ -60,13 +64,14 @@ public class MenuBoxes {
             System.out.println("----------------------------------------");
             System.out.println("    Welcome " + register.getAuthorName(input-1));
             System.out.println("""
-                        What do you want to do today?
-                        1. Write todays entry
-                        2. Edit existing day
-                        3. Add specific date
-                        4. Exit
-                        """);
-            System.out.println("----------------------------------------");
+                            What do you want to do today?
+                            1. Write todays entry
+                            2. Edit existing day
+                            3. Add specific date
+                            4. Exit
+                        ----------------------------------------
+                            """);
+
             scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             whatTodayHandling(choice, register.getAuthorName(input-1), register);
@@ -97,7 +102,16 @@ public class MenuBoxes {
     }
 
     public void editExistingDay(String author, AuthorRegister register){
+        System.out.println("----------------------------------------");
         register.getAuthorByName(author).printAll();
+        System.out.println("----------------------------------------");
+        System.out.print("  Type in the date of the day you want to edit: ");
+        scanner = new Scanner(System.in);
+        String choice = scanner.nextLine();
+        System.out.print("  Type in the new entry for this day: ");
+        String entry = scanner.nextLine();
+        register.editDay(choice, entry, author);
+        System.out.println("----------------------------------------");
     }
 
     public void createNewUser(AuthorRegister register){
@@ -108,5 +122,9 @@ public class MenuBoxes {
         register.addNewAuthor(name);
         System.out.println("    Welcome to the system " + name);
         System.out.println("----------------------------------------");
+    }
+
+    public void exit(AuthorRegister register){
+        Save.saveToCSV(register.getAuthors(), register.getDays());
     }
 }

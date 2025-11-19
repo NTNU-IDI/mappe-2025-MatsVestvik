@@ -24,6 +24,8 @@ public class Day {
     public String getId() {return id;}
     public String getContent() {return this.entry;}
 
+    public void setEntry(String entry) {this.entry = entry;}
+
     public void addEntry(String content, String name){
         
     }

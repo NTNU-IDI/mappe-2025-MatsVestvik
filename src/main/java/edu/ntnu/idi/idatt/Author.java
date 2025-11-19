@@ -32,6 +32,15 @@ public class Author {
         return false;
     }
 
+    public Day getDayByDate(String date){
+        for (Day day : days){
+            if(day.getDate().equals(date)){
+                return day;
+            }
+        }
+        return null;
+    }
+
     public void addDay(Day day){
         if (searchDays(name)) {
             System.out.println("This day already exists");
@@ -48,7 +57,7 @@ public class Author {
 
     public void printAll(){
         for(Day day: days){
-            System.out.println(day.getDate());
+            System.out.println("    "+day.getDate());
         }
     }
 }

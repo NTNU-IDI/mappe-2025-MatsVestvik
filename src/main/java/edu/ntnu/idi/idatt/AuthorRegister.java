@@ -115,13 +115,21 @@ public class AuthorRegister {
         return authors.get(pos).getName();
     }
 
-    public static Author getAuthorByName(String name){
+    public Author getAuthorByName(String name){
         for (Author author : authors){
             if (name.equals(author.getName())){
                 return author;
             }
         }
         return null;
+    }
+
+    public void editDay(String date, String entry, String name){
+        for(Author author: authors){
+            if(name.equals(author.getName())){
+                author.getDayByDate(date).setEntry(entry);
+            }
+        }
     }
 
     public void printDaysAuthor(Author author){
