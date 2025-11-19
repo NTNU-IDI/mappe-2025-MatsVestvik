@@ -11,7 +11,7 @@ public class Save {
         for (Author author : authors){
             try(FileWriter writer = new FileWriter("src/main/resources/entries/"+author.getName()+".csv", true)){
                 for (int i = 0; i < author.getDaysSize(); i++){
-                    writer.write(author.getListDays().get(i).getDate() + "," + author.getName() + ","+ author.getListDays().get(i).getContent()+"\n");
+                    writer.write(author.getSortDays(author.getListDays()).get(i).getDate() + "," + author.getName() + ","+ author.getListDays().get(i).getContent()+"\n");
                 }
             }catch(IOException e){
                 System.out.println("Something went wrong please try again");

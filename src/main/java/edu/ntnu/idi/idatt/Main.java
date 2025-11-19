@@ -30,6 +30,6 @@ public class Main{
         register.printDaysAuthor(AuthorRegister.getAuthorByName("Mats"));
 
         //register.printAll();
-        //Save.saveToCSV(AuthorRegister.getAuthors(), AuthorRegister.getDays());
+        Save.saveToCSV(AuthorRegister.getAuthors(), AuthorRegister.getDays());
     }
 }

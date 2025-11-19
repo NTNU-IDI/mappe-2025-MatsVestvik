@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Author {
@@ -38,6 +39,11 @@ public class Author {
         else{
             days.add(day);
         }
+    }
+
+    public List<Day> getSortDays(List<Day> unsortedDays) {
+        unsortedDays.sort(Comparator.comparing(Day::getDate));
+        return unsortedDays;
     }
 
     public void printAll(){
