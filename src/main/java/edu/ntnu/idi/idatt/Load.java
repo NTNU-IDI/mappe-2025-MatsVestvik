@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class Load {
-    Load(List<Author> authors, HashMap<String, Day> days){
+    Load(List<Author> authors){
         loadAuthorsFromCSV(authors);
-        loadDaysFromCSV(days, authors);
+        loadDaysFromCSV(authors);
     }
     public void loadAuthorsFromCSV(List<Author> authors) {
         String entriesDirectory = "src/main/resources/entries/";
@@ -38,7 +37,7 @@ public class Load {
         System.out.println("AuthorRegister initialized with " + authors.size() + " authors.");
     }
 
-    public void loadDaysFromCSV(HashMap<String, Day> days, List<Author> authors){
+    public void loadDaysFromCSV(List<Author> authors){
         for(Author author:authors){
             try(BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+author.getName()+".csv"))){
                 String line;
@@ -48,7 +47,7 @@ public class Load {
                     if (values.length > 0) {
                         String rowDate = values[0].trim();
                         String rowEntry = values[2].trim();
-                        addDay(author.getName(), rowDate, rowEntry, days, authors);
+                        addDay(authors, author.getName(), rowDate, rowEntry);
                     }
 
                 }
@@ -58,23 +57,12 @@ public class Load {
         }
     }
 
-    public void addDay(String auth, String date, String content, HashMap<String, Day> days, List<Author> authors){
-        for(int i = 0; i < authors.size(); i++){
-            if (auth.equalsIgnoreCase(authors.get(i).getName())) {
-                String ID = date + authors.get(i).getName();
-                
-                if (days.containsKey(ID)){
-                    System.out.println("""
-                        This day already exists for this author.
-                        Please edit instead :)
-                        """);
-                }
-                else{
-                    Day newday = new Day(ID, date, content);
-                    days.put(ID, newday); 
-                    authors.get(i).addDay(newday); 
-                    System.out.println("day added successfully to map");
-                }
+    public void addDay(List<Author> authors, String author, String date, String content){
+        for(Author auth: authors){
+            if(author.equals(auth.getName())){
+                String ID = date + auth.getName();
+                Day newDay = new Day(ID, date, content);
+                auth.addDay(newDay);
                 return;
             }
         }

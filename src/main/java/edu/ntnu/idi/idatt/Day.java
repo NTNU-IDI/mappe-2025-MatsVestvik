@@ -1,7 +1,5 @@
 package main.java.edu.ntnu.idi.idatt;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Day {
@@ -9,8 +7,8 @@ public class Day {
     private String date;
     private final String id;
 
-    Day(String id, String entry){
-        this.id = id;
+    Day(String author, String entry){
+        this.id = LocalDate.now().toString() + author;
         this.entry = entry;
         this.date = LocalDate.now().toString();
     }

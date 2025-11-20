@@ -2,11 +2,10 @@ package main.java.edu.ntnu.idi.idatt;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class Save {
-    public static void saveToCSV(List<Author> authors, HashMap<String, Day> days){
+    public static void saveToCSV(List<Author> authors){
         ClearCSV.clear();
         for (Author author : authors){
             try(FileWriter writer = new FileWriter("src/main/resources/entries/"+author.getName()+".csv", true)){

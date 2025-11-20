@@ -1,7 +1,6 @@
 package main.java.edu.ntnu.idi.idatt;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class MenuBoxes {
@@ -181,7 +180,7 @@ public class MenuBoxes {
     public void exit(AuthorRegister register){
         clearTerminal();
         running = false;
-        Save.saveToCSV(register.getAuthors(), register.getDays());
+        Save.saveToCSV(register.getAuthors());
         scanner.close();
         System.out.println("Goodbye!");
     }

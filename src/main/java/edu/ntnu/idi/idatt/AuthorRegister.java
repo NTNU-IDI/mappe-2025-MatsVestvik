@@ -1,25 +1,17 @@
 package main.java.edu.ntnu.idi.idatt;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
 
 public class AuthorRegister {
     private static List<Author> authors;
-    private static HashMap<String, Day> days;
 
     AuthorRegister(){
         authors = new ArrayList<>();
-        days = new HashMap<>();
     }
 
     public static List<Author> getAuthors(){ return authors;}
-    public static HashMap<String, Day> getDays(){ return days;}
 
     public void addNewAuthor(String name) {
         for (Author author : authors) {
@@ -59,24 +51,11 @@ public class AuthorRegister {
     }
     
 
-    public void addDayToday(String auth, String content){
-        for(int i = 0; i < authors.size(); i++){
-            if (auth.equalsIgnoreCase(authors.get(i).getName())) {
-                String ID = LocalDate.now() + authors.get(i).getName();
-                
-                if (days.containsKey(ID)){
-                    System.out.println("""
-                        This day already exists for this author.
-                        Please edit instead :)
-                        """);
-                }
-                else{
-                    Day newday = new Day(ID, content);
-                    days.put(ID, newday); 
-                    authors.get(i).addDay(newday); 
-                    System.out.println();
-                    System.out.println("day added successfully");
-                }
+    public void addDayToday(String author, String content){
+        for(Author auth: authors){
+            if(author.equals(auth.getName())){
+                Day newDay = new Day(author, content);
+                auth.addDay(newDay);
                 return;
             }
         }
