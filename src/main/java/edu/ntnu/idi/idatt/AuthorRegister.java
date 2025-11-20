@@ -3,6 +3,7 @@ package main.java.edu.ntnu.idi.idatt;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AuthorRegister {
     private static List<Author> authors;
@@ -93,6 +94,17 @@ public class AuthorRegister {
         return null;
     }
 
+    public int getAuthorPos(String name){
+        int pos = 0;
+        for (Author author : authors){
+            pos++;
+            if (name.equals(author.getName())){
+                return pos;
+            }
+        }
+        return pos;
+    }
+
     public void editDay(String date, String entry, String name){
         for(Author author: authors){
             if(name.equals(author.getName())){
@@ -106,4 +118,6 @@ public class AuthorRegister {
             System.out.println(author.getListDays().get(i).toString());
         }
     }
+
+    
 }
