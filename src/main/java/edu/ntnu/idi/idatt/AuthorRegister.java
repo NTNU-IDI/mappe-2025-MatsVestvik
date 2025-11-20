@@ -42,23 +42,13 @@ public class AuthorRegister {
         }
         return false;
     }
-    public void addDay(String auth, String date, String content){
-        for(int i = 0; i < authors.size(); i++){
-            if (auth.equalsIgnoreCase(authors.get(i).getName())) {
-                String ID = date + authors.get(i).getName();
-                
-                if (days.containsKey(ID)){
-                    System.out.println("""
-                        This day already exists for this author.
-                        Please edit instead :)
-                        """);
-                }
-                else{
-                    Day newday = new Day(ID, date, content);
-                    days.put(ID, newday); 
-                    authors.get(i).addDay(newday); 
-                    System.out.println("day added successfully to map");
-                }
+
+    public void addDay(String author, String date, String content){
+        for(Author auth: authors){
+            if(author.equals(auth.getName())){
+                String ID = date + auth.getName();
+                Day newDay = new Day(ID, date, content);
+                auth.addDay(newDay);
                 return;
             }
         }

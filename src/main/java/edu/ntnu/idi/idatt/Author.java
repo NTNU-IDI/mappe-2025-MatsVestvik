@@ -42,7 +42,7 @@ public class Author {
     }
 
     public void addDay(Day day){
-        if (searchDays(name)) {
+        if (searchDays(day.getDate())) {
             System.out.println("This day already exists");
         }
         else{
