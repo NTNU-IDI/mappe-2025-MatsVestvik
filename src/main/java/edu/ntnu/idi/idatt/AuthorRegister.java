@@ -3,16 +3,15 @@ package main.java.edu.ntnu.idi.idatt;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class AuthorRegister {
-    private static List<Author> authors;
+    private List<Author> authors;
 
     AuthorRegister(){
         authors = new ArrayList<>();
     }
 
-    public static List<Author> getAuthors(){ return authors;}
+    public List<Author> getAuthors(){ return authors;}
 
     public void addNewAuthor(String name) {
         for (Author author : authors) {

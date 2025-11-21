@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Save {
-    public static void saveToCSV(List<Author> authors){
+    public void saveToCSV(List<Author> authors){
         ClearCSV.clear();
         for (Author author : authors){
             try(FileWriter writer = new FileWriter("src/main/resources/entries/"+author.getName()+".csv", true)){

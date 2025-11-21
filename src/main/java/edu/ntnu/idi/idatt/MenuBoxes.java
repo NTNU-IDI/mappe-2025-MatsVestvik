@@ -8,7 +8,6 @@ public class MenuBoxes {
 
     Scanner scanner;
     private boolean running = true;
-    private boolean error = false;
     AuthorRegister register;
 
     MenuBoxes(AuthorRegister register){
@@ -52,19 +51,33 @@ public class MenuBoxes {
             case 1 -> login();
             case 2 -> createNewUser();
             case 3 -> exit();
-            default -> System.out.println("Something went wrong, please try again");
+            default -> error("Please press a valid key");
         }
     }
 
     public void login(){
         clearTerminal();
-        System.out.println("----------------------------------------");
-        System.out.println("    Choose a user:");
-        register.printAllAuthors();
-        System.out.println("----------------------------------------");
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-        loginHandling(choice);
+        boolean isInLogin = true;
+        while (isInLogin) {
+            System.out.println("----------------------------------------");
+            System.out.println("    Choose a user:");
+            register.printAllAuthors();
+            System.out.println("----------------------------------------");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if(choice > 0 && choice < register.getAuthors().size()+1){
+                loginHandling(choice);
+            }
+            else if(choice == register.getAuthors().size()+1){
+                clearTerminal();
+                isInLogin = false;
+            }
+            else{
+                error("Not a valid input");
+            }
+        }
+        
+        
     }
 
     public void loginHandling(int input){
@@ -100,6 +113,7 @@ public class MenuBoxes {
                 if (choice == 5) {
                     inUserMenu = false;
                     System.out.println("Logging out...");
+                    clearTerminal();
                 } else {
                     whatTodayHandling(choice, register.getAuthorName(input-1));
                 }
@@ -116,34 +130,43 @@ public class MenuBoxes {
             case 2 -> lookAtExistingDay(author);
             case 3 -> addSpecificDate(author);
             case 4 -> deleteAccount(author);
-            default -> System.out.println("Something went wrong, please try again");
+            default -> System.out.println("Not a valid button press");
         }
     }
 
     public void writeTodaysEntry(String author){
         clearTerminal();
         System.out.println("----------------------------------------");
-        System.out.println("      What is on your mind today: ");
-        String content = scanner.nextLine();
-        scanner.nextLine();
+        System.out.println("    What is on your mind today: ");
+        System.out.print("    ");String content = scanner.nextLine();
         register.addDay(author, LocalDate.now().toString(), content);
-        System.out.println("Entry saved for today!");
+        System.out.println("    Entry saved for today!");
         System.out.println("----------------------------------------");
     }
 
     public void lookAtExistingDay(String author){
         clearTerminal();
-        System.out.println("----------------------------------------");
-        register.getAuthorByName(author).printAll();
-        System.out.println("----------------------------------------");
-        System.out.print("  Type in the date of the day you want to edit: ");
-        String choice = scanner.nextLine();
-        System.out.print("  Type in the new entry for this day: ");
-        String entry = scanner.nextLine();
-        scanner.nextLine();
-        register.editDay(choice, entry, author);
-        System.out.println("Entry updated successfully!");
-        System.out.println("----------------------------------------");
+        boolean inLookAtExistingDay = true;
+        while (inLookAtExistingDay) {
+            System.out.println("----------------------------------------");
+            register.getAuthorByName(author).printAll();
+            System.out.println("    E. Exit");
+            System.out.println("----------------------------------------");
+            System.out.print("    Type in the date of the day you want to edit: ");
+            String choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("e")){
+                inLookAtExistingDay = false;
+            }
+            else{
+                System.out.print("    Type in the new entry for this day: ");
+                String entry = scanner.nextLine();
+                register.editDay(choice, entry, author);
+                System.out.println("    Entry updated successfully!");
+                System.out.println("----------------------------------------"); 
+            }
+            
+        }
+        
     }
 
     public void addSpecificDate(String author){
@@ -178,15 +201,15 @@ public class MenuBoxes {
     public void createNewUser(){
         clearTerminal();
         System.out.println("----------------------------------------");
-        System.out.print("  Please enter your name: ");
+        System.out.print("    Please enter your name: ");
         String name = scanner.nextLine();
-        scanner.nextLine();
-        register.addNewAuthor(name);
+        System.out.print("    ");register.addNewAuthor(name);
         System.out.println("    Welcome to the system " + name);
         System.out.println("----------------------------------------");
+        clearTerminal();
     }
 
-    public void error(String message, String author){
+    public void error(String message){
         System.out.println("""
                     ----------------------------------------
                         ERROR: """ + message + """
@@ -194,15 +217,14 @@ public class MenuBoxes {
                     ----------------------------------------
                     """);
         String enter = scanner.nextLine();
-        scanner.nextLine();
-        error = false;
-        loginHandling(register.getAuthorPos(author));
+        welcome();
     }
 
     public void exit(){
         clearTerminal();
         running = false;
-        Save.saveToCSV(register.getAuthors());
+        Save save = new Save();
+        save.saveToCSV(register.getAuthors());
         scanner.close();
         System.out.println("Goodbye!");
     }
