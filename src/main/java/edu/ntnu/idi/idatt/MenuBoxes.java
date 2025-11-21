@@ -107,7 +107,7 @@ public class MenuBoxes {
                             1. Write todays entry
                             2. Look at my days
                             3. Add specific date
-                            4. Delete my account
+                            4. Settings
                             5. Logout
                             6. Save and quit
                         ----------------------------------------
@@ -140,7 +140,7 @@ public class MenuBoxes {
             case 1 -> writeTodaysEntry(author);
             case 2 -> lookAtExistingDay(author);
             case 3 -> addSpecificDate(author);
-            case 4 -> deleteAccount(author);
+            case 4 -> settings(author);
             default -> System.out.println("Not a valid button press");
         }
     }
@@ -225,20 +225,84 @@ public class MenuBoxes {
         System.out.println("----------------------------------------");
     }
 
-    public void deleteAccount(String author){
+    public void settings(String author){
+        boolean inSetting = true;
+        while (inSetting) {
+            clearTerminal();
+            System.out.println("""
+                        ----------------------------------------
+                            %s's Settings
+                            1. Change Username
+                            2. Change password
+                            3. Delete account
+                            4. Back
+                        ----------------------------------------
+                        """.formatted(author));
+
+            int choice = scanner.nextInt();
+            if (choice == 4){
+                inSetting = false;
+            }
+            else{
+                boolean accountDeleted = settingsHandler(choice, author);
+                if (accountDeleted) {
+                    return; // Exit immediately if account was deleted
+                }
+            }
+        }
+    }
+
+    public boolean settingsHandler(int choice, String author){
         clearTerminal();
-        System.out.println("""
-                    Warning you are about to delete your account
-                    Type your username to confirm
-                """);
-        String username = scanner.nextLine();
-        if(username.equals(author)){
-            register.deleteAuthor(author);
-            System.out.println("    Account deleted");
+        switch (choice) {
+            //case 1 ->
+            //case 2 ->
+            case 3 ->  {
+                if(deleteAccount(author)) {
+                    return true; // Account was deleted
+                }
+            }
+            default -> System.out.println("Invalid input");
         }
-        else{
-            System.out.println("    What you typed did not match your username");
+        return false;
+    }
+
+    public boolean deleteAccount(String author){
+        String username = "";
+        boolean inDeleteAccount = true;
+        while (inDeleteAccount) {
+            clearTerminal();
+            System.out.println("""
+                        Warning you are about to delete your account
+                        Type your username to confirm:
+                        """);
+            
+            username = scanner.nextLine();
+            if(!username.equals("")){
+                if(username.equals(author)){
+                    register.deleteAuthor(author);
+                    System.out.println("Account deleted successfully!");
+                    return true;
+                }
+                else if(username.equalsIgnoreCase("cancel")){
+                    System.out.println("Account deletion cancelled.");
+                    return false;
+                }
+                else{
+                    System.out.println("What you typed did not match your username. Type 'cancel' to go back.");
+                    String cancel = scanner.nextLine();
+                    if (cancel.equalsIgnoreCase("cancel")){
+                        return false;
+                    }
+                    else{
+
+                    }
+                }
+            }
+            
+            
         }
+        return false;
     }
 
     public void createNewUser(){
