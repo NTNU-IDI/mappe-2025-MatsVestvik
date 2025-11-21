@@ -66,7 +66,12 @@ public class MenuBoxes {
             int choice = scanner.nextInt();
             scanner.nextLine();
             if(choice > 0 && choice < register.getAuthors().size()+1){
-                loginHandling(choice);
+                
+                boolean exit = loginHandling(choice);
+                if(exit){
+                    exit();
+                    return;
+                }
             }
             else if(choice == register.getAuthors().size()+1){
                 clearTerminal();
@@ -80,7 +85,7 @@ public class MenuBoxes {
         
     }
 
-    public void loginHandling(int input){
+    public boolean loginHandling(int input){
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.println("    You have selected " + register.getAuthorName(input-1));
@@ -90,7 +95,7 @@ public class MenuBoxes {
         int ePin = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        if (ePin == 1){ 
+        if (ePin == 1){     
             
             boolean inUserMenu = true;
             while (inUserMenu) {
@@ -104,6 +109,7 @@ public class MenuBoxes {
                             3. Add specific date
                             4. Delete my account
                             5. Logout
+                            6. Save and quit
                         ----------------------------------------
                             """);
 
@@ -114,7 +120,12 @@ public class MenuBoxes {
                     inUserMenu = false;
                     System.out.println("Logging out...");
                     clearTerminal();
-                } else {
+                } 
+                else if (choice == 6) {
+                    exit();
+                    return true;
+                }
+                else {
                     whatTodayHandling(choice, register.getAuthorName(input-1));
                 }
             }
@@ -122,6 +133,7 @@ public class MenuBoxes {
         else{
             System.out.println("    entered pin was incorrect. Please try again");
         }
+        return false;
     }
 
     public void whatTodayHandling(int choice, String author){
@@ -136,12 +148,45 @@ public class MenuBoxes {
 
     public void writeTodaysEntry(String author){
         clearTerminal();
-        System.out.println("----------------------------------------");
-        System.out.println("    What is on your mind today: ");
-        System.out.print("    ");String content = scanner.nextLine();
-        register.addDay(author, LocalDate.now().toString(), content);
-        System.out.println("    Entry saved for today!");
-        System.out.println("----------------------------------------");
+        boolean inWriteTodaysEntry = true;
+        while (inWriteTodaysEntry) {
+            if(register.searchDays(author,LocalDate.now())){
+                System.out.println("""
+                ----------------------------------------
+                    This day already contains an entry.
+                    are you sure you want to overwrite it?
+                    press y to continue overwrite
+                    press n to go back 
+                ----------------------------------------         
+                """);
+                String answer = scanner.nextLine();
+                if (answer.equalsIgnoreCase("y")) {
+                    System.out.println("----------------------------------------");
+                    System.out.println("    What is on your mind today: ");
+                    System.out.print("    ");String content = scanner.nextLine();
+                    register.addDay(author, LocalDate.now().toString(), content);
+                    System.out.println("    Entry saved for today!");
+                    System.out.println("----------------------------------------");
+                    inWriteTodaysEntry = false;
+                }
+                else if (answer.equalsIgnoreCase("n")) {
+                    inWriteTodaysEntry = false;
+                }
+                else{
+                    System.out.println("invalid input returning...");
+                    inWriteTodaysEntry = false;
+                }
+            }
+            else{
+                System.out.println("----------------------------------------");
+                System.out.println("    What is on your mind today: ");
+                System.out.print("    ");String content = scanner.nextLine();
+                register.addDay(author, LocalDate.now().toString(), content);
+                System.out.println("    Entry saved for today!");
+                System.out.println("----------------------------------------");
+                inWriteTodaysEntry = false;
+            }
+        }    
     }
 
     public void lookAtExistingDay(String author){
@@ -176,7 +221,6 @@ public class MenuBoxes {
         String date = scanner.nextLine();
         System.out.println("      What is on your mind for " + date + ": ");
         String content = scanner.nextLine();
-        scanner.nextLine();
         register.addDay(author, date, content);
         System.out.println("Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
@@ -191,7 +235,7 @@ public class MenuBoxes {
         String username = scanner.nextLine();
         if(username.equals(author)){
             register.deleteAuthor(author);
-            System.out.println("    Account delted");
+            System.out.println("    Account deleted");
         }
         else{
             System.out.println("    What you typed did not match your username");
@@ -216,7 +260,7 @@ public class MenuBoxes {
                         Press enter to continue
                     ----------------------------------------
                     """);
-        String enter = scanner.nextLine();
+        scanner.nextLine();
         welcome();
     }
 
