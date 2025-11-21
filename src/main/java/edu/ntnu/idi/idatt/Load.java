@@ -1,4 +1,4 @@
-package main.java.edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -66,10 +66,8 @@ public class Load {
                 return;
             }
         }
-        System.out.println("""
-                    This author does not exist.
-                    Please create new author or try again.
-                    """); 
+        System.out.println("This author does not exist.");
+        System.out.println("Please create new author or try again.");
     }
 
     

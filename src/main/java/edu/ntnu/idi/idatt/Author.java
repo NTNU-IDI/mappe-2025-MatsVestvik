@@ -1,4 +1,4 @@
-package main.java.edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

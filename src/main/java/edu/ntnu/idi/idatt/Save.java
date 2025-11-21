@@ -1,4 +1,4 @@
-package main.java.edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt;
 
 import java.io.FileWriter;
 import java.io.IOException;
