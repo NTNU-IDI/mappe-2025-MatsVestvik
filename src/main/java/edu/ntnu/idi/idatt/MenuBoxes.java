@@ -122,7 +122,6 @@ public class MenuBoxes {
                     clearTerminal();
                 } 
                 else if (choice == 6) {
-                    exit();
                     return true;
                 }
                 else {
@@ -268,7 +267,9 @@ public class MenuBoxes {
         clearTerminal();
         running = false;
         Save save = new Save();
+        System.out.println("Saving data..."); // Debug line
         save.saveToCSV(register.getAuthors());
+        System.out.println("Save completed."); // Debug line
         scanner.close();
         System.out.println("Goodbye!");
     }

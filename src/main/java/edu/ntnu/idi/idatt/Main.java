@@ -7,8 +7,5 @@ public class Main{
 
         MenuBoxes menu = new MenuBoxes(register);
         menu.welcome();
-
-        Save save = new Save();
-        save.saveToCSV(register.getAuthors());
     }
 }
