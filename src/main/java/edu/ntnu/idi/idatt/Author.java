@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 public class Author {
     private String name;
     //private int pin;
@@ -36,13 +38,18 @@ public class Author {
         return null;
     }
 
-    public void addDay(Day day){
-        if (searchDays(day.getDate())) {
-            System.out.println("This day already exists");
+    public void addDay(Day inputDay) {
+        Day existingDay = null;
+        for (Day day : days) {
+            if (day.getDate().equals(inputDay.getDate())) {
+                existingDay = day;
+                break;
+            }
         }
-        else{
-            days.add(day);
+        if (existingDay != null) {
+            days.remove(existingDay);
         }
+        days.add(inputDay);
     }
 
     public List<Day> getSortDays(List<Day> unsortedDays) {
