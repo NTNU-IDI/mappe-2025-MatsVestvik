@@ -9,6 +9,7 @@ import java.util.List;
 
 import edu.ntnu.idi.idatt.objects.Author;
 import edu.ntnu.idi.idatt.objects.Day;
+import edu.ntnu.idi.idatt.util.ClearCSV;
 
 public class Save {
     public void saveToCSV(List<Author> authors) {

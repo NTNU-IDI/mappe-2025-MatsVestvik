@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.service;
+package edu.ntnu.idi.idatt.util;
 import java.io.File;
 
 public class ClearCSV {
