@@ -13,7 +13,7 @@ public class AuthorRegister {
 
     public List<Author> getAuthors(){ return authors;}
 
-    public void addNewAuthor(String name) {
+    public void addNewAuthor(String name, int pin) {
         for (Author author : authors) {
             if (author.getName().equals(name)) {
                 System.out.println("This author already exists");
@@ -21,7 +21,7 @@ public class AuthorRegister {
             }
         }
         
-        Author newAuthor = new Author(name);
+        Author newAuthor = new Author(name, pin);
         authors.add(newAuthor);
         System.out.println("adding new author...");
     }

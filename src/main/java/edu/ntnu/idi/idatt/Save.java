@@ -25,10 +25,14 @@ public class Save {
             System.out.println("Attempting to save to: " + filename); // Debug line
             
             try (FileWriter writer = new FileWriter(filename, false)) { // false to overwrite, not append
+                // Write header with author's PIN
+                String header = "# Author: " + author.getName() + ", PIN: " + author.getPin() + "\n";
+                writer.write(header);
+                
                 List<Day> days = author.getSortDays(author.getListDays()); // Use sorted days
                 
                 for (Day day : days) {
-                    String line = day.getDate() + "," + author.getName() + "," + day.getContent() + "\n";
+                    String line = day.getDate() + "," + day.getContent() + "\n";
                     writer.write(line);
                 }
                 

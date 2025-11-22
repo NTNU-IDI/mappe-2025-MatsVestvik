@@ -1,4 +1,5 @@
 package edu.ntnu.idi.idatt;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -7,18 +8,26 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Author {
     private String name;
-    //private int pin;
+    private int pin;
     private List<Day> days;
 
-    Author(String name){
+    Author(String name, int pin){
         this.name = name;
+        this.pin = pin;
         days = new ArrayList<>();
     }
 
     public String getName() {return name;}
     public int getDaysSize() {return days.size();}
-
     public List<Day> getListDays() {return days;}
+    public int getPin() {return pin;}
+
+    public boolean checkPin(int pin){
+        if(pin == this.pin){
+            return true;
+        }
+        return false;
+     }
 
     public boolean searchDays(String date) {
         for (Day day : days){
@@ -62,4 +71,6 @@ public class Author {
             System.out.println("    "+day.getDate());
         }
     }
+
+    
 }

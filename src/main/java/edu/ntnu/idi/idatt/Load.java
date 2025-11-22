@@ -11,6 +11,7 @@ public class Load {
         loadAuthorsFromCSV(authors);
         loadDaysFromCSV(authors);
     }
+    
     public void loadAuthorsFromCSV(List<Author> authors) {
         String entriesDirectory = "src/main/resources/entries/";
         File dir = new File(entriesDirectory);
@@ -28,31 +29,65 @@ public class Load {
             String fileName = csvFile.getName();
             String authorName = fileName.substring(0, fileName.lastIndexOf('.'));
             
+            // Read the PIN from the CSV header
+            int authorPin = readPinFromCSV(csvFile);
+            
             // Create and add the author
-            Author author = new Author(authorName);
+            Author author = new Author(authorName, authorPin);
             authors.add(author);
-            System.out.println("Loaded author: " + authorName);
+            System.out.println("Loaded author: " + authorName + " with PIN: " + authorPin);
         }
         
         System.out.println("AuthorRegister initialized with " + authors.size() + " authors.");
     }
 
-    public void loadDaysFromCSV(List<Author> authors){
-        for(Author author:authors){
-            try(BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\entries\\"+author.getName()+".csv"))){
-                String line;
+    private int readPinFromCSV(File csvFile) {
+        int defaultPin = 1111; // Default PIN if not found
         
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+            String firstLine = reader.readLine();
+            if (firstLine != null && firstLine.startsWith("#")) {
+                // Parse the header line to extract PIN
+                if (firstLine.contains("PIN:")) {
+                    String pinPart = firstLine.split("PIN:")[1].trim();
+                    // Extract just the numeric part
+                    String pinString = pinPart.split("[,\\s]")[0].trim();
+                    try {
+                        return Integer.parseInt(pinString);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid PIN format in file: " + csvFile.getName() + ", using default PIN");
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading PIN from file: " + csvFile.getName());
+        }
+        
+        return defaultPin;
+    }
+
+    public void loadDaysFromCSV(List<Author> authors){
+        for(Author author : authors){
+            String filePath = "src/main/resources/entries/" + author.getName() + ".csv";
+            try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+                String line;
+                boolean isFirstLine = true;
+                
                 while ((line = reader.readLine()) != null) {
+                    // Skip header lines (lines starting with #)
+                    if (line.startsWith("#")) {
+                        continue;
+                    }
+                    
                     String[] values = line.split(",");
-                    if (values.length > 0) {
+                    if (values.length >= 3) {
                         String rowDate = values[0].trim();
-                        String rowEntry = values[2].trim();
+                        String rowEntry = values[1].trim();
                         addDay(authors, author.getName(), rowDate, rowEntry);
                     }
-
                 }
-            }catch(IOException e){
-                System.out.println("something went wrong");
+            } catch(IOException e){
+                System.out.println("Error loading days for author " + author.getName() + ": " + e.getMessage());
             }
         }
     }
@@ -69,6 +104,4 @@ public class Load {
         System.out.println("This author does not exist.");
         System.out.println("Please create new author or try again.");
     }
-
-    
 }

@@ -95,7 +95,7 @@ public class MenuBoxes {
         int ePin = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        if (ePin == 1){     
+        if (register.getAuthorByName(register.getAuthorName(input-1)).checkPin(ePin)){     
             
             boolean inUserMenu = true;
             while (inUserMenu) {
@@ -256,7 +256,7 @@ public class MenuBoxes {
         clearTerminal();
         switch (choice) {
             //case 1 ->
-            //case 2 ->
+            case 2 -> changePassword(author);
             case 3 ->  {
                 if(deleteAccount(author)) {
                     return true; // Account was deleted
@@ -265,6 +265,10 @@ public class MenuBoxes {
             default -> System.out.println("Invalid input");
         }
         return false;
+    }
+
+    public void changePassword(){
+        
     }
 
     public boolean deleteAccount(String author){
@@ -310,7 +314,9 @@ public class MenuBoxes {
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your name: ");
         String name = scanner.nextLine();
-        System.out.print("    ");register.addNewAuthor(name);
+        System.out.print("    Please enter a pin: ");
+        int pin = scanner.nextInt();
+        System.out.print("    ");register.addNewAuthor(name, pin);
         System.out.println("    Welcome to the system " + name);
         System.out.println("----------------------------------------");
         clearTerminal();
