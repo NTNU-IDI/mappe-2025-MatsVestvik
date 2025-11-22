@@ -101,15 +101,25 @@ public class AuthorRegister {
                 return pos;
             }
         }
-        return pos;
+        return pos + 1;
     }
 
     public void editDay(String date, String entry, String name){
         for(Author author: authors){
             if(name.equals(author.getName())){
-                author.getDayByDate(date).setEntry(entry);
+                Day day = author.getDayByDate(date);
+                if (day != null) {
+                    day.setEntry(entry);
+                } else {
+                    // Create new day if it doesn't exist
+                    String ID = date + author.getName();
+                    Day newDay = new Day(ID, date, entry);
+                    author.addDay(newDay);
+                }
+                return;
             }
         }
+        System.out.println("Author not found: " + name);
     }
 
     public void printDaysAuthor(Author author){
