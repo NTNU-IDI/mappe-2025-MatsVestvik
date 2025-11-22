@@ -27,7 +27,15 @@ public class Author {
             return true;
         }
         return false;
-     }
+    }
+
+    public void setPin(int pin){
+        this.pin = pin;
+    }
+
+    public void setName(String newName){
+        this.name = newName;
+    }
 
     public boolean searchDays(String date) {
         for (Day day : days){

@@ -219,10 +219,10 @@ public class MenuBoxes {
     public void addSpecificDate(){
         clearTerminal();
         System.out.println("----------------------------------------");
-        System.out.print("  Enter the date (YYYY-MM-DD): ");
+        System.out.print("    Enter the date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
-        System.out.println("      What is on your mind for " + date + ": ");
-        String content = scanner.nextLine();
+        System.out.println("    What is on your mind for " + date + ": ");
+        System.out.println("    ");String content = scanner.nextLine();
         register.addDay(authorName, date, content);
         System.out.println("Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
@@ -258,7 +258,7 @@ public class MenuBoxes {
     public boolean settingsHandler(int choice){
         clearTerminal();
         switch (choice) {
-            //case 1 ->
+            case 1 -> changeUsername();
             case 2 -> changePassword();
             case 3 ->  {
                 if(deleteAccount()) {
@@ -270,8 +270,62 @@ public class MenuBoxes {
         return false;
     }
 
-    public void changePassword(){
+    public void changeUsername(){
+        clearTerminal();
+        System.out.println("----------------------------------------");
+        System.out.print("    New name: ");
+        String newName = scanner.nextLine();
+        String oldName = this.authorName; // Store the old name
+     
+        register.getAuthorByName(oldName).setName(newName);
 
+        this.authorName = newName;
+        
+        System.out.println("    Username changed from " + oldName + " to " + newName);
+        System.out.println("----------------------------------------");
+        System.out.println("    Press enter to continue...");
+        scanner.nextLine();
+    }
+
+    public void changePassword(){
+        clearTerminal();
+        System.out.println("----------------------------------------");
+        System.out.print("    Please enter your current pin: ");            
+        int triedPin = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        if(register.getAuthorByName(authorName).checkPin(triedPin)){
+            int newPin = 0;
+            boolean validPin = false;
+            
+            while (!validPin) {
+                System.out.print("    Please enter a 4-digit pin: ");
+                String pinInput = scanner.nextLine().trim();
+                
+                try {
+                    newPin = Integer.parseInt(pinInput);
+                    
+                    // Check if PIN is exactly 4 digits
+                    if (pinInput.length() == 4 && newPin >= 1000 && newPin <= 9999) {
+                        validPin = true;
+                    } else {
+                        System.out.println("    Error: PIN must be exactly 4 digits (0000-9999)!");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("    Error: PIN must contain only numbers!");
+                }
+            }
+            
+            register.getAuthorByName(authorName).setPin(newPin);
+            System.out.println("    PIN changed successfully!");
+            
+        } else {
+            System.out.println("    Incorrect current PIN!");
+        }
+        
+        System.out.println("----------------------------------------");
+        System.out.println("    Press enter to continue...");
+        scanner.nextLine();
     }
 
     public boolean deleteAccount(){
@@ -280,8 +334,11 @@ public class MenuBoxes {
         while (inDeleteAccount) {
             clearTerminal();
             System.out.println("""
-                        Warning you are about to delete your account
-                        Type your username to confirm:
+                ----------------------------------------
+                    Warning you are about to delete
+                    your account
+                    Type your username to confirm:
+                ----------------------------------------
                         """);
             
             username = scanner.nextLine();
@@ -316,12 +373,41 @@ public class MenuBoxes {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your name: ");
-        String name = scanner.nextLine();
-        System.out.print("    Please enter a pin: ");
-        int pin = scanner.nextInt();
-        System.out.print("    ");register.addNewAuthor(name, pin);
+        String name = scanner.nextLine().trim();
+        
+        // Validate that name is not empty
+        while (name.isEmpty()) {
+            System.out.println("    Error: Name cannot be empty!");
+            System.out.print("    Please enter your name: ");
+            name = scanner.nextLine().trim();
+        }
+        
+        int pin = 0;
+        boolean validPin = false;
+        
+        while (!validPin) {
+            System.out.print("    Please enter a 4-digit pin: ");
+            String pinInput = scanner.nextLine().trim();
+            
+            try {
+                pin = Integer.parseInt(pinInput);
+                
+                // Check if PIN is exactly 4 digits
+                if (pinInput.length() == 4 && pin >= 1000 && pin <= 9999) {
+                    validPin = true;
+                } else {
+                    System.out.println("    Error: PIN must be exactly 4 digits (0000-9999)!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("    Error: PIN must contain only numbers!");
+            }
+        }
+        
+        register.addNewAuthor(name, pin);
         System.out.println("    Welcome to the system " + name);
         System.out.println("----------------------------------------");
+        System.out.println("    Press enter to continue...");
+        scanner.nextLine();
         clearTerminal();
     }
 
