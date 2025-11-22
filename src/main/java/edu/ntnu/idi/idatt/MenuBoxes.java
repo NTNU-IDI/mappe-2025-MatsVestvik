@@ -9,6 +9,7 @@ public class MenuBoxes {
     Scanner scanner;
     private boolean running = true;
     AuthorRegister register;
+    private String authorName;
 
     MenuBoxes(AuthorRegister register){
         scanner = new Scanner(System.in); // Initialize scanner once
@@ -66,7 +67,7 @@ public class MenuBoxes {
             int choice = scanner.nextInt();
             scanner.nextLine();
             if(choice > 0 && choice < register.getAuthors().size()+1){
-                
+                this.authorName = register.getAuthorName(choice-1);
                 boolean exit = loginHandling(choice);
                 if(exit){
                     exit();
@@ -87,21 +88,23 @@ public class MenuBoxes {
 
     public boolean loginHandling(int input){
         clearTerminal();
+        
         System.out.println("----------------------------------------");
-        System.out.println("    You have selected " + register.getAuthorName(input-1));
+        System.out.println("    You have selected " + authorName);
         System.out.println("    Please enter your pin:");
         System.out.println("----------------------------------------");
 
+        
         int ePin = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        if (register.getAuthorByName(register.getAuthorName(input-1)).checkPin(ePin)){     
+        if (register.getAuthorByName(authorName).checkPin(ePin)){     
             
             boolean inUserMenu = true;
             while (inUserMenu) {
                 clearTerminal();
                 System.out.println("----------------------------------------");
-                System.out.println("    Welcome " + register.getAuthorName(input-1));
+                System.out.println("    Welcome " + authorName);
                 System.out.println("""
                             What do you want to do today?
                             1. Write todays entry
@@ -125,7 +128,7 @@ public class MenuBoxes {
                     return true;
                 }
                 else {
-                    whatTodayHandling(choice, register.getAuthorName(input-1));
+                    whatTodayHandling(choice);
                 }
             }
         }
@@ -135,21 +138,21 @@ public class MenuBoxes {
         return false;
     }
 
-    public void whatTodayHandling(int choice, String author){
+    public void whatTodayHandling(int choice){
         switch (choice) {
-            case 1 -> writeTodaysEntry(author);
-            case 2 -> lookAtExistingDay(author);
-            case 3 -> addSpecificDate(author);
-            case 4 -> settings(author);
+            case 1 -> writeTodaysEntry();
+            case 2 -> lookAtExistingDay();
+            case 3 -> addSpecificDate();
+            case 4 -> settings();
             default -> System.out.println("Not a valid button press");
         }
     }
 
-    public void writeTodaysEntry(String author){
+    public void writeTodaysEntry(){
         clearTerminal();
         boolean inWriteTodaysEntry = true;
         while (inWriteTodaysEntry) {
-            if(register.searchDays(author,LocalDate.now())){
+            if(register.searchDays(authorName,LocalDate.now())){
                 System.out.println("""
                 ----------------------------------------
                     This day already contains an entry.
@@ -163,7 +166,7 @@ public class MenuBoxes {
                     System.out.println("----------------------------------------");
                     System.out.println("    What is on your mind today: ");
                     System.out.print("    ");String content = scanner.nextLine();
-                    register.addDay(author, LocalDate.now().toString(), content);
+                    register.addDay(authorName, LocalDate.now().toString(), content);
                     System.out.println("    Entry saved for today!");
                     System.out.println("----------------------------------------");
                     inWriteTodaysEntry = false;
@@ -180,7 +183,7 @@ public class MenuBoxes {
                 System.out.println("----------------------------------------");
                 System.out.println("    What is on your mind today: ");
                 System.out.print("    ");String content = scanner.nextLine();
-                register.addDay(author, LocalDate.now().toString(), content);
+                register.addDay(authorName, LocalDate.now().toString(), content);
                 System.out.println("    Entry saved for today!");
                 System.out.println("----------------------------------------");
                 inWriteTodaysEntry = false;
@@ -188,12 +191,12 @@ public class MenuBoxes {
         }    
     }
 
-    public void lookAtExistingDay(String author){
+    public void lookAtExistingDay(){
         clearTerminal();
         boolean inLookAtExistingDay = true;
         while (inLookAtExistingDay) {
             System.out.println("----------------------------------------");
-            register.getAuthorByName(author).printAll();
+            register.getAuthorByName(authorName).printAll();
             System.out.println("    E. Exit");
             System.out.println("----------------------------------------");
             System.out.print("    Type in the date of the day you want to edit: ");
@@ -204,7 +207,7 @@ public class MenuBoxes {
             else{
                 System.out.print("    Type in the new entry for this day: ");
                 String entry = scanner.nextLine();
-                register.editDay(choice, entry, author);
+                register.editDay(choice, entry, authorName);
                 System.out.println("    Entry updated successfully!");
                 System.out.println("----------------------------------------"); 
             }
@@ -213,19 +216,19 @@ public class MenuBoxes {
         
     }
 
-    public void addSpecificDate(String author){
+    public void addSpecificDate(){
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("  Enter the date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
         System.out.println("      What is on your mind for " + date + ": ");
         String content = scanner.nextLine();
-        register.addDay(author, date, content);
+        register.addDay(authorName, date, content);
         System.out.println("Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
     }
 
-    public void settings(String author){
+    public void settings(){
         boolean inSetting = true;
         while (inSetting) {
             clearTerminal();
@@ -237,14 +240,14 @@ public class MenuBoxes {
                             3. Delete account
                             4. Back
                         ----------------------------------------
-                        """.formatted(author));
+                        """.formatted(authorName));
 
             int choice = scanner.nextInt();
             if (choice == 4){
                 inSetting = false;
             }
             else{
-                boolean accountDeleted = settingsHandler(choice, author);
+                boolean accountDeleted = settingsHandler(choice);
                 if (accountDeleted) {
                     return; // Exit immediately if account was deleted
                 }
@@ -252,13 +255,13 @@ public class MenuBoxes {
         }
     }
 
-    public boolean settingsHandler(int choice, String author){
+    public boolean settingsHandler(int choice){
         clearTerminal();
         switch (choice) {
             //case 1 ->
-            case 2 -> changePassword(author);
+            case 2 -> changePassword();
             case 3 ->  {
-                if(deleteAccount(author)) {
+                if(deleteAccount()) {
                     return true; // Account was deleted
                 }
             }
@@ -268,10 +271,10 @@ public class MenuBoxes {
     }
 
     public void changePassword(){
-        
+
     }
 
-    public boolean deleteAccount(String author){
+    public boolean deleteAccount(){
         String username = "";
         boolean inDeleteAccount = true;
         while (inDeleteAccount) {
@@ -283,8 +286,8 @@ public class MenuBoxes {
             
             username = scanner.nextLine();
             if(!username.equals("")){
-                if(username.equals(author)){
-                    register.deleteAuthor(author);
+                if(username.equals(authorName)){
+                    register.deleteAuthor(authorName);
                     System.out.println("Account deleted successfully!");
                     return true;
                 }
