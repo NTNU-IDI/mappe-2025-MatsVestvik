@@ -63,7 +63,8 @@ public class DiaryEntryHandler {
             register.getAuthorByName(authorName).printAll();
             System.out.println("    E. Exit");
             System.out.println("----------------------------------------");
-            System.out.print("    Type in the date of the day you want to look at: ");
+            System.out.println("    Type in the date of the day you \n    want to look at:");
+            System.out.print("    ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("e")) {
                 inLookAtExistingDay = false;
@@ -93,10 +94,10 @@ public class DiaryEntryHandler {
     public void addSpecificDate(String authorName) {
         clearTerminal();
         System.out.println("----------------------------------------");
-        System.out.print("    Enter the date (YYYY-MM-DD): ");
-        String date = scanner.nextLine();
+        System.out.println("    Enter the date (YYYY-MM-DD): ");
+        System.out.print("    ");String date = scanner.nextLine();
         System.out.println("    What is on your mind for " + date + ": ");
-        System.out.println("    ");
+        System.out.print("    ");
         String content = scanner.nextLine();
         register.addDay(authorName, date, content);
         System.out.println("Entry saved for " + date + "!");

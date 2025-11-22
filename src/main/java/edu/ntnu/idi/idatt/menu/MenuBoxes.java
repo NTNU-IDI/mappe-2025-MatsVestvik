@@ -51,8 +51,7 @@ public class MenuBoxes {
                     1. Login existing user
                     2. Create new user
                     3. Exit
-                ----------------------------------------
-                    """);
+                ----------------------------------------""");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
             welcomeHandling(choice);
