@@ -1,8 +1,11 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.menu;
 
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.service.Save;
 
 public class MenuBoxes {
 
@@ -11,7 +14,7 @@ public class MenuBoxes {
     AuthorRegister register;
     private String authorName;
 
-    MenuBoxes(AuthorRegister register){
+    public MenuBoxes(AuthorRegister register){
         scanner = new Scanner(System.in); // Initialize scanner once
         this.register = register;
     }
@@ -192,24 +195,41 @@ public class MenuBoxes {
     }
 
     public void lookAtExistingDay(){
-        clearTerminal();
+        
         boolean inLookAtExistingDay = true;
         while (inLookAtExistingDay) {
+            clearTerminal();
             System.out.println("----------------------------------------");
             register.getAuthorByName(authorName).printAll();
             System.out.println("    E. Exit");
             System.out.println("----------------------------------------");
-            System.out.print("    Type in the date of the day you want to edit: ");
+            System.out.print("    Type in the date of the day you want to look at: ");
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("e")){
                 inLookAtExistingDay = false;
             }
             else{
-                System.out.print("    Type in the new entry for this day: ");
-                String entry = scanner.nextLine();
-                register.editDay(choice, entry, authorName);
-                System.out.println("    Entry updated successfully!");
-                System.out.println("----------------------------------------"); 
+                clearTerminal();
+                System.out.println("----------------------------------------");
+                System.out.println("    "+choice);
+                System.out.println(register.getAuthorByName(authorName).readDay(choice) +"\n\n");
+                System.out.println("    Edit: e         Back: b");
+                System.out.println("----------------------------------------");
+                String eb = scanner.nextLine();
+                if(eb.equalsIgnoreCase("e")){
+                    System.out.print("    Type in the new entry for this day: ");
+                    String entry = scanner.nextLine();
+                    register.editDay(choice, entry, authorName);
+                    System.out.println("    Entry updated successfully!");
+                    System.out.println("----------------------------------------"); 
+                }
+                else if(eb.equalsIgnoreCase("b")){
+                    return;
+                }
+                else{
+                    return;
+                }
+                
             }
             
         }
@@ -274,6 +294,7 @@ public class MenuBoxes {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("    New name: ");
+        scanner.nextLine();
         String newName = scanner.nextLine();
         String oldName = this.authorName; // Store the old name
      

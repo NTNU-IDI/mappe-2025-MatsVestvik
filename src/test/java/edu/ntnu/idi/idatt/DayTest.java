@@ -1,6 +1,9 @@
 package edu.ntnu.idi.idatt;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ntnu.idi.idatt.objects.Day;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 

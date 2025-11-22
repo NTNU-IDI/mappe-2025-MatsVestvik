@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,8 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import edu.ntnu.idi.idatt.objects.Author;
+import edu.ntnu.idi.idatt.objects.Day;
+
 public class Load {
-    Load(List<Author> authors){
+    public Load(List<Author> authors){
         loadAuthorsFromCSV(authors);
         loadDaysFromCSV(authors);
     }
@@ -71,7 +74,6 @@ public class Load {
             String filePath = "src/main/resources/entries/" + author.getName() + ".csv";
             try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
                 String line;
-                boolean isFirstLine = true;
                 
                 while ((line = reader.readLine()) != null) {
                     // Skip header lines (lines starting with #)
@@ -79,11 +81,16 @@ public class Load {
                         continue;
                     }
                     
-                    String[] values = line.split(",");
-                    if (values.length >= 3) {
+                    // Split by pipe separator instead of comma
+                    String[] values = line.split("\\|", 2); // Split into max 2 parts
+                    if (values.length >= 2) {
                         String rowDate = values[0].trim();
                         String rowEntry = values[1].trim();
+                        // Replace escaped newlines with actual newlines
+                        rowEntry = rowEntry.replace("\\n", "\n");
                         addDay(authors, author.getName(), rowDate, rowEntry);
+                    } else {
+                        System.out.println("Invalid line format in " + author.getName() + ".csv: " + line);
                     }
                 }
             } catch(IOException e){

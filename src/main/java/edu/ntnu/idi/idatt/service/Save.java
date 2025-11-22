@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.service;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,11 +7,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import edu.ntnu.idi.idatt.objects.Author;
+import edu.ntnu.idi.idatt.objects.Day;
+
 public class Save {
     public void saveToCSV(List<Author> authors) {
         ClearCSV.clear();
         
-        // Ensure the directory exists
         String directoryPath = "src/main/resources/entries/";
         try {
             Files.createDirectories(Paths.get(directoryPath));
@@ -22,26 +24,27 @@ public class Save {
         
         for (Author author : authors) {
             String filename = directoryPath + author.getName() + ".csv";
-            System.out.println("Attempting to save to: " + filename); // Debug line
+            System.out.println("Attempting to save to: " + filename);
             
-            try (FileWriter writer = new FileWriter(filename, false)) { // false to overwrite, not append
+            try (FileWriter writer = new FileWriter(filename, false)) {
                 // Write header with author's PIN
                 String header = "# Author: " + author.getName() + ", PIN: " + author.getPin() + "\n";
                 writer.write(header);
                 
-                List<Day> days = author.getSortDays(author.getListDays()); // Use sorted days
+                List<Day> days = author.getSortDays(author.getListDays());
                 
                 for (Day day : days) {
-                    String line = day.getDate() + "," + day.getContent() + "\n";
+                    // Format: date|content (pipe separator is less common in text)
+                    String line = day.getDate() + "|" + day.getContent().replace("\n", "\\n") + "\n";
                     writer.write(line);
                 }
                 
-                writer.flush(); // Force write to disk
-                System.out.println("Successfully saved " + days.size() + " entries for " + author.getName()); // Debug line
+                writer.flush();
+                System.out.println("Successfully saved " + days.size() + " entries for " + author.getName());
                 
             } catch (IOException e) {
                 System.out.println("Error saving data for " + author.getName() + ": " + e.getMessage());
-                e.printStackTrace(); // This will show the full error
+                e.printStackTrace();
             }
         }
     }

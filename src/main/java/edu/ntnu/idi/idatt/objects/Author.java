@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.objects;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ public class Author {
     private int pin;
     private List<Day> days;
 
-    Author(String name, int pin){
+    public Author(String name, int pin){
         this.name = name;
         this.pin = pin;
         days = new ArrayList<>();
@@ -67,6 +67,15 @@ public class Author {
             days.remove(existingDay);
         }
         days.add(inputDay);
+    }
+
+    public String readDay(String date){
+        for(Day day : days){
+            if(day.getDate().equals(date)){
+                return day.getContent();
+            }
+        }
+        return null;
     }
 
     public List<Day> getSortDays(List<Day> unsortedDays) {

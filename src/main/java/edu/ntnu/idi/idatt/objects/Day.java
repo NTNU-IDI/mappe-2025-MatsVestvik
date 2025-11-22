@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.objects;
 
 import java.time.LocalDate;
 
@@ -7,13 +7,13 @@ public class Day {
     private String date;
     private final String id;
 
-    Day(String author, String entry){
+    public Day(String author, String entry){
         this.id = LocalDate.now().toString() + author;
         this.entry = entry;
         this.date = LocalDate.now().toString();
     }
 
-    Day(String id, String date, String entry){
+    public Day(String id, String date, String entry){
         this.id = id;
         this.entry = entry;
         this.date = date;

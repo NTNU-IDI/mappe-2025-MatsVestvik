@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.objects;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 public class AuthorRegister {
     private List<Author> authors;
 
-    AuthorRegister(){
+    public AuthorRegister(){
         authors = new ArrayList<>();
     }
 
