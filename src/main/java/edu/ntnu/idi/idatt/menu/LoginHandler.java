@@ -7,6 +7,7 @@ public class LoginHandler {
     private Scanner scanner;
     private AuthorRegister register;
     private MenuBoxes menu;
+    public String authorName;
 
     public LoginHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
         this.scanner = scanner;
@@ -30,8 +31,9 @@ public class LoginHandler {
             scanner.nextLine();
             if (choice > 0 && choice < register.getAuthors().size() + 1) {
                 String authorName = register.getAuthorName(choice - 1);
+                this.authorName = authorName;
                 menu.setAuthorName(authorName);
-                boolean exit = loginHandling(authorName);
+                boolean exit = loginHandling();
                 if (exit) {
                     menu.exit();
                     return;
@@ -45,7 +47,7 @@ public class LoginHandler {
         }
     }
 
-    public boolean loginHandling(String authorName) {
+    public boolean loginHandling() {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.println("    You have selected " + authorName);

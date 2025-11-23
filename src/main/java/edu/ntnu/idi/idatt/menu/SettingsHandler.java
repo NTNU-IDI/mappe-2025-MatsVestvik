@@ -7,6 +7,7 @@ public class SettingsHandler {
     private Scanner scanner;
     private AuthorRegister register;
     private MenuBoxes menu;
+    public String authorName;
 
     public SettingsHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
         this.scanner = scanner;
@@ -15,6 +16,7 @@ public class SettingsHandler {
     }
 
     public boolean settings(String authorName) {
+        this.authorName = authorName;
         boolean inSetting = true;
         while (inSetting) {
             clearTerminal();
@@ -26,7 +28,7 @@ public class SettingsHandler {
                             3. Delete account
                             4. Back
                         ----------------------------------------
-                        """.formatted(authorName));
+                        """.formatted(this.authorName));
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
                 scanner.next(); // Clear the invalid input
@@ -35,7 +37,7 @@ public class SettingsHandler {
             if (choice == 4) {
                 inSetting = false;
             } else {
-                boolean accountDeleted = settingsHandler(choice, authorName);
+                boolean accountDeleted = settingsHandler(choice);
                 if (accountDeleted) {
                     return true; // Exit immediately if account was deleted
                 }
@@ -44,13 +46,13 @@ public class SettingsHandler {
         return false;
     }
 
-    public boolean settingsHandler(int choice, String authorName) {
+    public boolean settingsHandler(int choice) {
         clearTerminal();
         switch (choice) {
-            case 1 -> changeUsername(authorName);
-            case 2 -> changePassword(authorName);
+            case 1 -> changeUsername();
+            case 2 -> changePassword();
             case 3 -> {
-                if (deleteAccount(authorName)) {
+                if (deleteAccount()) {
                     return true; // Account was deleted
                 }
             }
@@ -59,13 +61,14 @@ public class SettingsHandler {
         return false;
     }
 
-    public void changeUsername(String authorName) {
+    public void changeUsername() {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("    New name: ");
         scanner.nextLine();
         String newName = scanner.nextLine();
         String oldName = authorName;
+        this.authorName = newName;
 
         register.getAuthorByName(oldName).setName(newName);
         menu.setAuthorName(newName);
@@ -76,7 +79,7 @@ public class SettingsHandler {
         scanner.nextLine();
     }
 
-    public void changePassword(String authorName) {
+    public void changePassword() {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your current pin: ");
@@ -117,7 +120,7 @@ public class SettingsHandler {
         scanner.nextLine();
     }
 
-    public boolean deleteAccount(String authorName) {
+    public boolean deleteAccount() {
         String username = "";
         boolean inDeleteAccount = true;
         while (inDeleteAccount) {

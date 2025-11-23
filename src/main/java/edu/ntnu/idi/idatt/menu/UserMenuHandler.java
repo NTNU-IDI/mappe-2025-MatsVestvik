@@ -9,6 +9,7 @@ public class UserMenuHandler {
     private AuthorRegister register;
     private MenuBoxes menu;
     private DiaryEntryHandler diaryHandler;
+    public String authorName;
 
     public UserMenuHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
         this.scanner = scanner;
@@ -18,11 +19,12 @@ public class UserMenuHandler {
     }
 
     public boolean showUserMenu(String authorName) {
+        this.authorName = authorName;
         boolean inUserMenu = true;
         while (inUserMenu) {
             clearTerminal();
             System.out.println("----------------------------------------");
-            System.out.println("    Welcome " + authorName);
+            System.out.println("    Welcome " + this.authorName);
             System.out.println("""
                         What do you want to do today?
                         1. Write todays entry
@@ -48,7 +50,14 @@ public class UserMenuHandler {
             } else if (choice == 6) {
                 return true;
             } else {
-                boolean shouldLogout = handleUserChoice(choice, authorName);
+                boolean shouldLogout = handleUserChoice(choice);
+
+                // Refresh the displayed author name in case Settings changed it
+                String current = menu.getAuthorName();
+                if (current != null && !current.equals(this.authorName)) {
+                    this.authorName = current;
+                }
+
                 if (shouldLogout) {
                     inUserMenu = false;
                 }
@@ -57,7 +66,7 @@ public class UserMenuHandler {
         return false;
     }
 
-    private boolean handleUserChoice(int choice, String authorName) {
+    private boolean handleUserChoice(int choice) {
         switch (choice) {
             case 1 -> {
                 diaryHandler.writeTodaysEntry(authorName);
