@@ -9,10 +9,21 @@ public class DiaryEntryHandler {
     private Scanner scanner;
     private AuthorRegister register;
 
+    /**
+     * Handles diary entry creation and management for a specific author.
+     * Validates user input and delegates storage operations to the AuthorRegister.
+     */
+
     public DiaryEntryHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
     }
+
+    /*
+    write todays entry prompts you asking for a entry and a rating. These
+    values are passed to a function that creates the day object and stored 
+    in the authors list of days.
+    */
 
     public void writeTodaysEntry(String authorName) {
         clearTerminal();
@@ -79,6 +90,12 @@ public class DiaryEntryHandler {
         }
     }
 
+    /*
+    Look at days lets you see all the dates with a connected entry. Here you are able to 
+    edit an existing day or exit. You are only allowed to enter a date that exists in the
+    days list of your author object.
+    */
+
     public void lookAtExistingDay(String authorName) {
         boolean inLookAtExistingDay = true;
         while (inLookAtExistingDay) {
@@ -140,6 +157,11 @@ public class DiaryEntryHandler {
         }
     }
 
+    /*
+    Add specific date is a function that allows you to create an entry with any date attached. 
+    It cleans for anything that is not a valid date.
+    */
+
     public void addSpecificDate(String authorName) {
         clearTerminal();
         System.out.println("----------------------------------------");
@@ -180,6 +202,11 @@ public class DiaryEntryHandler {
         System.out.println("----------------------------------------");
     }
 
+    /*
+    clearterminal clears the terminal. It is a very nice function for a cleaner terminal
+    . This creates a nicer user experince.
+    */
+    
     private void clearTerminal() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {

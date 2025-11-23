@@ -20,7 +20,7 @@ public class SettingsHandler {
         boolean inSetting = true;
         while (inSetting) {
             clearTerminal();
-            System.out.println("""
+            System.out.print("""
                         ----------------------------------------
                             %s's Settings
                             1. Change Username
@@ -29,6 +29,7 @@ public class SettingsHandler {
                             4. Back
                         ----------------------------------------
                         """.formatted(this.authorName));
+            System.out.println("    ");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
                 scanner.next(); // Clear the invalid input
@@ -65,11 +66,39 @@ public class SettingsHandler {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.print("    New name: ");
+        // consume any leftover newline then read the new name
         scanner.nextLine();
-        String newName = scanner.nextLine();
+        String newName = scanner.nextLine().trim();
         String oldName = authorName;
-        this.authorName = newName;
 
+        // Loop until a valid, non-empty, and unique name is provided
+        while (true) {
+            if (newName.isEmpty()) {
+                System.out.println("    Error: Name cannot be empty!");
+            } else {
+                // Check if the name belongs to a different existing author
+                if (register.getAuthorByName(newName) != null && !newName.equals(oldName)) {
+                    System.out.println("    Error: That username is already taken by another user!");
+                } else {
+                    break; // valid name (either same as old or unique)
+                }
+            }
+
+            System.out.print("    New name: ");
+            newName = scanner.nextLine().trim();
+        }
+
+        // If name unchanged, just return to settings
+        if (newName.equals(oldName)) {
+            System.out.println("    Name unchanged.");
+            System.out.println("----------------------------------------");
+            System.out.println("    Press enter to continue...");
+            scanner.nextLine();
+            return;
+        }
+
+        // Apply the rename
+        this.authorName = newName;
         register.getAuthorByName(oldName).setName(newName);
         menu.setAuthorName(newName);
 

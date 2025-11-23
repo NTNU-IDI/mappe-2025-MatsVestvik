@@ -13,12 +13,23 @@ public class LoginHandler {
     private UserMenuHandler userMenuHandler;
     private SettingsHandler settingsHandler;
 
+    /*
+    Login handler is where you choose your author object. This allows you to gain
+    access to other functions. This is a security step.
+    */
+
     public LoginHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
         this.userMenuHandler = new UserMenuHandler(scanner, register, this);
         this.settingsHandler = new SettingsHandler(scanner, register, this);
     }
+
+    /*
+    Login shows you all the author currently in the system. You are also shown the ability
+    to create a new author or save and quit. Save and quit writes all data to seperate csv files
+    for all author. 
+    */
 
     public void login() {
         boolean isInLogin = true;
@@ -29,7 +40,7 @@ public class LoginHandler {
             register.printAllAuthors();
             System.out.println("    "+(register.getAuthors().size() + 1)+". Create new user");
             System.out.println("    " + (register.getAuthors().size() + 2) + ". Save and Exit");
-            System.out.println("----------------------------------------");
+            System.out.print("----------------------------------------\n    ");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
                 scanner.next(); // Clear the invalid input
@@ -56,12 +67,18 @@ public class LoginHandler {
         }
     }
 
+    /*
+    Login handling prompts you to enter a pin. We then take that pin in pass it into
+    the check pin function to see if it is the correct pin of the user.
+    After this check user gains acces to the days of this author.
+    */
+
     public boolean loginHandling() {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.println("    You have selected " + authorName);
-        System.out.println("    Please enter your pin:");
-        System.out.println("----------------------------------------");
+        System.out.print("    Please enter your pin: ");
+        
         while (!scanner.hasNextInt()) {
             clearTerminal();
             System.out.println("    Invalid input! Please enter a pin (0000-9999): ");
@@ -79,6 +96,10 @@ public class LoginHandler {
         return false;
     }
 
+    /*
+    This funtion ensures that the author name is updated.
+    */
+
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
@@ -86,6 +107,10 @@ public class LoginHandler {
     public String getAuthorName() {
         return this.authorName;
     }
+
+    /*
+    Here you are prompted to enter name and pin for a new author abject. this function
+    is also responsible for sinitizing the input for good user feedback */
 
     public void createNewUser() {
         clearTerminal();
@@ -122,12 +147,16 @@ public class LoginHandler {
         }
 
         register.addNewAuthor(name, pin);
-        System.out.println("    Welcome to the system " + name);
+        System.out.println("\n    Welcome to the system " + name);
         System.out.println("----------------------------------------");
         System.out.println("    Press enter to continue...");
         scanner.nextLine();
         clearTerminal();
     }
+
+    /*
+    clear terminal clears the terminal
+     */
 
     private void clearTerminal() {
         try {
@@ -140,6 +169,10 @@ public class LoginHandler {
             System.out.println("\n".repeat(50));
         }
     }
+
+    /*
+    exit is a function that closes the scanner and calls the save to csv method to write date.
+    */
 
     public void exit() {
         clearTerminal();

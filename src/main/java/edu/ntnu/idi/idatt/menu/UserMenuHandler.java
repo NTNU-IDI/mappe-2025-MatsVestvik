@@ -33,8 +33,8 @@ public class UserMenuHandler {
                         4. Settings
                         5. Logout
                         6. Save and quit
-                    ----------------------------------------
-                        """);
+                    ----------------------------------------""");
+            System.out.print("    ");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
                 scanner.next(); // Clear the invalid input

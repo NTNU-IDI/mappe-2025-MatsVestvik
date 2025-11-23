@@ -23,7 +23,6 @@ public class AuthorRegister {
         
         Author newAuthor = new Author(name, pin);
         authors.add(newAuthor);
-        System.out.println("adding new author...");
     }
 
     public boolean searchDays(String auth, LocalDate date){
