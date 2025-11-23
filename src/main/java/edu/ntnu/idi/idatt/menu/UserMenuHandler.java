@@ -44,22 +44,42 @@ public class UserMenuHandler {
             } else if (choice == 6) {
                 return true;
             } else {
-                handleUserChoice(choice, authorName);
+                boolean shouldLogout = handleUserChoice(choice, authorName);
+                if (shouldLogout) {
+                    inUserMenu = false;
+                }
             }
         }
         return false;
     }
 
-    private void handleUserChoice(int choice, String authorName) {
+    private boolean handleUserChoice(int choice, String authorName) {
         switch (choice) {
-            case 1 -> diaryHandler.writeTodaysEntry(authorName);
-            case 2 -> diaryHandler.lookAtExistingDay(authorName);
-            case 3 -> diaryHandler.addSpecificDate(authorName);
+            case 1 -> {
+                diaryHandler.writeTodaysEntry(authorName);
+                return false;
+            }
+            case 2 -> {
+                diaryHandler.lookAtExistingDay(authorName);
+                return false;
+            }
+            case 3 -> {
+                diaryHandler.addSpecificDate(authorName);
+                return false;
+            }
             case 4 -> {
                 SettingsHandler settingsHandler = new SettingsHandler(scanner, register, menu);
-                settingsHandler.settings(authorName);
+                boolean deleted = settingsHandler.settings(authorName);
+                if (deleted) {
+                    menu.setAuthorName(null);
+                    return true;
+                }
+                return false;
             }
-            default -> System.out.println("Not a valid button press");
+            default -> {
+                System.out.println("Not a valid button press");
+                return false;
+            }
         }
     }
 

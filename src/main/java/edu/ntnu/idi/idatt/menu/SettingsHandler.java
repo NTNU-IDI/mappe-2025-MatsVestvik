@@ -14,7 +14,7 @@ public class SettingsHandler {
         this.menu = menu;
     }
 
-    public void settings(String authorName) {
+    public boolean settings(String authorName) {
         boolean inSetting = true;
         while (inSetting) {
             clearTerminal();
@@ -34,10 +34,11 @@ public class SettingsHandler {
             } else {
                 boolean accountDeleted = settingsHandler(choice, authorName);
                 if (accountDeleted) {
-                    return; // Exit immediately if account was deleted
+                    return true; // Exit immediately if account was deleted
                 }
             }
         }
+        return false;
     }
 
     public boolean settingsHandler(int choice, String authorName) {

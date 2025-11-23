@@ -15,9 +15,9 @@ public class LoginHandler {
     }
 
     public void login() {
-        clearTerminal();
         boolean isInLogin = true;
         while (isInLogin) {
+            clearTerminal();
             System.out.println("----------------------------------------");
             System.out.println("    Choose a user:");
             register.printAllAuthors();
