@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.menu;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
@@ -19,7 +20,7 @@ public class DiaryEntryHandler {
         while (inWriteTodaysEntry) {
             if (register.searchDays(authorName, LocalDate.now())) {
                 System.out.println("""
-                ----------------------------------------
+                -----------------------------------------
                     This day already contains an entry.
                     are you sure you want to overwrite it?
                     press y to continue overwrite
@@ -92,11 +93,24 @@ public class DiaryEntryHandler {
             register.getAuthorByName(authorName).printAll();
             System.out.println("    E. Exit");
             System.out.println("----------------------------------------");
-            System.out.println("    Type in the date of the day you \n    want to look at:");
+            System.out.println("    Type in the date of the day you \n    want to look at (choose one from the list above):");
             System.out.print("    ");
+
+            // Collect available dates for the author
+            java.util.List<edu.ntnu.idi.idatt.objects.Day> days = register.getAuthorByName(authorName).getListDays();
+            java.util.Set<String> validDates = new java.util.HashSet<>();
+            for (edu.ntnu.idi.idatt.objects.Day d : days) {
+                validDates.add(d.getDate());
+            }
+
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("e")) {
                 inLookAtExistingDay = false;
+            } else if (!validDates.contains(choice)) {
+                System.out.println("    Not a valid date. Please choose one of the listed dates or 'E' to exit.");
+                System.out.println("    Press enter to continue...");
+                scanner.nextLine();
+                continue;
             } else {
                 clearTerminal();
                 System.out.println("----------------------------------------");
@@ -139,7 +153,26 @@ public class DiaryEntryHandler {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.println("    Enter the date (YYYY-MM-DD): ");
-        System.out.print("    ");String date = scanner.nextLine();
+
+        String date = null;
+        while (true) {
+            System.out.print("    ");
+            String input = scanner.nextLine().trim();
+            // allow user to cancel
+            if (input.equalsIgnoreCase("e")) {
+                System.out.println("    Cancelled. Returning...");
+                System.out.println("----------------------------------------");
+                return;
+            }
+            try {
+                // parse to ensure format and validity
+                LocalDate.parse(input);
+                date = input;
+                break;
+            } catch (DateTimeParseException ex) {
+                System.out.println("    Invalid date format. Please use YYYY-MM-DD or type 'E' to cancel.");
+            }
+        }
         System.out.println("    What is on your mind for " + date + ": ");
         System.out.print("    ");
         String content = scanner.nextLine();
