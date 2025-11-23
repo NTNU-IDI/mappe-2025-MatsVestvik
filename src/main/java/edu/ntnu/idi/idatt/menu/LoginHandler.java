@@ -2,26 +2,33 @@ package edu.ntnu.idi.idatt.menu;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.service.Save;
 
 public class LoginHandler {
-    private Scanner scanner;
-    private AuthorRegister register;
-    private MenuBoxes menu;
-    public String authorName;
 
-    public LoginHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
+    Scanner scanner;
+    private boolean running = true;
+    AuthorRegister register;
+    private String authorName;
+    private UserMenuHandler userMenuHandler;
+    private SettingsHandler settingsHandler;
+
+    public LoginHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
-        this.menu = menu;
+        this.userMenuHandler = new UserMenuHandler(scanner, register, this);
+        this.settingsHandler = new SettingsHandler(scanner, register, this);
     }
 
     public void login() {
         boolean isInLogin = true;
-        while (isInLogin) {
+        while (isInLogin && running) {
             clearTerminal();
             System.out.println("----------------------------------------");
             System.out.println("    Choose a user:");
             register.printAllAuthors();
+            System.out.println("    "+(register.getAuthors().size() + 1)+". Create new user");
+            System.out.println("    " + (register.getAuthors().size() + 2) + ". Save and Exit");
             System.out.println("----------------------------------------");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
@@ -32,15 +39,17 @@ public class LoginHandler {
             if (choice > 0 && choice < register.getAuthors().size() + 1) {
                 String authorName = register.getAuthorName(choice - 1);
                 this.authorName = authorName;
-                menu.setAuthorName(authorName);
+                setAuthorName(authorName);
                 boolean exit = loginHandling();
                 if (exit) {
-                    menu.exit();
+                    exit();
                     return;
                 }
             } else if (choice == register.getAuthors().size() + 1) {
+                createNewUser();
+            } else if (choice == register.getAuthors().size() + 2) {
                 clearTerminal();
-                isInLogin = false;
+                exit();
             } else {
                 System.out.println("Not a valid input");
             }
@@ -62,12 +71,20 @@ public class LoginHandler {
         scanner.nextLine(); // Consume newline
 
         if (register.getAuthorByName(authorName).checkPin(ePin)) {
-            UserMenuHandler userMenuHandler = new UserMenuHandler(scanner, register, menu);
+            UserMenuHandler userMenuHandler = new UserMenuHandler(scanner, register, this);
             return userMenuHandler.showUserMenu(authorName);
         } else {
             System.out.println("    entered pin was incorrect. Please try again");
         }
         return false;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorName() {
+        return this.authorName;
     }
 
     public void createNewUser() {
@@ -122,5 +139,16 @@ public class LoginHandler {
         } catch (Exception e) {
             System.out.println("\n".repeat(50));
         }
+    }
+
+    public void exit() {
+        clearTerminal();
+        running = false;
+        Save save = new Save();
+        System.out.println("Saving data...");
+        save.saveToCSV(register.getAuthors());
+        System.out.println("Save completed.");
+        scanner.close();
+        System.out.println("Goodbye!");
     }
 }

@@ -7,11 +7,11 @@ import edu.ntnu.idi.idatt.objects.AuthorRegister;
 public class UserMenuHandler {
     private Scanner scanner;
     private AuthorRegister register;
-    private MenuBoxes menu;
+    private LoginHandler menu;
     private DiaryEntryHandler diaryHandler;
     public String authorName;
 
-    public UserMenuHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
+    public UserMenuHandler(Scanner scanner, AuthorRegister register, LoginHandler menu) {
         this.scanner = scanner;
         this.register = register;
         this.menu = menu;

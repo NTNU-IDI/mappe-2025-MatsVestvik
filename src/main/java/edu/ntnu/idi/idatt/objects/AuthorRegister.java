@@ -66,14 +66,10 @@ public class AuthorRegister {
     } 
 
     public void printAllAuthors(){
-        int exitcounter = 1;
         for(int i = 0; i<authors.size(); i++){
             int num = i+1;
             System.out.println("    "+num+". "+authors.get(i).getName());
-            exitcounter++;
         }
-
-        System.out.println("    "+exitcounter + ". Exit");
     }
 
     public void deleteAuthor(String auth) {

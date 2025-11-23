@@ -16,9 +16,9 @@ public class MenuBoxes {
     public MenuBoxes(AuthorRegister register) {
         scanner = new Scanner(System.in);
         this.register = register;
-        this.loginHandler = new LoginHandler(scanner, register, this);
-        this.userMenuHandler = new UserMenuHandler(scanner, register, this);
-        this.settingsHandler = new SettingsHandler(scanner, register, this);
+        this.loginHandler = new LoginHandler(scanner, register);
+        this.userMenuHandler = new UserMenuHandler(scanner, register, loginHandler);
+        this.settingsHandler = new SettingsHandler(scanner, register, loginHandler);
     }
 
     public void setAuthorName(String authorName) {  

@@ -10,11 +10,11 @@ import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
 public class LoginHandlerTest {
 
-	static class TestMenuBoxes extends MenuBoxes {
+	static class TestLoginHandler extends LoginHandler {
 		private boolean exited = false;
 
-		public TestMenuBoxes(AuthorRegister register) {
-			super(register);
+		public TestLoginHandler(Scanner scanner, AuthorRegister register) {
+			super(scanner, register);
 		}
 
 		@Override
@@ -34,10 +34,11 @@ public class LoginHandlerTest {
 
 		String input = "1234\n5\n"; // enter pin then choose logout (5)
 		Scanner scanner = new Scanner(input);
-		TestMenuBoxes menu = new TestMenuBoxes(reg);
-		LoginHandler handler = new LoginHandler(scanner, reg, menu);
+		TestLoginHandler menu = new TestLoginHandler(scanner, reg);
+		LoginHandler handler = menu;
 
-		boolean result = handler.loginHandling("Alice");
+		handler.setAuthorName("Alice");
+		boolean result = handler.loginHandling();
 		assertFalse(result);
 	}
 
@@ -48,10 +49,11 @@ public class LoginHandlerTest {
 
 		String input = "4321\n6\n"; // enter pin then choose save and quit (6)
 		Scanner scanner = new Scanner(input);
-		TestMenuBoxes menu = new TestMenuBoxes(reg);
-		LoginHandler handler = new LoginHandler(scanner, reg, menu);
+		TestLoginHandler menu = new TestLoginHandler(scanner, reg);
+		LoginHandler handler = menu;
 
-		boolean result = handler.loginHandling("Bob");
+		handler.setAuthorName("Bob");
+		boolean result = handler.loginHandling();
 		assertTrue(result);
 	}
 
@@ -62,10 +64,11 @@ public class LoginHandlerTest {
 
 		String input = "0000\n"; // wrong pin
 		Scanner scanner = new Scanner(input);
-		TestMenuBoxes menu = new TestMenuBoxes(reg);
-		LoginHandler handler = new LoginHandler(scanner, reg, menu);
+		TestLoginHandler menu = new TestLoginHandler(scanner, reg);
+		LoginHandler handler = menu;
 
-		boolean result = handler.loginHandling("Eve");
+		handler.setAuthorName("Eve");
+		boolean result = handler.loginHandling();
 		assertFalse(result);
 	}
 
@@ -76,8 +79,8 @@ public class LoginHandlerTest {
 		// name, pin, then press enter to continue
 		String input = "Charlie\n2468\n\n";
 		Scanner scanner = new Scanner(input);
-		TestMenuBoxes menu = new TestMenuBoxes(reg);
-		LoginHandler handler = new LoginHandler(scanner, reg, menu);
+		TestLoginHandler menu = new TestLoginHandler(scanner, reg);
+		LoginHandler handler = menu;
 
 		handler.createNewUser();
 

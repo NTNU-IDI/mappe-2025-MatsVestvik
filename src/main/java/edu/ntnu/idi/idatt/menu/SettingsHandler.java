@@ -6,10 +6,10 @@ import edu.ntnu.idi.idatt.objects.AuthorRegister;
 public class SettingsHandler {
     private Scanner scanner;
     private AuthorRegister register;
-    private MenuBoxes menu;
+    private LoginHandler menu;
     public String authorName;
 
-    public SettingsHandler(Scanner scanner, AuthorRegister register, MenuBoxes menu) {
+    public SettingsHandler(Scanner scanner, AuthorRegister register, LoginHandler menu) {
         this.scanner = scanner;
         this.register = register;
         this.menu = menu;
