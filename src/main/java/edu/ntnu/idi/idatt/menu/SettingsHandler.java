@@ -121,10 +121,9 @@ public class SettingsHandler {
             System.out.println("""
                 ----------------------------------------
                     Warning you are about to delete
-                    your account
+                    your account %s
                     Type your username to confirm:
-                ----------------------------------------
-                        """);
+                ----------------------------------------""".formatted(authorName));
 
             username = scanner.nextLine();
             if (!username.equals("")) {
