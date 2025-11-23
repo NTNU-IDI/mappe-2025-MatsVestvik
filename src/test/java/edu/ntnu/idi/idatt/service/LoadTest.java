@@ -189,7 +189,7 @@ public class LoadTest {
         authors.add(author);
 
         Load load = new Load(new ArrayList<>());
-        load.addDay(authors, "John", "2024-01-01", "Test content");
+        load.addDay(authors, "John", "2024-01-01", "Test content", 0);
 
         assertEquals(1, author.getDaysSize());
         assertEquals("Test content", author.readDay("2024-01-01"));
@@ -199,7 +199,7 @@ public class LoadTest {
     void testAddDay_AuthorNotExists() {
         Load load = new Load(new ArrayList<>());
         // Should not throw exception, just print error message
-        assertDoesNotThrow(() -> load.addDay(authors, "NonExistent", "2024-01-01", "Test content"));
+        assertDoesNotThrow(() -> load.addDay(authors, "NonExistent", "2024-01-01", "Test content", 0));
     }
 
     @Test
@@ -208,8 +208,8 @@ public class LoadTest {
         authors.add(author);
 
         Load load = new Load(new ArrayList<>());
-        load.addDay(authors, "John", "2024-01-01", "First content");
-        load.addDay(authors, "John", "2024-01-01", "Updated content");
+        load.addDay(authors, "John", "2024-01-01", "First content", 0);
+        load.addDay(authors, "John", "2024-01-01", "Updated content", 0);
 
         assertEquals(1, author.getDaysSize());
         assertEquals("Updated content", author.readDay("2024-01-01"));

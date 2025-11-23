@@ -41,9 +41,9 @@ public class SaveTest {
         Author author = new Author(name, pin);
         
         // Add some test days
-        Day day1 = new Day("2024-01-01" + name, "2024-01-01", "First entry with\nnewline");
-        Day day2 = new Day("2024-01-02" + name, "2024-01-02", "Second entry");
-        Day day3 = new Day("2024-01-03" + name, "2024-01-03", "Third entry");
+        Day day1 = new Day("2024-01-01" + name, "2024-01-01", "First entry with\nnewline", 0);
+        Day day2 = new Day("2024-01-02" + name, "2024-01-02", "Second entry", 0);
+        Day day3 = new Day("2024-01-03" + name, "2024-01-03", "Third entry", 0);
         
         author.addDay(day3); // Add out of order to test sorting
         author.addDay(day1);
@@ -112,7 +112,7 @@ public class SaveTest {
         Author author = new Author("TestUser", 1234);
         
         // Test content with special characters and newlines
-        Day day = new Day("2024-01-01TestUser", "2024-01-01", "Line 1\nLine 2\nLine 3");
+        Day day = new Day("2024-01-01TestUser", "2024-01-01", "Line 1\nLine 2\nLine 3", 0);
         author.addDay(day);
         authors.add(author);
 
@@ -122,7 +122,7 @@ public class SaveTest {
     @Test
     void testSaveToCSV_OverwriteExisting() {
         Author author = new Author("TestUser", 1234);
-        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "First content");
+        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "First content", 0);
         author.addDay(day1);
         authors.add(author);
 
@@ -130,7 +130,7 @@ public class SaveTest {
         assertDoesNotThrow(() -> save.saveToCSV(authors));
 
         // Update content and save again (should overwrite)
-        Day day2 = new Day("2024-01-01TestUser", "2024-01-01", "Updated content");
+        Day day2 = new Day("2024-01-01TestUser", "2024-01-01", "Updated content", 0);
         author.addDay(day2);
         
         assertDoesNotThrow(() -> save.saveToCSV(authors));
@@ -141,9 +141,9 @@ public class SaveTest {
         Author author = new Author("TestUser", 1234);
         
         // Add days in non-chronological order
-        Day day3 = new Day("2024-01-03TestUser", "2024-01-03", "Third day");
-        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "First day");
-        Day day2 = new Day("2024-01-02TestUser", "2024-01-02", "Second day");
+        Day day3 = new Day("2024-01-03TestUser", "2024-01-03", "Third day", 0);
+        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "First day", 0);
+        Day day2 = new Day("2024-01-02TestUser", "2024-01-02", "Second day", 0);
         
         author.addDay(day3);
         author.addDay(day1);
@@ -159,7 +159,7 @@ public class SaveTest {
         
         // Test various special characters
         String contentWithSpecials = "Content with | pipes, commas,, and \n newlines\t tabs";
-        Day day = new Day("2024-01-01TestUser", "2024-01-01", contentWithSpecials);
+        Day day = new Day("2024-01-01TestUser", "2024-01-01", contentWithSpecials, 0);
         author.addDay(day);
         authors.add(author);
 
@@ -170,7 +170,7 @@ public class SaveTest {
     void testSaveToCSV_EmptyContent() {
         Author author = new Author("TestUser", 1234);
         
-        Day day = new Day("2024-01-01TestUser", "2024-01-01", "");
+        Day day = new Day("2024-01-01TestUser", "2024-01-01", "", 0);
         author.addDay(day);
         authors.add(author);
 
@@ -185,7 +185,7 @@ public class SaveTest {
         Files.createDirectories(testSaveDir);
         
         Author author = new Author("VerifyUser", 4321);
-        Day day = new Day("2024-01-01VerifyUser", "2024-01-01", "Test content with\nnewline");
+        Day day = new Day("2024-01-01VerifyUser", "2024-01-01", "Test content with\nnewline", 0);
         author.addDay(day);
         authors.add(author);
 

@@ -15,8 +15,8 @@ public class AuthorTest {
     @BeforeEach
     void setUp() {
         author = new Author("TestUser", 1234);
-        testDay1 = new Day("2024-01-01TestUser", "2024-01-01", "First day of the year");
-        testDay2 = new Day("2024-01-02TestUser", "2024-01-02", "Second day of the year");
+        testDay1 = new Day("TestUser", "First day of the year", 0);
+        testDay2 = new Day("TestUser", "Second day of the year", 0);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class AuthorTest {
         assertEquals("First day of the year", author.readDay("2024-01-01"));
 
         // Create a new day with same date but different content
-        Day updatedDay = new Day("2024-01-01TestUser", "2024-01-01", "Updated content");
+        Day updatedDay = new Day("2024-01-01TestUser", "2024-01-01", "Updated content", 0);
         author.addDay(updatedDay);
 
         // Should still have only one day, but with updated content
@@ -138,9 +138,9 @@ public class AuthorTest {
     @Test
     void testGetSortDays_UnsortedList() {
         // Add days in non-chronological order
-        Day day3 = new Day("2024-01-03TestUser", "2024-01-03", "Content 3");
-        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "Content 1");
-        Day day2 = new Day("2024-01-02TestUser", "2024-01-02", "Content 2");
+        Day day3 = new Day("2024-01-03TestUser", "2024-01-03", "Content 3", 0);
+        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "Content 1", 0);
+        Day day2 = new Day("2024-01-02TestUser", "2024-01-02", "Content 2", 0);
 
         author.addDay(day3);
         author.addDay(day1);

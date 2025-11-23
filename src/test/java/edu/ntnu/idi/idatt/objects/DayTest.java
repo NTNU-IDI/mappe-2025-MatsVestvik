@@ -14,12 +14,12 @@ public class DayTest {
     
     @BeforeEach
     void setUp() {
-        day = new Day("testId", "2023-10-15", TEST_ENTRY);
+        day = new Day("testId", "2023-10-15", TEST_ENTRY, 0);
     }
     
     @Test
     void testConstructorWithAuthor() {
-        Day dayWithAuthor = new Day("testUser", "New entry");
+        Day dayWithAuthor = new Day("testUser", "New entry", 0);
         assertNotNull(dayWithAuthor.getId());
         assertEquals("New entry", dayWithAuthor.getContent());
     }

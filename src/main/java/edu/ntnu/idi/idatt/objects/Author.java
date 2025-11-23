@@ -69,6 +69,15 @@ public class Author {
         days.add(inputDay);
     }
 
+    public int getDayRating(String date){
+        for(Day day : days){
+            if(day.getDate().equals(date)){
+                return day.getRating();
+            }
+        }
+        return -1; // Return -1 if day not found
+    }
+
     public String readDay(String date){
         for(Day day : days){
             if(day.getDate().equals(date)){

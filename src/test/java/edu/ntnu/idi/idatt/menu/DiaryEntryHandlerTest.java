@@ -58,7 +58,7 @@ public class DiaryEntryHandlerTest {
         handler.writeTodaysEntry(authorName);
 
         // Assert
-        verify(mockRegister).addDay(authorName, today, "Today's thoughts");
+        verify(mockRegister).addDay(authorName, today, "Today's thoughts", 0);
         assertTrue(getOutput().contains("Entry saved for today!"));
     }
 
@@ -78,7 +78,7 @@ public class DiaryEntryHandlerTest {
         handler.writeTodaysEntry(authorName);
 
         // Assert
-        verify(mockRegister).addDay(authorName, today, "Updated thoughts");
+        verify(mockRegister).addDay(authorName, today, "Updated thoughts", 0);
         assertTrue(getOutput().contains("Entry saved for today!"));
     }
 
@@ -97,7 +97,7 @@ public class DiaryEntryHandlerTest {
         handler.writeTodaysEntry(authorName);
 
         // Assert
-        verify(mockRegister, never()).addDay(anyString(), anyString(), anyString());
+        verify(mockRegister, never()).addDay(anyString(), anyString(), anyString(), anyInt());
         assertFalse(getOutput().contains("Entry saved for today!"));
     }
 
@@ -116,7 +116,7 @@ public class DiaryEntryHandlerTest {
         handler.writeTodaysEntry(authorName);
 
         // Assert
-        verify(mockRegister, never()).addDay(anyString(), anyString(), anyString());
+        verify(mockRegister, never()).addDay(anyString(), anyString(), anyString(), anyInt());
         assertTrue(getOutput().contains("invalid input"));
     }
 
@@ -136,7 +136,7 @@ public class DiaryEntryHandlerTest {
 
         // Assert
         verify(mockAuthor).printAll();
-        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString());
+        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString(), anyInt());
     }
 
     @Test
@@ -156,7 +156,7 @@ public class DiaryEntryHandlerTest {
         handler.lookAtExistingDay(authorName);
 
         // Assert
-        verify(mockRegister).editDay(date, "Updated entry", authorName);
+        verify(mockRegister).editDay(date, "Updated entry", authorName, 0);
         assertTrue(getOutput().contains("Entry updated successfully!"));
     }
 
@@ -177,7 +177,7 @@ public class DiaryEntryHandlerTest {
         handler.lookAtExistingDay(authorName);
 
         // Assert
-        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString());
+        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString(), anyInt());
     }
 
     @Test
@@ -197,7 +197,7 @@ public class DiaryEntryHandlerTest {
         handler.lookAtExistingDay(authorName);
 
         // Assert
-        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString());
+        verify(mockRegister, never()).editDay(anyString(), anyString(), anyString(), anyInt());
     }
 
     @Test
@@ -214,7 +214,7 @@ public class DiaryEntryHandlerTest {
         handler.addSpecificDate(authorName);
 
         // Assert
-        verify(mockRegister).addDay(authorName, date, "Specific date thoughts");
+        verify(mockRegister).addDay(authorName, date, "Specific date thoughts", 0);
         assertTrue(getOutput().contains("Entry saved for " + date + "!"));
     }
 
@@ -232,7 +232,7 @@ public class DiaryEntryHandlerTest {
         handler.addSpecificDate(authorName);
 
         // Assert
-        verify(mockRegister).addDay(authorName, date, "");
+        verify(mockRegister).addDay(authorName, date, "", 0);
         assertTrue(getOutput().contains("Entry saved for " + date + "!"));
     }
 
@@ -265,6 +265,6 @@ public class DiaryEntryHandlerTest {
         handler.lookAtExistingDay(authorName);
 
         // Assert
-        verify(mockRegister).editDay("2024-01-02", "Second updated", authorName);
+        verify(mockRegister).editDay("2024-01-02", "Second updated", authorName, 0);
     }
 }

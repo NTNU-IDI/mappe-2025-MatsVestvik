@@ -32,7 +32,10 @@ public class DiaryEntryHandler {
                     System.out.println("    What is on your mind today: ");
                     System.out.print("    ");
                     String content = scanner.nextLine();
-                    register.addDay(authorName, LocalDate.now().toString(), content);
+                    System.out.println("    Rate this day (1-10): ");
+                    int rating = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    register.addDay(authorName, LocalDate.now().toString(), content, rating);
                     System.out.println("    Entry saved for today!");
                     System.out.println("----------------------------------------");
                     inWriteTodaysEntry = false;
@@ -47,7 +50,10 @@ public class DiaryEntryHandler {
                 System.out.println("    What is on your mind today: ");
                 System.out.print("    ");
                 String content = scanner.nextLine();
-                register.addDay(authorName, LocalDate.now().toString(), content);
+                System.out.println("    Rate this day (1-10): ");
+                int rating = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                register.addDay(authorName, LocalDate.now().toString(), content, rating);
                 System.out.println("    Entry saved for today!");
                 System.out.println("----------------------------------------");
                 inWriteTodaysEntry = false;
@@ -71,7 +77,7 @@ public class DiaryEntryHandler {
             } else {
                 clearTerminal();
                 System.out.println("----------------------------------------");
-                System.out.println("    " + choice);
+                System.out.println("    " + choice + "          Rating: " + register.getAuthorByName(authorName).getDayRating(choice));
                 System.out.println(register.getAuthorByName(authorName).readDay(choice) + "\n\n");
                 System.out.println("    Edit: e         Back: b");
                 System.out.println("----------------------------------------");
@@ -79,7 +85,10 @@ public class DiaryEntryHandler {
                 if (eb.equalsIgnoreCase("e")) {
                     System.out.print("    Type in the new entry for this day: ");
                     String entry = scanner.nextLine();
-                    register.editDay(choice, entry, authorName);
+                    System.out.println("    Rate this day (1-10): ");
+                    int rating = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    register.editDay(choice, entry, authorName, rating);
                     System.out.println("    Entry updated successfully!");
                     System.out.println("----------------------------------------");
                 } else if (eb.equalsIgnoreCase("b")) {
@@ -99,7 +108,10 @@ public class DiaryEntryHandler {
         System.out.println("    What is on your mind for " + date + ": ");
         System.out.print("    ");
         String content = scanner.nextLine();
-        register.addDay(authorName, date, content);
+        System.out.println("    Rate this day (1-10): ");
+        int rating = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        register.addDay(authorName, date, content, rating);
         System.out.println("Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
     }
