@@ -52,6 +52,10 @@ public class MenuBoxes {
                     2. Create new user
                     3. Exit
                 ----------------------------------------""");
+            while (!scanner.hasNextInt()) {
+                System.out.println("    Invalid input! Enter a valid number: ");
+                scanner.next(); // Clear the invalid input
+            }
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
             welcomeHandling(choice);

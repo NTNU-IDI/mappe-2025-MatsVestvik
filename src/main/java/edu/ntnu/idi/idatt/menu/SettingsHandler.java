@@ -27,7 +27,10 @@ public class SettingsHandler {
                             4. Back
                         ----------------------------------------
                         """.formatted(authorName));
-
+            while (!scanner.hasNextInt()) {
+                System.out.println("    Invalid input! Enter a valid number: ");
+                scanner.next(); // Clear the invalid input
+            }   
             int choice = scanner.nextInt();
             if (choice == 4) {
                 inSetting = false;

@@ -22,6 +22,10 @@ public class LoginHandler {
             System.out.println("    Choose a user:");
             register.printAllAuthors();
             System.out.println("----------------------------------------");
+            while (!scanner.hasNextInt()) {
+                System.out.println("    Invalid input! Enter a valid number: ");
+                scanner.next(); // Clear the invalid input
+            }
             int choice = scanner.nextInt();
             scanner.nextLine();
             if (choice > 0 && choice < register.getAuthors().size() + 1) {
@@ -47,7 +51,11 @@ public class LoginHandler {
         System.out.println("    You have selected " + authorName);
         System.out.println("    Please enter your pin:");
         System.out.println("----------------------------------------");
-
+        while (!scanner.hasNextInt()) {
+            clearTerminal();
+            System.out.println("    Invalid input! Please enter a pin (0000-9999): ");
+            scanner.next(); // Clear the invalid input
+        }
         int ePin = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 

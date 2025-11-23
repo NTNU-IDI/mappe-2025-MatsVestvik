@@ -33,7 +33,18 @@ public class DiaryEntryHandler {
                     System.out.print("    ");
                     String content = scanner.nextLine();
                     System.out.println("    Rate this day (1-10): ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("    Invalid input! Please enter a number (1-10): ");
+                        scanner.next(); // Clear the invalid input
+                    }
                     int rating = scanner.nextInt();
+
+                    // Clamp the rating between 1-10
+                    if (rating > 10) {
+                        rating = 10;
+                    } else if (rating < 1) {
+                        rating = 1;
+                    }
                     scanner.nextLine(); // Consume newline
                     register.addDay(authorName, LocalDate.now().toString(), content, rating);
                     System.out.println("    Entry saved for today!");
@@ -51,7 +62,19 @@ public class DiaryEntryHandler {
                 System.out.print("    ");
                 String content = scanner.nextLine();
                 System.out.println("    Rate this day (1-10): ");
+                while (!scanner.hasNextInt()) {
+                    clearTerminal();
+                    System.out.println("    Invalid input! Please enter a number (1-10): ");
+                    scanner.next(); // Clear the invalid input
+                }
                 int rating = scanner.nextInt();
+
+                // Clamp the rating between 1-10
+                if (rating > 10) {
+                    rating = 10;
+                } else if (rating < 1) {
+                    rating = 1;
+                }
                 scanner.nextLine(); // Consume newline
                 register.addDay(authorName, LocalDate.now().toString(), content, rating);
                 System.out.println("    Entry saved for today!");
@@ -86,7 +109,19 @@ public class DiaryEntryHandler {
                     System.out.print("    Type in the new entry for this day: ");
                     String entry = scanner.nextLine();
                     System.out.println("    Rate this day (1-10): ");
+                    while (!scanner.hasNextInt()) {
+                        clearTerminal();
+                        System.out.println("    Invalid input! Please enter a number (1-10): ");
+                        scanner.next(); // Clear the invalid input
+                    }
                     int rating = scanner.nextInt();
+
+                    // Clamp the rating between 1-10
+                    if (rating > 10) {
+                        rating = 10;
+                    } else if (rating < 1) {
+                        rating = 1;
+                    }
                     scanner.nextLine(); // Consume newline
                     register.editDay(choice, entry, authorName, rating);
                     System.out.println("    Entry updated successfully!");
@@ -109,7 +144,19 @@ public class DiaryEntryHandler {
         System.out.print("    ");
         String content = scanner.nextLine();
         System.out.println("    Rate this day (1-10): ");
+        while (!scanner.hasNextInt()) {
+            clearTerminal();
+            System.out.println("    Invalid input! Please enter a number (1-10): ");
+            scanner.next(); // Clear the invalid input
+        }
         int rating = scanner.nextInt();
+
+        // Clamp the rating between 1-10
+        if (rating > 10) {
+            rating = 10;
+        } else if (rating < 1) {
+            rating = 1;
+        }
         scanner.nextLine(); // Consume newline
         register.addDay(authorName, date, content, rating);
         System.out.println("Entry saved for " + date + "!");
