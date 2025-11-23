@@ -93,7 +93,8 @@ public class Author {
     }
 
     public void printAll(){
-        for(Day day: days){
+        List<Day> sortedDays = getSortDays(days);
+        for(Day day: sortedDays){
             System.out.println("    "+day.getDate());
         }
     }

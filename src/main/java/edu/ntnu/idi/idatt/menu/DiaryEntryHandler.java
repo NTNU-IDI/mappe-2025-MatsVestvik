@@ -33,7 +33,7 @@ public class DiaryEntryHandler {
                     System.out.println("    What is on your mind today: ");
                     System.out.print("    ");
                     String content = scanner.nextLine();
-                    System.out.println("    Rate this day (1-10): ");
+                    System.out.print("    Rate this day (1-10): ");
                     while (!scanner.hasNextInt()) {
                         System.out.println("    Invalid input! Please enter a number (1-10): ");
                         scanner.next(); // Clear the invalid input
@@ -62,20 +62,14 @@ public class DiaryEntryHandler {
                 System.out.println("    What is on your mind today: ");
                 System.out.print("    ");
                 String content = scanner.nextLine();
-                System.out.println("    Rate this day (1-10): ");
+                System.out.print("    Rate this day (1-10): ");
                 while (!scanner.hasNextInt()) {
                     clearTerminal();
-                    System.out.println("    Invalid input! Please enter a number (1-10): ");
+                    System.out.print("    Invalid input! Please enter a number (1-10): ");
                     scanner.next(); // Clear the invalid input
                 }
                 int rating = scanner.nextInt();
 
-                // Clamp the rating between 1-10
-                if (rating > 10) {
-                    rating = 10;
-                } else if (rating < 1) {
-                    rating = 1;
-                }
                 scanner.nextLine(); // Consume newline
                 register.addDay(authorName, LocalDate.now().toString(), content, rating);
                 System.out.println("    Entry saved for today!");
@@ -91,7 +85,7 @@ public class DiaryEntryHandler {
             clearTerminal();
             System.out.println("----------------------------------------");
             register.getAuthorByName(authorName).printAll();
-            System.out.println("    E. Exit");
+            System.out.println("    e. Exit");
             System.out.println("----------------------------------------");
             System.out.println("    Type in the date of the day you \n    want to look at (choose one from the list above):");
             System.out.print("    ");
@@ -107,35 +101,32 @@ public class DiaryEntryHandler {
             if (choice.equalsIgnoreCase("e")) {
                 inLookAtExistingDay = false;
             } else if (!validDates.contains(choice)) {
-                System.out.println("    Not a valid date. Please choose one of the listed dates or 'E' to exit.");
+                System.out.println("    Not a valid date. Please choose one of the listed dates or 'e' to exit.");
                 System.out.println("    Press enter to continue...");
                 scanner.nextLine();
                 continue;
             } else {
                 clearTerminal();
                 System.out.println("----------------------------------------");
-                System.out.println("    " + choice + "          Rating: " + register.getAuthorByName(authorName).getDayRating(choice));
-                System.out.println(register.getAuthorByName(authorName).readDay(choice) + "\n\n");
+                System.out.println(choice + "          Rating: " + register.getAuthorByName(authorName).getDayRating(choice));
+                System.out.println("----------------------------------------");
+                System.out.println(register.getAuthorByName(authorName).readDay(choice) );
+                System.out.println("----------------------------------------");
                 System.out.println("    Edit: e         Back: b");
                 System.out.println("----------------------------------------");
                 String eb = scanner.nextLine();
                 if (eb.equalsIgnoreCase("e")) {
-                    System.out.print("    Type in the new entry for this day: ");
+                    System.out.println("    Type in the new entry for this day: ");
+                    System.out.print("    ");
                     String entry = scanner.nextLine();
-                    System.out.println("    Rate this day (1-10): ");
+                    System.out.print("    Rate this day (1-10): ");
                     while (!scanner.hasNextInt()) {
                         clearTerminal();
-                        System.out.println("    Invalid input! Please enter a number (1-10): ");
+                        System.out.print("    Invalid input! Please enter a number (1-10): ");
                         scanner.next(); // Clear the invalid input
                     }
                     int rating = scanner.nextInt();
 
-                    // Clamp the rating between 1-10
-                    if (rating > 10) {
-                        rating = 10;
-                    } else if (rating < 1) {
-                        rating = 1;
-                    }
                     scanner.nextLine(); // Consume newline
                     register.editDay(choice, entry, authorName, rating);
                     System.out.println("    Entry updated successfully!");
@@ -153,7 +144,6 @@ public class DiaryEntryHandler {
         clearTerminal();
         System.out.println("----------------------------------------");
         System.out.println("    Enter the date (YYYY-MM-DD): ");
-
         String date = null;
         while (true) {
             System.out.print("    ");
@@ -176,7 +166,7 @@ public class DiaryEntryHandler {
         System.out.println("    What is on your mind for " + date + ": ");
         System.out.print("    ");
         String content = scanner.nextLine();
-        System.out.println("    Rate this day (1-10): ");
+        System.out.print("    Rate this day (1-10): ");
         while (!scanner.hasNextInt()) {
             clearTerminal();
             System.out.println("    Invalid input! Please enter a number (1-10): ");
@@ -184,15 +174,9 @@ public class DiaryEntryHandler {
         }
         int rating = scanner.nextInt();
 
-        // Clamp the rating between 1-10
-        if (rating > 10) {
-            rating = 10;
-        } else if (rating < 1) {
-            rating = 1;
-        }
         scanner.nextLine(); // Consume newline
         register.addDay(authorName, date, content, rating);
-        System.out.println("Entry saved for " + date + "!");
+        System.out.println("    Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
     }
 
