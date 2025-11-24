@@ -10,8 +10,6 @@ public class LoginHandler {
     private boolean running = true;
     AuthorRegister register;
     private String authorName;
-    private UserMenuHandler userMenuHandler;
-    private SettingsHandler settingsHandler;
 
     /*
     Login handler is where you choose your author object. This allows you to gain
@@ -21,8 +19,6 @@ public class LoginHandler {
     public LoginHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
-        this.userMenuHandler = new UserMenuHandler(scanner, register, this);
-        this.settingsHandler = new SettingsHandler(scanner, register, this);
     }
 
     /*
@@ -39,7 +35,8 @@ public class LoginHandler {
             System.out.println("    Choose a user:");
             register.printAllAuthors();
             System.out.println("    "+(register.getAuthors().size() + 1)+". Create new user");
-            System.out.println("    " + (register.getAuthors().size() + 2) + ". Save and Exit");
+            System.out.println("    " + (register.getAuthors().size() + 2)+". Admin");
+            System.out.println("    " + (register.getAuthors().size() + 3) + ". Save and Exit");
             System.out.print("----------------------------------------\n    ");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
@@ -58,7 +55,9 @@ public class LoginHandler {
                 }
             } else if (choice == register.getAuthors().size() + 1) {
                 createNewUser();
-            } else if (choice == register.getAuthors().size() + 2) {
+            } else if(choice == register.getAuthors().size() + 2){
+                extras();
+            }else if (choice == register.getAuthors().size() + 3) {
                 clearTerminal();
                 exit();
             } else {
@@ -152,6 +151,40 @@ public class LoginHandler {
         System.out.println("    Press enter to continue...");
         scanner.nextLine();
         clearTerminal();
+    }
+
+    public void extras(){
+        clearTerminal();
+        System.out.print("""
+                ----------------------------------------
+                    Enter Admin password: """);
+        
+        while (!scanner.hasNextInt()) {
+            clearTerminal();
+            System.out.print("    Invalid input! \nPlease enter a pin (0000-9999): ");
+            scanner.next(); // Clear the invalid input
+        }
+        int ePin = scanner.nextInt();
+        scanner.nextLine();
+        if(ePin == 1234){
+            System.out.println("""
+                ----------------------------------------
+                    1. Statistics
+                    2. Search all
+                ----------------------------------------""");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if(choice == 1){
+                clearTerminal();
+                register.getStatisticsAll();
+                System.out.println("e.Exit");
+                scanner.nextLine();
+            }
+        }
+        else{
+            return;
+        }
+        
     }
 
     /*

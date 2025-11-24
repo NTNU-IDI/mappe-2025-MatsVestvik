@@ -117,9 +117,31 @@ public class AuthorRegister {
         System.out.println("Author not found: " + name);
     }
 
+    public void getStatistics(String author){
+        System.out.println("Avrg rating: " + getAuthorByName(author).getAvrgRating() +" | Num of days: "+ getAuthorByName(author).getDaysSize());
+    }
+
+    public void getStatisticsAll(){
+        for (Author author:authors){
+            System.out.println("----------------------------------------");
+            System.out.println(author.getName());
+            getStatistics(author.getName());
+            System.out.println("----------------------------------------");
+        }
+    }
+
     public void printDaysAuthor(Author author){
         for (int i = 0; i < author.getDaysSize(); i++){
             System.out.println(author.getListDays().get(i).toString());
+        }
+    }
+
+    public void printAllDiaries(){
+        for (Author author: authors){
+            System.out.println("----------------------------------------");
+            System.out.println(author.getName());
+            author.printAllContent();
+            System.out.println("----------------------------------------");
         }
     }
 

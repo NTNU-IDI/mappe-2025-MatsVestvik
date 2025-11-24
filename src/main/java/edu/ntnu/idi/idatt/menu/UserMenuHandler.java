@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.menu;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 

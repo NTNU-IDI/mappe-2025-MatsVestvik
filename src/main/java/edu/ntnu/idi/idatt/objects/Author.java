@@ -1,10 +1,7 @@
 package edu.ntnu.idi.idatt.objects;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Author {
     private String name;
@@ -96,6 +93,27 @@ public class Author {
         List<Day> sortedDays = getSortDays(days);
         for(Day day: sortedDays){
             System.out.println("    "+day.getDate());
+        }
+    }
+
+    public double getAvrgRating(){
+        if (days.size() == 0) {
+            return 0;
+        }
+        else{
+            int tot = 0;
+            for (Day day: days){
+                tot+=day.getRating();
+            }
+            return tot/days.size();
+        }
+        
+    }
+
+    public void printAllContent(){
+        for (Day day: days){
+            System.out.println(day.getDate() + day.getRating());
+            System.out.println(day.getContent());
         }
     }
 
