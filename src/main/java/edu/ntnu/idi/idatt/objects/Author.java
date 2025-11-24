@@ -66,6 +66,19 @@ public class Author {
         days.add(inputDay);
     }
 
+    public void removeDay(String date){
+        Day dayToRemove = null;
+        for(Day day: days){
+            if(day.getDate().equals(date)){
+                dayToRemove = day;
+                break;
+            }
+        }
+        if(dayToRemove != null){
+            days.remove(dayToRemove);
+        }
+    }
+
     public int getDayRating(String date){
         for(Day day : days){
             if(day.getDate().equals(date)){

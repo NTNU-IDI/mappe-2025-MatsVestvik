@@ -129,7 +129,7 @@ public class DiaryEntryHandler {
                 System.out.println("----------------------------------------");
                 System.out.println(register.getAuthorByName(authorName).readDay(choice) );
                 System.out.println("----------------------------------------");
-                System.out.println("    Edit: e         Back: b");
+                System.out.println("e. Edit         b. back     d. delete");
                 System.out.println("----------------------------------------");
                 String eb = scanner.nextLine();
                 if (eb.equalsIgnoreCase("e")) {
@@ -150,6 +150,8 @@ public class DiaryEntryHandler {
                     System.out.println("----------------------------------------");
                 } else if (eb.equalsIgnoreCase("b")) {
                     return;
+                } else if (eb.equalsIgnoreCase("d")) {
+                    register.getAuthorByName(authorName).removeDay(choice);
                 } else {
                     return;
                 }

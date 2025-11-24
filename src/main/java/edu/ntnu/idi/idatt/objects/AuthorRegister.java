@@ -117,6 +117,10 @@ public class AuthorRegister {
         System.out.println("Author not found: " + name);
     }
 
+    public void searchAllDaysContaining(String contains){
+        
+    }
+
     public void getStatistics(String author){
         System.out.println("Avrg rating: " + getAuthorByName(author).getAvrgRating() +" | Num of days: "+ getAuthorByName(author).getDaysSize());
     }
@@ -134,6 +138,48 @@ public class AuthorRegister {
         for (int i = 0; i < author.getDaysSize(); i++){
             System.out.println(author.getListDays().get(i).toString());
         }
+    }
+
+    /**
+     * Search across all authors' days for diary entries containing the given keyword.
+     * The search is case-insensitive and matches if the entry content contains the keyword as a substring.
+     * Returns a list of formatted strings: "Author - YYYY-MM-DD: <content>".
+     */
+    public java.util.List<String> searchEntries(String keyword) {
+        java.util.List<String> results = new java.util.ArrayList<>();
+        if (keyword == null || keyword.isEmpty()) return results;
+        String lower = keyword.toLowerCase();
+        for (Author author : authors) {
+            for (Day day : author.getListDays()) {
+                String content = day.getContent();
+                if (content != null && content.toLowerCase().contains(lower)) {
+                    results.add(author.getName() + " - " + day.getDate() + ": " + content);
+                }
+            }
+        }
+        return results;
+    }
+
+    public java.util.List<String> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
+        java.util.List<String> results = new java.util.ArrayList<>();
+        String lower = (keyword == null) ? "" : keyword.toLowerCase();
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        for (Author author : authors) {
+            for (Day day : author.getListDays()) {
+                LocalDate dayDate = LocalDate.parse(day.getDate());
+                if ((dayDate.isEqual(start) || dayDate.isAfter(start)) &&
+                    (dayDate.isEqual(end) || dayDate.isBefore(end))) {
+                    String content = day.getContent();
+                    if (content != null) {
+                        if (lower.isEmpty() || content.toLowerCase().contains(lower)) {
+                            results.add(author.getName() + " - " + day.getDate() + ": " + content);
+                        }
+                    }
+                }
+            }
+        }
+        return results;
     }
 
     public void printAllDiaries(){
