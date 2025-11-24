@@ -6,24 +6,33 @@ import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
 public class DiaryEntryHandler {
-    private Scanner scanner;
-    private AuthorRegister register;
 
     /**
      * Handles diary entry creation and management for a specific author.
      * Validates user input and delegates storage operations to the AuthorRegister.
+     * Delegates Data storage functions to Author register.
      */
 
+    private Scanner scanner;
+    private AuthorRegister register;
+
+    /**
+     * Cunstructs DiaryEntryHandler with scanner and register
+     * @param scanner
+     * @param register
+     */
     public DiaryEntryHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
     }
 
-    /*
-    write todays entry prompts you asking for a entry and a rating. These
-    values are passed to a function that creates the day object and stored 
-    in the authors list of days.
-    */
+    /**
+     * allows user to write todays entry. Prompt for already existing day
+     * allows user to choose to overwrite
+     * validation. ensures reating is in 1-10 range
+     * 
+     * @param authorName
+     */
 
     public void writeTodaysEntry(String authorName) {
         clearTerminal();
@@ -90,11 +99,12 @@ public class DiaryEntryHandler {
         }
     }
 
-    /*
-    Look at days lets you see all the dates with a connected entry. Here you are able to 
-    edit an existing day or exit. You are only allowed to enter a date that exists in the
-    days list of your author object.
-    */
+    /**
+     * Displays all existing days in author days list.
+     * after selection allows edit back and deltion.
+     * display content and rating for specific day
+     * @param authorName
+     */
 
     public void lookAtExistingDay(String authorName) {
         boolean inLookAtExistingDay = true;
@@ -159,10 +169,12 @@ public class DiaryEntryHandler {
         }
     }
 
-    /*
-    Add specific date is a function that allows you to create an entry with any date attached. 
-    It cleans for anything that is not a valid date.
-    */
+    /**
+     * Allows author to create a day object with any valid date
+     * sanitation ensures only real dates.
+     * prompts for a date an entry and a rating.
+     * @param authorName
+     */
 
     public void addSpecificDate(String authorName) {
         clearTerminal();
@@ -204,10 +216,10 @@ public class DiaryEntryHandler {
         System.out.println("----------------------------------------");
     }
 
-    /*
-    clearterminal clears the terminal. It is a very nice function for a cleaner terminal
-    . This creates a nicer user experince.
-    */
+    /**
+     * clearterminal clears the terminal for a better viewing experience
+     * called everytime user enters new menu
+     */
     
     private void clearTerminal() {
         try {

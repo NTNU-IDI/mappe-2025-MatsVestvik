@@ -5,14 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorRegister {
+    /**
+     * this is a list of all authors in the system
+     */
     private List<Author> authors;
 
+    /**
+     * creates a new authors list
+     */
     public AuthorRegister(){
         authors = new ArrayList<>();
     }
 
+    /**
+     * get authors list
+     * @return
+     */
     public List<Author> getAuthors(){ return authors;}
 
+    /**
+     * sanitizes input, ensures the author name does not exist in system. 
+     * ensures name value is uniqe 
+     * @param name
+     * @param pin
+     */
     public void addNewAuthor(String name, int pin) {
         for (Author author : authors) {
             if (author.getName().equals(name)) {
@@ -25,6 +41,13 @@ public class AuthorRegister {
         authors.add(newAuthor);
     }
 
+
+    /**
+     * allow to find day in specific authors days list
+     * @param auth
+     * @param date
+     * @return
+     */
     public boolean searchDays(String auth, LocalDate date){
         for(Author author:authors){
             if(author.getName().equals(auth)){
@@ -34,6 +57,14 @@ public class AuthorRegister {
         return false;
     }
 
+
+    /**
+     * Allows adding a day to specific author days list
+     * @param author
+     * @param date
+     * @param content
+     * @param rating
+     */
     public void addDay(String author, String date, String content, int rating){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
@@ -49,7 +80,12 @@ public class AuthorRegister {
                     """); 
     }
     
-
+    /**
+     * add a day to specific days list with todays date
+     * @param author
+     * @param content
+     * @param rating
+     */
     public void addDayToday(String author, String content, int rating){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
@@ -64,21 +100,40 @@ public class AuthorRegister {
                     """); 
     } 
 
+
+    /**
+     * print all author names numbered to be used in a menu display. 
+     */
     public void printAllAuthors(){
         for(int i = 0; i<authors.size(); i++){
             int num = i+1;
             System.out.println("    "+num+". "+authors.get(i).getName());
         }
     }
+    /**
+     * removes author with matching name from register
+     * @param auth
+     */
 
     public void deleteAuthor(String auth) {
         authors.removeIf(author -> author.getName().equals(auth));
     }
+    /**
+     * retrieces name of author in pos
+     * used in for loops
+     * @param pos
+     * @return
+     */
 
     public String getAuthorName(int pos){
         return authors.get(pos).getName();
     }
 
+    /**
+     * return author object of object with matching name
+     * @param name
+     * @return
+     */
     public Author getAuthorByName(String name){
         for (Author author : authors){
             if (name.equals(author.getName())){
@@ -87,6 +142,12 @@ public class AuthorRegister {
         }
         return null;
     }
+
+    /**
+     * returns int of position to author object in authors list
+     * @param name
+     * @return
+     */
 
     public int getAuthorPos(String name){
         int pos = 0;
@@ -99,6 +160,13 @@ public class AuthorRegister {
         return pos + 1;
     }
 
+    /**
+     * 
+     * @param date
+     * @param entry
+     * @param name
+     * @param rating
+     */
     public void editDay(String date, String entry, String name, int rating){
         for(Author author: authors){
             if(name.equals(author.getName())){
@@ -117,22 +185,36 @@ public class AuthorRegister {
         System.out.println("Author not found: " + name);
     }
 
-    public void searchAllDaysContaining(String contains){
-        
-    }
+    /**
+     * get statistics for specified user
+     * @param author
+     */
 
     public void getStatistics(String author){
         System.out.println("Avrg rating: " + getAuthorByName(author).getAvrgRating() +" | Num of days: "+ getAuthorByName(author).getDaysSize());
     }
 
+    /**
+     * print all statistics in a nice easy to vie format
+     */
     public void getStatisticsAll(){
+        int totalDays = 0;
+        double totalAvrgRating = 0;
         for (Author author:authors){
             System.out.println("----------------------------------------");
             System.out.println(author.getName());
             getStatistics(author.getName());
-            System.out.println("----------------------------------------");
+            totalAvrgRating += author.getAvrgRating();
+            totalDays += author.getDaysSize();
         }
-    }
+        System.out.println("----------------------------------------");
+        System.out.println("Total num of days: "+totalDays +"\nAvrg avrg rating: " +totalAvrgRating/authors.size());
+    }  
+
+    /**
+     * print all the days assosiated with a author. 
+     * @param author
+     */
 
     public void printDaysAuthor(Author author){
         for (int i = 0; i < author.getDaysSize(); i++){
@@ -160,6 +242,12 @@ public class AuthorRegister {
         return results;
     }
 
+    /**
+     * returns a formatted String that can be printed
+     * takes startdate enddate and keyword adn searces all days for day
+     * that macthes parameters
+     *  */ 
+
     public java.util.List<String> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
         java.util.List<String> results = new java.util.ArrayList<>();
         String lower = (keyword == null) ? "" : keyword.toLowerCase();
@@ -182,12 +270,15 @@ public class AuthorRegister {
         return results;
     }
 
+    /**
+     * prints all the diary entries for all days lists
+     */
+
     public void printAllDiaries(){
         for (Author author: authors){
             System.out.println("----------------------------------------");
             System.out.println(author.getName());
             author.printAllContent();
-            System.out.println("----------------------------------------");
         }
     }
 

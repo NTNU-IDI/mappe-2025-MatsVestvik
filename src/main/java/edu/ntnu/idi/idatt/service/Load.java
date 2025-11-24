@@ -10,11 +10,25 @@ import edu.ntnu.idi.idatt.objects.Author;
 import edu.ntnu.idi.idatt.objects.Day;
 
 public class Load {
+    /**
+     * handles the reading from csv inbetween sessions
+     */
+
+    /**
+     * creates the load object to use method loadauthorsfromcsv
+     * uses function loaddays from csv after authors
+     * @param authors
+     */
     public Load(List<Author> authors){
         loadAuthorsFromCSV(authors);
         loadDaysFromCSV(authors);
     }
     
+    /**
+     * takes the list authors and places author objects in.¨
+     * reads name of csv for author name
+     * @param authors
+     */
     public void loadAuthorsFromCSV(List<Author> authors) {
         String entriesDirectory = "src/main/resources/entries/";
         File dir = new File(entriesDirectory);
@@ -44,6 +58,11 @@ public class Load {
         System.out.println("AuthorRegister initialized with " + authors.size() + " authors.");
     }
 
+    /**
+     * reads header in every csv for pin
+     * @param csvFile
+     * @return
+     */
     private int readPinFromCSV(File csvFile) {
         int defaultPin = 1111; // Default PIN if not found
         
@@ -69,6 +88,11 @@ public class Load {
         return defaultPin;
     }
 
+    /**
+     * reads ecerything bellow header in csv and assigns every line as day.
+     * gets day values from "|" seperated values.
+     * @param authors
+     */
     public void loadDaysFromCSV(List<Author> authors){
         for(Author author : authors){
             String filePath = "src/main/resources/entries/" + author.getName() + ".csv";
@@ -99,6 +123,15 @@ public class Load {
             }
         }
     }
+
+    /**
+     * add day function to add day to specific author days list
+     * @param authors
+     * @param author
+     * @param date
+     * @param content
+     * @param rating
+     */
 
     public void addDay(List<Author> authors, String author, String date, String content, int rating){
         for(Author auth: authors){

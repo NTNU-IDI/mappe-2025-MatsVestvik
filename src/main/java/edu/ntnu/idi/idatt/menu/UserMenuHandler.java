@@ -4,11 +4,22 @@ import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
 public class UserMenuHandler {
+
+    /**
+     * allows access to specific author abject and variables.
+     */
     private Scanner scanner;
     private AuthorRegister register;
     private LoginHandler menu;
     private DiaryEntryHandler diaryHandler;
     public String authorName;
+
+    /**
+     * create usermenu with specified parameters.
+     * @param scanner
+     * @param register
+     * @param menu
+     */
 
     public UserMenuHandler(Scanner scanner, AuthorRegister register, LoginHandler menu) {
         this.scanner = scanner;
@@ -16,6 +27,16 @@ public class UserMenuHandler {
         this.menu = menu;
         this.diaryHandler = new DiaryEntryHandler(scanner, register);
     }
+
+    /**
+     * prompts user with options.
+     * write entry with a date. look at days
+     * settings takes user to SettingsHandler
+     * logout takes user to LoginHandler
+     * save and quit writes data to csv and closes scanner.
+     * @param authorName
+     * @return
+     */
 
     public boolean showUserMenu(String authorName) {
         this.authorName = authorName;
@@ -65,6 +86,12 @@ public class UserMenuHandler {
         return false;
     }
 
+    /**
+     * handles input from previous menu. takes user to responsible handler.
+     * @param choice
+     * @return
+     */
+
     private boolean handleUserChoice(int choice) {
         switch (choice) {
             case 1 -> {
@@ -95,6 +122,9 @@ public class UserMenuHandler {
         }
     }
 
+    /**
+     * clear terminal inbetween menuoutputs for readability.
+     */
     private void clearTerminal() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {

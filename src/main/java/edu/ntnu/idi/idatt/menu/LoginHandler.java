@@ -6,26 +6,33 @@ import edu.ntnu.idi.idatt.service.Save;
 
 public class LoginHandler {
 
+    /**
+     * handles login screen where user can choose account or create
+     * also handles admin operations. with extra functionality
+     * also handles new author creation.
+     */
+
     Scanner scanner;
     private boolean running = true;
     AuthorRegister register;
     private String authorName;
 
-    /*
-    Login handler is where you choose your author object. This allows you to gain
-    access to other functions. This is a security step.
-    */
+    /**
+     * creates the loginhandler with specified scanner and register.
+     * @param scanner
+     * @param register
+     */
 
     public LoginHandler(Scanner scanner, AuthorRegister register) {
         this.scanner = scanner;
         this.register = register;
     }
 
-    /*
-    Login shows you all the author currently in the system. You are also shown the ability
-    to create a new author or save and quit. Save and quit writes all data to seperate csv files
-    for all author. 
-    */
+    /**
+     * shows login option.
+     * display all authors numbered that are currently in the system for easy selection
+     * display create new user option, admin and save and exit.
+     */
 
     public void login() {
         boolean isInLogin = true;
@@ -34,6 +41,7 @@ public class LoginHandler {
             System.out.println("----------------------------------------");
             System.out.println("    Choose a user:");
             register.printAllAuthors();
+            System.out.println("----------------------------------------");
             System.out.println("    "+(register.getAuthors().size() + 1)+". Create new user");
             System.out.println("    " + (register.getAuthors().size() + 2)+". Admin");
             System.out.println("    " + (register.getAuthors().size() + 3) + ". Save and Exit");
@@ -66,11 +74,11 @@ public class LoginHandler {
         }
     }
 
-    /*
-    Login handling prompts you to enter a pin. We then take that pin in pass it into
-    the check pin function to see if it is the correct pin of the user.
-    After this check user gains acces to the days of this author.
-    */
+    /**
+     * handles password verification. prompts for an input and uses chackpin to verify
+     * 
+     * @return
+     */
 
     public boolean loginHandling() {
         clearTerminal();
@@ -95,9 +103,10 @@ public class LoginHandler {
         return false;
     }
 
-    /*
-    This funtion ensures that the author name is updated.
-    */
+    /**
+     * function that can be called from other classes to ensure the author name is updated
+     * @param authorName
+     */
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
@@ -107,9 +116,9 @@ public class LoginHandler {
         return this.authorName;
     }
 
-    /*
-    Here you are prompted to enter name and pin for a new author abject. this function
-    is also responsible for sinitizing the input for good user feedback */
+    /**
+     * prompts user for name and pin. verifies there is a name and and valid pin
+     */
 
     public void createNewUser() {
         clearTerminal();
@@ -153,11 +162,17 @@ public class LoginHandler {
         clearTerminal();
     }
 
+    /**
+     * contains functions that are reserved to admin
+     * Allows search in all diaries. 
+     * allows display of all statistics.
+     */
+
     public void extras(){
         clearTerminal();
         System.out.print("""
                 ----------------------------------------
-                    Enter Admin password: """);
+                    Enter Admin password:  """);
         
         while (!scanner.hasNextInt()) {
             clearTerminal();
@@ -172,7 +187,8 @@ public class LoginHandler {
                     1. Statistics
                     2. Search Keyword
                     3. Search in timespan
-                    4. Exit
+                    4. Read all
+                    5. Exit
                 ----------------------------------------""");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -273,7 +289,14 @@ public class LoginHandler {
                 System.out.println("    Press enter to continue...");
                 scanner.nextLine();
             }
-            else if (choice == 4){
+            else if(choice == 4){
+                clearTerminal();
+                register.printAllDiaries();
+                System.out.println("----------------------------------------");
+                System.out.println("    Press enter to continue...");
+                scanner.nextLine();
+            }
+            else if (choice == 5){
                 return;
             }
             else{
@@ -287,8 +310,8 @@ public class LoginHandler {
         
     }
 
-    /*
-    clear terminal clears the terminal
+    /**
+     * clear the terminal inbetween menu displays for readability
      */
 
     private void clearTerminal() {
@@ -303,9 +326,9 @@ public class LoginHandler {
         }
     }
 
-    /*
-    exit is a function that closes the scanner and calls the save to csv method to write date.
-    */
+    /**
+     * exit closes the scanner and saves entries to csv
+     */
 
     public void exit() {
         clearTerminal();

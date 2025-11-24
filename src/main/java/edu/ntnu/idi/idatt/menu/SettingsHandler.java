@@ -4,16 +4,34 @@ import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
 public class SettingsHandler {
+
+    /**
+     * Controlles the administration of author object.
+     * allows to change variables in the author object
+     */
     private Scanner scanner;
     private AuthorRegister register;
     private LoginHandler menu;
     public String authorName;
+
+    /**
+     * Creates the Settings object with specified paramaters.
+     * @param scanner
+     * @param register
+     * @param menu
+     */
 
     public SettingsHandler(Scanner scanner, AuthorRegister register, LoginHandler menu) {
         this.scanner = scanner;
         this.register = register;
         this.menu = menu;
     }
+
+    /**
+     * Prompts user with options for acition. validates input to be num to be int. 
+     * @param authorName
+     * @return
+     */
 
     public boolean settings(String authorName) {
         this.authorName = authorName;
@@ -47,6 +65,12 @@ public class SettingsHandler {
         return false;
     }
 
+    /**
+     * settingsHandler takes input from previous display and chooses responsible function.
+     * @param choice
+     * @return
+     */
+
     public boolean settingsHandler(int choice) {
         clearTerminal();
         switch (choice) {
@@ -61,6 +85,11 @@ public class SettingsHandler {
         }
         return false;
     }
+
+    /**
+     * prompts user for new name. validates that this is not empty
+     * validates that this is not the same name as another user.
+     */
 
     public void changeUsername() {
         clearTerminal();
@@ -108,6 +137,12 @@ public class SettingsHandler {
         scanner.nextLine();
     }
 
+    /**
+     * prompts for current pin for validation
+     * if correct allow antry of new pin
+     * ensure new pin is a valid pin
+     */
+
     public void changePassword() {
         clearTerminal();
         System.out.println("----------------------------------------");
@@ -149,6 +184,12 @@ public class SettingsHandler {
         scanner.nextLine();
     }
 
+    /**
+     * prompts user to input their username to ensure intent
+     * returns user to login screen if user was deleted.
+     * @return
+     */
+
     public boolean deleteAccount() {
         String username = "";
         boolean inDeleteAccount = true;
@@ -181,6 +222,10 @@ public class SettingsHandler {
         }
         return false;
     }
+
+    /**
+     * clear the terminal inbetween menuscreens for readability
+     */
 
     private void clearTerminal() {
         try {

@@ -11,6 +11,12 @@ import edu.ntnu.idi.idatt.objects.Day;
 import edu.ntnu.idi.idatt.util.ClearCSV;
 
 public class Save {
+    /**
+     * handles writing to csv. calls function clear csv to remove old save date
+     * writes header with usename and pin
+     * writes date entry an rating per lin seperated by "|"
+     * @param authors
+     */
     public void saveToCSV(List<Author> authors) {
         ClearCSV.clear();
         
