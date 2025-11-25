@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.menu;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class SettingsHandler {
 
@@ -37,7 +38,7 @@ public class SettingsHandler {
         this.authorName = authorName;
         boolean inSetting = true;
         while (inSetting) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.print("""
                         ----------------------------------------
                             %s's Settings
@@ -72,7 +73,7 @@ public class SettingsHandler {
      */
 
     public boolean settingsHandler(int choice) {
-        clearTerminal();
+        TerminalUtils.clear();
         switch (choice) {
             case 1 -> changeUsername();
             case 2 -> changePassword();
@@ -92,7 +93,7 @@ public class SettingsHandler {
      */
 
     public void changeUsername() {
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.print("    New name: ");
         // consume any leftover newline then read the new name
@@ -144,7 +145,7 @@ public class SettingsHandler {
      */
 
     public void changePassword() {
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your current pin: ");
         int triedPin = scanner.nextInt();
@@ -194,7 +195,7 @@ public class SettingsHandler {
         String username = "";
         boolean inDeleteAccount = true;
         while (inDeleteAccount) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.println("""
                 ----------------------------------------
                     Warning you are about to delete
@@ -227,15 +228,5 @@ public class SettingsHandler {
      * clear the terminal inbetween menuscreens for readability
      */
 
-    private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println("\n".repeat(50));
-        }
-    }
+    // Terminal clearing is handled by TerminalUtils.clear()
 }

@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.menu;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.service.Save;
+import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class LoginHandler {
 
@@ -37,7 +38,7 @@ public class LoginHandler {
     public void login() {
         boolean isInLogin = true;
         while (isInLogin && running) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.println("----------------------------------------");
             System.out.println("    Choose a user:");
             register.printAllAuthors();
@@ -66,7 +67,7 @@ public class LoginHandler {
             } else if(choice == register.getAuthors().size() + 2){
                 extras();
             }else if (choice == register.getAuthors().size() + 3) {
-                clearTerminal();
+                TerminalUtils.clear();
                 exit();
             } else {
                 System.out.println("Not a valid input");
@@ -81,13 +82,13 @@ public class LoginHandler {
      */
 
     public boolean loginHandling() {
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.println("    You have selected " + authorName);
         System.out.print("    Please enter your pin: ");
         
         while (!scanner.hasNextInt()) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.println("    Invalid input! Please enter a pin (0000-9999): ");
             scanner.next(); // Clear the invalid input
         }
@@ -121,7 +122,7 @@ public class LoginHandler {
      */
 
     public void createNewUser() {
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your name: ");
         String name = scanner.nextLine().trim();
@@ -159,7 +160,7 @@ public class LoginHandler {
         System.out.println("----------------------------------------");
         System.out.println("    Press enter to continue...");
         scanner.nextLine();
-        clearTerminal();
+        TerminalUtils.clear();
     }
 
     /**
@@ -169,13 +170,13 @@ public class LoginHandler {
      */
 
     public void extras(){
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.print("""
                 ----------------------------------------
                     Enter Admin password:  """);
         
         while (!scanner.hasNextInt()) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.print("    Invalid input! \nPlease enter a pin (0000-9999): ");
             scanner.next(); // Clear the invalid input
         }
@@ -193,14 +194,14 @@ public class LoginHandler {
             int choice = scanner.nextInt();
             scanner.nextLine();
             if(choice == 1){
-                clearTerminal();
+                TerminalUtils.clear();
                 register.getStatisticsAll();
                 System.out.println("e.Exit");
                 scanner.nextLine();
             }
             else if(choice == 2){
                 // Search all diaries for a keyword
-                clearTerminal();
+                TerminalUtils.clear();
                 System.out.println("----------------------------------------");
                 System.out.print("    Enter keyword to search for (or blank to cancel): ");
                 String keyword = scanner.nextLine().trim();
@@ -210,7 +211,7 @@ public class LoginHandler {
                     scanner.nextLine();
                 } else {
                     java.util.List<String> results = register.searchEntries(keyword);
-                    clearTerminal();
+                    TerminalUtils.clear();
                     System.out.println("----------------------------------------");
                     if (results.isEmpty()) {
                         System.out.println("    No diary entries found containing '" + keyword + "'.");
@@ -227,7 +228,7 @@ public class LoginHandler {
                 return;
             }
             else if(choice == 3){
-                clearTerminal();
+                TerminalUtils.clear();
                 System.out.println("----------------------------------------");
 
                 // Read and validate start date
@@ -275,7 +276,7 @@ public class LoginHandler {
                 String keyword = scanner.nextLine().trim();
 
                 java.util.List<String> results = register.searchEntriesInTimeSpan(keyword, start.toString(), end.toString());
-                clearTerminal();
+                TerminalUtils.clear();
                 System.out.println("----------------------------------------");
                 if (results.isEmpty()) {
                     System.out.println("    No diary entries found in the given timespan");
@@ -290,7 +291,7 @@ public class LoginHandler {
                 scanner.nextLine();
             }
             else if(choice == 4){
-                clearTerminal();
+                TerminalUtils.clear();
                 register.printAllDiaries();
                 System.out.println("----------------------------------------");
                 System.out.println("    Press enter to continue...");
@@ -311,27 +312,11 @@ public class LoginHandler {
     }
 
     /**
-     * clear the terminal inbetween menu displays for readability
-     */
-
-    private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println("\n".repeat(50));
-        }
-    }
-
-    /**
      * exit closes the scanner and saves entries to csv
      */
 
     public void exit() {
-        clearTerminal();
+        TerminalUtils.clear();
         running = false;
         Save save = new Save();
         System.out.println("Saving data...");

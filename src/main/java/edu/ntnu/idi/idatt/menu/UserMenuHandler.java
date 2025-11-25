@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.menu;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class UserMenuHandler {
 
@@ -42,7 +43,7 @@ public class UserMenuHandler {
         this.authorName = authorName;
         boolean inUserMenu = true;
         while (inUserMenu) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.println("----------------------------------------");
             System.out.println("    Welcome " + this.authorName);
             System.out.println("""
@@ -66,7 +67,7 @@ public class UserMenuHandler {
             if (choice == 5) {
                 inUserMenu = false;
                 System.out.println("Logging out...");
-                clearTerminal();
+                TerminalUtils.clear();
             } else if (choice == 6) {
                 return true;
             } else {
@@ -125,15 +126,5 @@ public class UserMenuHandler {
     /**
      * clear terminal inbetween menuoutputs for readability.
      */
-    private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println("\n".repeat(50));
-        }
-    }
+    // Terminal clearing delegated to TerminalUtils.clear()
 }

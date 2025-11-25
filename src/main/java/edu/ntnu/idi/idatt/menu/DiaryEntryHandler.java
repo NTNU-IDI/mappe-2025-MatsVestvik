@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class DiaryEntryHandler {
 
@@ -35,7 +36,7 @@ public class DiaryEntryHandler {
      */
 
     public void writeTodaysEntry(String authorName) {
-        clearTerminal();
+        TerminalUtils.clear();
         boolean inWriteTodaysEntry = true;
         while (inWriteTodaysEntry) {
             if (register.searchDays(authorName, LocalDate.now())) {
@@ -113,7 +114,7 @@ public class DiaryEntryHandler {
     public void lookAtExistingDay(String authorName) {
         boolean inLookAtExistingDay = true;
         while (inLookAtExistingDay) {
-            clearTerminal();
+            TerminalUtils.clear();
             System.out.println("----------------------------------------");
             register.getAuthorByName(authorName).printAll();
             System.out.println("    e. Exit");
@@ -137,7 +138,7 @@ public class DiaryEntryHandler {
                 scanner.nextLine();
                 continue;
             } else {
-                clearTerminal();
+                TerminalUtils.clear();
                 System.out.println("----------------------------------------");
                 System.out.println(choice + "          Rating: " + register.getAuthorByName(authorName).getDayRating(choice));
                 System.out.println("----------------------------------------");
@@ -185,7 +186,7 @@ public class DiaryEntryHandler {
      */
 
     public void addSpecificDate(String authorName) {
-        clearTerminal();
+        TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.println("    Enter the date (YYYY-MM-DD): ");
         String date = null;
@@ -233,15 +234,5 @@ public class DiaryEntryHandler {
      * called everytime user enters new menu
      */
     
-    private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println("\n".repeat(50));
-        }
-    }
+    // Terminal clearing delegated to TerminalUtils.clear()
 }
