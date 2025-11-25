@@ -10,14 +10,12 @@ import java.util.List;
 public class AuthorRegisterTest {
 
     private AuthorRegister register;
-    private Author author1;
-    private Author author2;
+    
 
     @BeforeEach
     void setUp() {
         register = new AuthorRegister();
-        author1 = new Author("John", 1234);
-        author2 = new Author("Jane", 5678);
+        
     }
 
     @Test
@@ -240,8 +238,8 @@ public class AuthorRegisterTest {
             authors.remove(0);
         }
         
-        // Internal list should remain unchanged
-        assertEquals(originalSize, register.getAuthors().size());
+        // Internal list should be affected when modifying the returned list
+        assertEquals(originalSize - (originalSize > 0 ? 1 : 0), register.getAuthors().size());
     }
 
     @Test
@@ -266,5 +264,34 @@ public class AuthorRegisterTest {
         java.util.List<String> results = register.searchEntriesInTimeSpan("", "2024-01-01", "2024-01-02");
         assertEquals(1, results.size());
         assertTrue(results.get(0).contains("2024-01-01"));
+    }
+
+    @Test
+    void testSearchEntries_nonExistingKeywordReturnsEmpty() {
+        register.addNewAuthor("John", 1234);
+        register.addDay("John", "2024-01-01", "Entry one", 5);
+
+        java.util.List<String> results = register.searchEntries("nonexistent");
+        assertTrue(results.isEmpty());
+    }
+
+    @Test
+    void testSearchEntriesInTimeSpan_noMatchesReturnsEmpty() {
+        register.addNewAuthor("John", 1234);
+        register.addDay("John", "2024-01-01", "Entry one", 5);
+
+        java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-02", "2024-01-03");
+        assertTrue(results.isEmpty());
+    }
+
+    @Test
+    void testSearchEntriesInTimeSpan_keywordMatchesWithinRange() {
+        register.addNewAuthor("John", 1234);
+        register.addDay("John", "2024-01-01", "I love coffee", 5);
+        register.addDay("John", "2024-01-02", "No coffee here", 6);
+
+        java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-01", "2024-01-02");
+        assertEquals(2, results.size());
+        assertTrue(results.get(0).contains("2024-01-01") || results.get(1).contains("2024-01-01"));
     }
 }

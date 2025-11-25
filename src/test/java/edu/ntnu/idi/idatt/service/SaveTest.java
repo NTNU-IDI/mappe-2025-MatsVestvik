@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +13,6 @@ import java.util.List;
 
 import edu.ntnu.idi.idatt.objects.Author;
 import edu.ntnu.idi.idatt.objects.Day;
-import edu.ntnu.idi.idatt.util.ClearCSV;
 
 public class SaveTest {
 
@@ -25,14 +21,12 @@ public class SaveTest {
     
     private List<Author> authors;
     private Save save;
-    private String testDirectoryPath;
 
     @BeforeEach
     void setUp() {
         authors = new ArrayList<>();
         save = new Save();
-        testDirectoryPath = tempDir.toString() + "/src/main/resources/entries/";
-        
+        // use temp directory for any file interactions if we expand tests later
         // We'll use reflection to modify the directory path for testing
         // Alternatively, we can create the actual directory structure in temp dir
     }
@@ -52,16 +46,7 @@ public class SaveTest {
         return author;
     }
 
-    private String readFileContent(File file) throws IOException {
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-        }
-        return content.toString();
-    }
+    // helper removed: tests use behavior-only assertions; file content checks are not done in these unit tests
 
     @Test
     void testSaveToCSV_SingleAuthor() throws IOException {

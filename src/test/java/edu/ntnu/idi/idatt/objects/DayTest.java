@@ -2,7 +2,7 @@ package edu.ntnu.idi.idatt.objects;
 
 import org.junit.jupiter.api.Test;
 
-import edu.ntnu.idi.idatt.objects.Day;
+// No explicit import needed since the test is in the same package
 
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;

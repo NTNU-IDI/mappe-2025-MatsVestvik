@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ntnu.idi.idatt.objects.Author;
-import edu.ntnu.idi.idatt.objects.Day;
 
 public class LoadTest {
 
@@ -40,7 +39,7 @@ public class LoadTest {
     @Test
     void testLoadAuthorsFromCSV_NoFiles() {
         // Test when no CSV files exist
-        Load load = new Load(authors);
+        new Load(authors);
         assertEquals(0, authors.size());
     }
 
@@ -221,8 +220,7 @@ public class LoadTest {
         createTestCSVFile("John.csv", csvContent);
 
         Load load = new Load(new ArrayList<>());
-        File csvFile = new File(testEntriesDir, "John.csv");
-        
+        // File reference not needed
         // Use reflection to test private method, or test through public interface
         // For now, we'll test through the public loadAuthorsFromCSV method
         load.loadAuthorsFromCSV(authors);

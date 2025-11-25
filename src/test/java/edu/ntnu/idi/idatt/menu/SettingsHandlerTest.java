@@ -57,4 +57,41 @@ public class SettingsHandlerTest {
         assertTrue(deleted);
         assertNull(reg.getAuthorByName("Charlie"));
     }
+
+    @Test
+    void changeUsername_emptyInput_keepsOldName() {
+        AuthorRegister reg = new AuthorRegister();
+        reg.addNewAuthor("Alice", 1111);
+
+        // user presses enter then cancel by providing the same name
+        String input = "\nAlice\n\n"; // blank then same name
+        Scanner scanner = new Scanner(input);
+        TestLoginHandler controller = new TestLoginHandler(scanner, reg);
+        SettingsHandler settings = new SettingsHandler(scanner, reg, controller);
+        settings.authorName = "Alice";
+
+        settings.changeUsername();
+
+        // Name should remain unchanged
+        assertNotNull(reg.getAuthorByName("Alice"));
+        assertEquals(1111, reg.getAuthorByName("Alice").getPin());
+    }
+
+    @Test
+    void deleteAccount_cancelledByUser_returnsFalseAndAuthorStays() {
+        AuthorRegister reg = new AuthorRegister();
+        reg.addNewAuthor("Charlie", 3333);
+
+        // user types incorrect name then types 'cancel'
+        String input = "WrongName\ncancel\n"; 
+        Scanner scanner = new Scanner(input);
+        TestLoginHandler controller = new TestLoginHandler(scanner, reg);
+        SettingsHandler settings = new SettingsHandler(scanner, reg, controller);
+        settings.authorName = "Charlie";
+
+        boolean deleted = settings.deleteAccount();
+
+        assertFalse(deleted);
+        assertNotNull(reg.getAuthorByName("Charlie"));
+    }
 }

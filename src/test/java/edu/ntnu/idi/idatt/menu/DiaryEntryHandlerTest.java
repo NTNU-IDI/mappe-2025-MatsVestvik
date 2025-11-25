@@ -237,6 +237,21 @@ public class DiaryEntryHandlerTest {
     }
 
     @Test
+    void testAddSpecificDate_InvalidDateAndCancel() {
+        // Arrange: invalid date input then cancel
+        String input = "invalid-date\nE\n";
+        Scanner scanner = createMockScanner(input);
+        handler = new DiaryEntryHandler(scanner, mockRegister);
+        String authorName = "John";
+
+        // Act
+        handler.addSpecificDate(authorName);
+
+        // Assert: no call to addDay
+        verify(mockRegister, never()).addDay(anyString(), anyString(), anyString(), anyInt());
+    }
+
+    @Test
     void testConstructor_Initialization() {
         // Arrange
         Scanner scanner = createMockScanner("");
