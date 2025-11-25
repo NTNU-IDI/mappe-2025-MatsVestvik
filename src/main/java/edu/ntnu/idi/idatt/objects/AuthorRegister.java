@@ -230,12 +230,12 @@ public class AuthorRegister {
     public java.util.List<String> searchEntries(String keyword) {
         java.util.List<String> results = new java.util.ArrayList<>();
         if (keyword == null || keyword.isEmpty()) return results;
-        String lower = keyword.toLowerCase();
         for (Author author : authors) {
-            for (Day day : author.getListDays()) {
-                String content = day.getContent();
-                if (content != null && content.toLowerCase().contains(lower)) {
-                    results.add(author.getName() + " - " + day.getDate() + ": " + content);
+            java.util.List<String> dates = author.findDatesByKeyword(keyword);
+            for (String date : dates) {
+                Day d = author.getDayByDate(date);
+                if (d != null) {
+                    results.add(author.getName() + " - " + date + ": " + d.getContent());
                 }
             }
         }
@@ -246,25 +246,17 @@ public class AuthorRegister {
      * returns a formatted String that can be printed
      * takes startdate enddate and keyword adn searces all days for day
      * that macthes parameters
-     *  */ 
+     *  
+     */ 
 
     public java.util.List<String> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
         java.util.List<String> results = new java.util.ArrayList<>();
-        String lower = (keyword == null) ? "" : keyword.toLowerCase();
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
         for (Author author : authors) {
-            for (Day day : author.getListDays()) {
-                LocalDate dayDate = LocalDate.parse(day.getDate());
-                if ((dayDate.isEqual(start) || dayDate.isAfter(start)) &&
-                    (dayDate.isEqual(end) || dayDate.isBefore(end))) {
-                    String content = day.getContent();
-                    if (content != null) {
-                        if (lower.isEmpty() || content.toLowerCase().contains(lower)) {
-                            results.add(author.getName() + " - " + day.getDate() + ": " + content);
-                        }
-                    }
-                }
+            java.util.List<Day> matches = author.findDaysByKeywordInRange(keyword, start, end);
+            for (Day d : matches) {
+                results.add(author.getName() + " - " + d.getDate() + ": " + d.getContent());
             }
         }
         return results;

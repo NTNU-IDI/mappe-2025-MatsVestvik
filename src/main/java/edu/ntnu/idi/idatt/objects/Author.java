@@ -201,5 +201,53 @@ public class Author {
         }
     }
 
+    /**
+     * Return a list of Day objects from this author that match keyword in content.
+     * If keyword is null or empty, returns an empty list.
+     */
+    public java.util.List<Day> findDaysByKeyword(String keyword) {
+        java.util.List<Day> result = new java.util.ArrayList<>();
+        if (keyword == null || keyword.isEmpty()) return result;
+        for (Day day : days) {
+            if (day.containsKeyword(keyword)) {
+                result.add(day);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Return a list of date strings for days whose content matches the keyword.
+     * Useful for building concise search results without exposing Day objects.
+     */
+    public java.util.List<String> findDatesByKeyword(String keyword) {
+        java.util.List<String> result = new java.util.ArrayList<>();
+        if (keyword == null || keyword.isEmpty()) return result;
+        for (Day day : days) {
+            if (day.containsKeyword(keyword)) {
+                result.add(day.getDate());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Return a list of Day objects within the date range inclusive whose content matches the keyword.
+     * If the keyword is empty or null, returns all days within the range.
+     */
+    public java.util.List<Day> findDaysByKeywordInRange(String keyword, java.time.LocalDate start, java.time.LocalDate end) {
+        java.util.List<Day> result = new java.util.ArrayList<>();
+        boolean matchAll = (keyword == null || keyword.isEmpty());
+        for (Day day : days) {
+            java.time.LocalDate dayDate = java.time.LocalDate.parse(day.getDate());
+            if ((dayDate.isEqual(start) || dayDate.isAfter(start)) && (dayDate.isEqual(end) || dayDate.isBefore(end))) {
+                if (matchAll || day.containsKeyword(keyword)) {
+                    result.add(day);
+                }
+            }
+        }
+        return result;
+    }
+
     
 }

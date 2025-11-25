@@ -243,4 +243,28 @@ public class AuthorRegisterTest {
         // Internal list should remain unchanged
         assertEquals(originalSize, register.getAuthors().size());
     }
+
+    @Test
+    void testSearchEntries_keywordMatchesAcrossAuthors() {
+        register.addNewAuthor("John", 1234);
+        register.addNewAuthor("Jane", 5678);
+        register.addDay("John", "2024-01-01", "I love coffee", 5);
+        register.addDay("Jane", "2024-01-02", "Coffee is great", 6);
+
+        java.util.List<String> results = register.searchEntries("coffee");
+        assertEquals(2, results.size());
+        assertTrue(results.get(0).contains("John - 2024-01-01"));
+        assertTrue(results.get(1).contains("Jane - 2024-01-02"));
+    }
+
+    @Test
+    void testSearchEntriesInTimeSpan_blankKeywordMatchesAllDaysInRange() {
+        register.addNewAuthor("John", 1234);
+        register.addDay("John", "2024-01-01", "Entry one", 5);
+        register.addDay("John", "2024-01-03", "Entry two", 6);
+
+        java.util.List<String> results = register.searchEntriesInTimeSpan("", "2024-01-01", "2024-01-02");
+        assertEquals(1, results.size());
+        assertTrue(results.get(0).contains("2024-01-01"));
+    }
 }

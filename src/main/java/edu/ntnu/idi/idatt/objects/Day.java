@@ -64,4 +64,14 @@ public class Day {
     public void printDay(){
         System.out.println(entry);
     }
+
+    /**
+     * Returns true if the day's content contains the given keyword (case-insensitive).
+     * Returns false for null/empty keyword or null content.
+     */
+    public boolean containsKeyword(String keyword) {
+        if (keyword == null || keyword.isEmpty()) return false;
+        if (this.entry == null) return false;
+        return this.entry.toLowerCase().contains(keyword.toLowerCase());
+    }
 }

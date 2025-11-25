@@ -34,4 +34,19 @@ public class DayTest {
         day.setEntry("Updated content");
         assertEquals("Updated content", day.getContent());
     }
+
+    @Test
+    void testContainsKeyword_matchesAndIsCaseInsensitive() {
+        day.setEntry("Today I drank Coffee and tea");
+        assertTrue(day.containsKeyword("coffee"));
+        assertTrue(day.containsKeyword("Coffee"));
+        assertFalse(day.containsKeyword("beer"));
+    }
+
+    @Test
+    void testContainsKeyword_emptyOrNull() {
+        day.setEntry("Some text here");
+        assertFalse(day.containsKeyword(""));
+        assertFalse(day.containsKeyword(null));
+    }
 }

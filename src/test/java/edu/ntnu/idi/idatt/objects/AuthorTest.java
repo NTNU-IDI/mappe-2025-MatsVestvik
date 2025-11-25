@@ -193,4 +193,47 @@ public class AuthorTest {
         
         assertDoesNotThrow(() -> author.printAll());
     }
+
+    @Test
+    void findDaysByKeyword_returnsMatchingDays() {
+        Day day1 = new Day("id1", "2024-01-01", "I drank coffee in the morning", 5);
+        Day day2 = new Day("id2", "2024-01-02", "Had tea in the afternoon", 6);
+        author.addDay(day1);
+        author.addDay(day2);
+
+        java.util.List<Day> matches = author.findDaysByKeyword("coffee");
+        assertEquals(1, matches.size());
+        assertEquals("2024-01-01", matches.get(0).getDate());
+    }
+
+    @Test
+    void findDatesByKeyword_returnsOnlyDates() {
+        Day day1 = new Day("id1", "2024-01-01", "I drank coffee in the morning", 5);
+        Day day2 = new Day("id2", "2024-01-02", "Had tea in the afternoon", 6);
+        author.addDay(day1);
+        author.addDay(day2);
+
+        java.util.List<String> dates = author.findDatesByKeyword("coffee");
+        assertEquals(1, dates.size());
+        assertEquals("2024-01-01", dates.get(0));
+    }
+
+    @Test
+    void findDaysByKeywordInRange_returnsDaysInRange_andOptionalKeyword() {
+        Day day1 = new Day("id1", "2024-01-01", "Coffee", 5);
+        Day day2 = new Day("id2", "2024-01-02", "Tea", 6);
+        Day day3 = new Day("id3", "2024-01-05", "Cake", 7);
+        author.addDay(day1);
+        author.addDay(day2);
+        author.addDay(day3);
+
+        java.time.LocalDate start = java.time.LocalDate.parse("2024-01-01");
+        java.time.LocalDate end = java.time.LocalDate.parse("2024-01-03");
+        java.util.List<Day> matches = author.findDaysByKeywordInRange("", start, end);
+        assertEquals(2, matches.size());
+
+        java.util.List<Day> coffeeOnly = author.findDaysByKeywordInRange("coffee", start, end);
+        assertEquals(1, coffeeOnly.size());
+        assertEquals("2024-01-01", coffeeOnly.get(0).getDate());
+    }
 }
