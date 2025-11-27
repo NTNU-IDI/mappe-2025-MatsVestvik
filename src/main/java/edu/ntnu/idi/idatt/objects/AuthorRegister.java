@@ -191,7 +191,9 @@ public class AuthorRegister {
      */
 
     public void getStatistics(String author){
-        System.out.println("Avrg rating: " + getAuthorByName(author).getAvrgRating() +" | Num of days: "+ getAuthorByName(author).getDaysSize());
+        double avg = getAuthorByName(author).getAvrgRating();
+        int numDays = getAuthorByName(author).getDaysSize();
+        System.out.println("Avrg rating: " + avg + " | Num of days: " + numDays);
     }
 
     /**

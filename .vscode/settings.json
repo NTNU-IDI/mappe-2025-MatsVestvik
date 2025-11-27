@@ -2,4 +2,7 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.configuration.updateBuildConfiguration": "interactive",
     "maven.view": "flat"
+    ,
+    "checkstyle.configuration": "config/checkstyle/checkstyle.xml",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
 }

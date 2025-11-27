@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.objects;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Author {
 
@@ -235,12 +236,16 @@ public class Author {
      * Return a list of Day objects within the date range inclusive whose content matches the keyword.
      * If the keyword is empty or null, returns all days within the range.
      */
-    public java.util.List<Day> findDaysByKeywordInRange(String keyword, java.time.LocalDate start, java.time.LocalDate end) {
+    public java.util.List<Day> findDaysByKeywordInRange(String keyword, LocalDate start, LocalDate end) {
         java.util.List<Day> result = new java.util.ArrayList<>();
         boolean matchAll = (keyword == null || keyword.isEmpty());
         for (Day day : days) {
             java.time.LocalDate dayDate = java.time.LocalDate.parse(day.getDate());
-            if ((dayDate.isEqual(start) || dayDate.isAfter(start)) && (dayDate.isEqual(end) || dayDate.isBefore(end))) {
+            boolean afterStart = dayDate.isEqual(start)
+                || dayDate.isAfter(start);
+            boolean beforeEnd = dayDate.isEqual(end)
+                || dayDate.isBefore(end);
+            if (afterStart && beforeEnd) {
                 if (matchAll || day.containsKeyword(keyword)) {
                     result.add(day);
                 }

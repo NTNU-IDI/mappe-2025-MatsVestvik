@@ -119,7 +119,8 @@ public class DiaryEntryHandler {
             register.getAuthorByName(authorName).printAll();
             System.out.println("    e. Exit");
             System.out.println("----------------------------------------");
-            System.out.println("    Type in the date of the day you \n    want to look at (choose one from the list above):");
+            System.out.print("    Type in the date of the day you\n");
+            System.out.println("    want to look at (choose one from the list above):");
             System.out.print("    ");
 
             // Collect available dates for the author
@@ -133,14 +134,16 @@ public class DiaryEntryHandler {
             if (choice.equalsIgnoreCase("e")) {
                 inLookAtExistingDay = false;
             } else if (!validDates.contains(choice)) {
-                System.out.println("    Not a valid date. Please choose one of the listed dates or 'e' to exit.");
+                System.out.println("    Not a valid date.");
+                System.out.println("    Please choose one of the listed dates or 'e' to exit.");
                 System.out.println("    Press enter to continue...");
                 scanner.nextLine();
                 continue;
             } else {
                 TerminalUtils.clear();
                 System.out.println("----------------------------------------");
-                System.out.println(choice + "          Rating: " + register.getAuthorByName(authorName).getDayRating(choice));
+                int dayRating = register.getAuthorByName(authorName).getDayRating(choice);
+                System.out.println(choice + "          Rating: " + dayRating);
                 System.out.println("----------------------------------------");
                 System.out.println(register.getAuthorByName(authorName).readDay(choice) );
                 System.out.println("----------------------------------------");

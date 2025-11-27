@@ -272,10 +272,13 @@ public class LoginHandler {
                 }
 
                 // Prompt for optional keyword (empty = match all)
-                System.out.print("    Enter keyword to search for within timespan (blank = all): ");
+                System.out.print("    Enter keyword to search for within timespan ");
+                System.out.print("(blank = all): ");
                 String keyword = scanner.nextLine().trim();
 
-                java.util.List<String> results = register.searchEntriesInTimeSpan(keyword, start.toString(), end.toString());
+                String startStr = start.toString();
+                String endStr = end.toString();
+                java.util.List<String> results = register.searchEntriesInTimeSpan(keyword, startStr, endStr);
                 TerminalUtils.clear();
                 System.out.println("----------------------------------------");
                 if (results.isEmpty()) {

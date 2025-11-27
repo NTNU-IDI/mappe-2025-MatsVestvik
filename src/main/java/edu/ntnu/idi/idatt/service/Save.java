@@ -41,7 +41,8 @@ public class Save {
                 
                 for (Day day : days) {
                     // Format: date|content (pipe separator is less common in text)
-                    String line = day.getDate() + "|" + day.getContent().replace("\n", "\\n") + "|" + day.getRating() + "\n";
+                    String contentEscaped = day.getContent() == null ? "" : day.getContent().replace("\n", "\\n");
+                    String line = day.getDate() + "|" + contentEscaped + "|" + day.getRating() + "\n";
                     writer.write(line);
                 }
                 

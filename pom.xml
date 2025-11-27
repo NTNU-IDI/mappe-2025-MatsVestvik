@@ -50,6 +50,38 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
             </plugin>
+            <!-- Checkstyle plugin for code style checking -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <!-- Point to our local config file (see config/checkstyle/checkstyle.xml) -->
+                    <configLocation>config/checkstyle/checkstyle.xml</configLocation>
+                    <!-- Using platform default charset for the Checkstyle plugin; omit charset property to avoid unknown property warnings -->
+                    <consoleOutput>true</consoleOutput>
+                    <!-- Do not fail the build at first; set to true once we enforce the rules. -->
+                    <failOnViolation>false</failOnViolation>
+                    <linkXRef>false</linkXRef>
+                    <suppressionsLocation>config/checkstyle/suppressions.xml</suppressionsLocation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate-checkstyle</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                    <execution>
+                        <id>generate-checkstyle-report</id>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
