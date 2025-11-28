@@ -9,9 +9,9 @@ public class Main{
     public static void main(String[] args) {
         /**
          *creates register object
-         creates Load object that calls functions in Load class
-         opens scanner object
-         calls loginhandler with scanner and register.
+         *creates Load object that calls functions in Load class
+         *opens scanner object
+         *calls loginhandler with scanner and register.
          */
         AuthorRegister register = new AuthorRegister();
         Load load = new Load(register.getAuthors());
