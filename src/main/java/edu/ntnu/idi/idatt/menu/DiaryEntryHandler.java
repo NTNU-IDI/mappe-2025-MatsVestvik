@@ -36,9 +36,10 @@ public class DiaryEntryHandler {
      */
 
     public void writeTodaysEntry(String authorName) {
-        TerminalUtils.clear();
-        boolean inWriteTodaysEntry = true;
+        TerminalUtils.clear(); //clear the terminal for clean output
+        boolean inWriteTodaysEntry = true; //check for when to exit
         while (inWriteTodaysEntry) {
+            //if the day already exists in authors list
             if (register.searchDays(authorName, LocalDate.now())) {
                 System.out.println("""
                 -----------------------------------------
@@ -55,12 +56,13 @@ public class DiaryEntryHandler {
                     System.out.print("    ");
                     String content = scanner.nextLine();
                     int rating;
+                    //ensure that rating is an int between 1 and 10
                     do {
                         System.out.println("    Please enter a rating (1-10): ");
                         System.out.print("    ");
                         while (!scanner.hasNextInt()) {
                             System.out.println("    Invalid input! Please enter a number (1-10): ");
-                            scanner.next(); // Clear the invalid input
+                            scanner.next(); 
                             System.out.print("    ");
                         }
                         rating = scanner.nextInt();
@@ -73,11 +75,12 @@ public class DiaryEntryHandler {
                     System.out.println("----------------------------------------");
                     inWriteTodaysEntry = false;
                 } else if (answer.equalsIgnoreCase("n")) {
-                    inWriteTodaysEntry = false;
+                    inWriteTodaysEntry = false; //exit this menu
                 } else {
                     System.out.println("invalid input returning...");
-                    inWriteTodaysEntry = false;
+                    inWriteTodaysEntry = false; // exit this menu
                 }
+            //day does not exist already, normal prompt
             } else {
                 System.out.println("----------------------------------------");
                 System.out.println("    What is on your mind today: ");
@@ -112,18 +115,18 @@ public class DiaryEntryHandler {
      */
 
     public void lookAtExistingDay(String authorName) {
-        boolean inLookAtExistingDay = true;
+        boolean inLookAtExistingDay = true; // check for when to exit
         while (inLookAtExistingDay) {
-            TerminalUtils.clear();
+            TerminalUtils.clear(); //clear the terminal for clean output
             System.out.println("----------------------------------------");
-            register.getAuthorByName(authorName).printAll();
+            register.getAuthorByName(authorName).printAll();// print all days date for author
             System.out.println("    e. Exit");
             System.out.println("----------------------------------------");
             System.out.print("    Type in the date of the day you\n");
             System.out.println("    want to look at (choose one from the list above):");
             System.out.print("    ");
 
-            // Collect available dates for the author
+            // Collect available dates for the author and check if input it valid
             java.util.List<edu.ntnu.idi.idatt.objects.Day> days = register.getAuthorByName(authorName).getListDays();
             java.util.Set<String> validDates = new java.util.HashSet<>();
             for (edu.ntnu.idi.idatt.objects.Day d : days) {
@@ -132,15 +135,16 @@ public class DiaryEntryHandler {
 
             String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("e")) {
-                inLookAtExistingDay = false;
-            } else if (!validDates.contains(choice)) {
+                inLookAtExistingDay = false; // exit this menu
+            } else if (!validDates.contains(choice)) {// check if date is in the list
                 System.out.println("    Not a valid date.");
                 System.out.println("    Please choose one of the listed dates or 'e' to exit.");
                 System.out.println("    Press enter to continue...");
                 scanner.nextLine();
                 continue;
             } else {
-                TerminalUtils.clear();
+                TerminalUtils.clear(); // clear the terminal for clean output
+                //print out all infor for a day with options
                 System.out.println("----------------------------------------");
                 int dayRating = register.getAuthorByName(authorName).getDayRating(choice);
                 System.out.println(choice + "          Rating: " + dayRating);
@@ -150,6 +154,7 @@ public class DiaryEntryHandler {
                 System.out.println("e. Edit         b. back     d. delete");
                 System.out.println("----------------------------------------");
                 String eb = scanner.nextLine();
+                //if edit it selected
                 if (eb.equalsIgnoreCase("e")) {
                     System.out.println("    Type in the new entry for this day: ");
                     System.out.print("    ");
@@ -170,8 +175,10 @@ public class DiaryEntryHandler {
                     register.editDay(choice, entry, authorName, rating);
                     System.out.println("    Entry updated successfully!");
                     System.out.println("----------------------------------------");
+                //for back
                 } else if (eb.equalsIgnoreCase("b")) {
                     return;
+                //for delete
                 } else if (eb.equalsIgnoreCase("d")) {
                     register.getAuthorByName(authorName).removeDay(choice);
                 } else {
@@ -189,7 +196,7 @@ public class DiaryEntryHandler {
      */
 
     public void addSpecificDate(String authorName) {
-        TerminalUtils.clear();
+        TerminalUtils.clear(); // clear the terminal for clean output.
         System.out.println("----------------------------------------");
         System.out.println("    Enter the date (YYYY-MM-DD): ");
         String date = null;
@@ -215,27 +222,21 @@ public class DiaryEntryHandler {
         System.out.print("    ");
         String content = scanner.nextLine();
         int rating;
+        //check validity of rating, prompt new
         do {
             System.out.println("    Please enter a rating (1-10): ");
             System.out.print("    ");
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Please enter a number (1-10): ");
-                scanner.next(); // Clear the invalid input
+                scanner.next(); 
                 System.out.print("    ");
             }
             rating = scanner.nextInt();
         } while (rating < 1 || rating > 10);
 
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         register.addDay(authorName, date, content, rating);
         System.out.println("    Entry saved for " + date + "!");
         System.out.println("----------------------------------------");
     }
-
-    /**
-     * clearterminal clears the terminal for a better viewing experience
-     * called everytime user enters new menu
-     */
-    
-    // Terminal clearing delegated to TerminalUtils.clear()
 }
