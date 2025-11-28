@@ -29,8 +29,8 @@ public class AuthorRegisterTest {
         
         List<Author> authors = register.getAuthors();
         assertEquals(1, authors.size());
-        assertEquals("John", authors.get(0).getName());
-        assertEquals(1234, authors.get(0).getPin());
+        assertEquals("John", authors.get(0).getName()); // check name variable
+        assertEquals(1234, authors.get(0).getPin()); // check pin variable
     }
 
     @Test

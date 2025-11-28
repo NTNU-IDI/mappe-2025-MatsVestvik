@@ -73,7 +73,7 @@ public class DiaryEntryHandler {
                     register.addDay(authorName, LocalDate.now().toString(), content, rating);
                     System.out.println("    Entry saved for today!");
                     System.out.println("----------------------------------------");
-                    inWriteTodaysEntry = false;
+                    inWriteTodaysEntry = false; 
                 } else if (answer.equalsIgnoreCase("n")) {
                     inWriteTodaysEntry = false; //exit this menu
                 } else {

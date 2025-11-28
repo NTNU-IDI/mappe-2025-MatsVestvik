@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: edu.ntnu.idi.idatt.objects.DayTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in edu.ntnu.idi.idatt.objects.DayTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in edu.ntnu.idi.idatt.objects.DayTest

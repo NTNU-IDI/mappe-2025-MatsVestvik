@@ -14,7 +14,7 @@ public class LoginHandler {
      */
 
     Scanner scanner;
-    private boolean running = true;
+    private boolean running = true; // check if the system should continue in loop
     AuthorRegister register;
     private String authorName;
 
@@ -37,22 +37,25 @@ public class LoginHandler {
 
     public void login() {
         boolean isInLogin = true;
-        while (isInLogin && running) {
-            TerminalUtils.clear();
+        while (isInLogin && running) { //check if the program should exit
+            TerminalUtils.clear(); //clear the terminal for clean output
             System.out.println("----------------------------------------");
             System.out.println("    Choose a user:");
             register.printAllAuthors();
             System.out.println("----------------------------------------");
+            //print other options with correct numbering
             System.out.println("    "+(register.getAuthors().size() + 1)+". Create new user");
             System.out.println("    " + (register.getAuthors().size() + 2)+". Admin");
             System.out.println("    " + (register.getAuthors().size() + 3) + ". Save and Exit");
             System.out.print("----------------------------------------\n    ");
+            //ensure that input is an int
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
                 scanner.next(); // Clear the invalid input
             }
             int choice = scanner.nextInt();
             scanner.nextLine();
+            //if choice was an author take them to personal loginscreen
             if (choice > 0 && choice < register.getAuthors().size() + 1) {
                 String authorName = register.getAuthorName(choice - 1);
                 this.authorName = authorName;
@@ -62,6 +65,7 @@ public class LoginHandler {
                     exit();
                     return;
                 }
+            //check if selection is non author
             } else if (choice == register.getAuthors().size() + 1) {
                 createNewUser();
             } else if(choice == register.getAuthors().size() + 2){
@@ -82,11 +86,12 @@ public class LoginHandler {
      */
 
     public boolean loginHandling() {
-        TerminalUtils.clear();
+        TerminalUtils.clear(); // clear the terminal. clean
         System.out.println("----------------------------------------");
         System.out.println("    You have selected " + authorName);
         System.out.print("    Please enter your pin: ");
         
+        //ensure input is int
         while (!scanner.hasNextInt()) {
             TerminalUtils.clear();
             System.out.println("    Invalid input! Please enter a pin (0000-9999): ");
@@ -95,6 +100,7 @@ public class LoginHandler {
         int ePin = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
+        //check if pin match
         if (register.getAuthorByName(authorName).checkPin(ePin)) {
             UserMenuHandler userMenuHandler = new UserMenuHandler(scanner, register, this);
             return userMenuHandler.showUserMenu(authorName);
@@ -122,7 +128,7 @@ public class LoginHandler {
      */
 
     public void createNewUser() {
-        TerminalUtils.clear();
+        TerminalUtils.clear(); // clear terminal, clean output
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your name: ");
         String name = scanner.nextLine().trim();
