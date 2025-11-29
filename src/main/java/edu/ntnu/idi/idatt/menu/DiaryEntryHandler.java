@@ -119,15 +119,7 @@ public class DiaryEntryHandler {
                 String eb = scanner.nextLine();
                 //if edit it selected
                 if (eb.equalsIgnoreCase("e")) {
-                    System.out.println("    Type in the new entry for this day: ");
-                    System.out.print("    ");
-                    String entry = scanner.nextLine();
-
-                    int rating = ValidRating.PrintValidRating();
-
-                    register.editDay(choice, entry, authorName, rating);
-                    System.out.println("    Entry updated successfully!");
-                    System.out.println("----------------------------------------");
+                    EnterDay.printValidDay(register, authorName);
                 //for back
                 } else if (eb.equalsIgnoreCase("b")) {
                     return;
@@ -171,14 +163,6 @@ public class DiaryEntryHandler {
                 System.out.println("    Invalid date format. Please use YYYY-MM-DD or type 'E' to cancel.");
             }
         }
-        System.out.println("    What is on your mind for " + date + ": ");
-        System.out.print("    ");
-        String content = scanner.nextLine();
-
-        int rating = ValidRating.PrintValidRating();
-        
-        register.addDay(authorName, date, content, rating);
-        System.out.println("    Entry saved for " + date + "!");
-        System.out.println("----------------------------------------");
+        EnterDay.printValidDay(register, authorName);
     }
 }
