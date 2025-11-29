@@ -3,14 +3,14 @@ package edu.ntnu.idi.idatt.BusinessLogic;
 import java.util.Scanner;
 
 public class ValidRating {
-    static Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * Ensures rating variable is an int between 1 and 10
      * @return
      */
-    public static int PrintValidRating() {
-        scanner = new Scanner(System.in);
+    public static int printValidRating() {
+        
         int rating;
         do {
                         System.out.println("    Please enter a rating (1-10): ");

@@ -15,7 +15,7 @@ public class LoginHandler {
 
     Scanner scanner;
     private boolean running = true; // check if the system should continue in loop
-    AuthorRegister register;
+    public AuthorRegister register;
     private String authorName;
 
     /**

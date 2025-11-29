@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
+import edu.ntnu.idi.idatt.BusinessLogic.EnterDay;
+import edu.ntnu.idi.idatt.BusinessLogic.ValidEntry;
 import edu.ntnu.idi.idatt.BusinessLogic.ValidRating;
 
 public class DiaryEntryHandler {
@@ -52,16 +54,7 @@ public class DiaryEntryHandler {
                 """);
                 String answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("y")) {
-                    System.out.println("----------------------------------------");
-                    System.out.println("    What is on your mind today: ");
-                    System.out.print("    ");
-                    String content = scanner.nextLine();
-
-                    int rating = ValidRating.PrintValidRating();
-                   
-                    register.addDay(authorName, LocalDate.now().toString(), content, rating);
-                    System.out.println("    Entry saved for today!");
-                    System.out.println("----------------------------------------");
+                    EnterDay.printValidDay(register, authorName);
                     inWriteTodaysEntry = false; 
                 } else if (answer.equalsIgnoreCase("n")) {
                     inWriteTodaysEntry = false; //exit this menu
@@ -71,16 +64,7 @@ public class DiaryEntryHandler {
                 }
             //day does not exist already, normal prompt
             } else {
-                System.out.println("----------------------------------------");
-                System.out.println("    What is on your mind today: ");
-                System.out.print("    ");
-                String content = scanner.nextLine();
-
-                int rating = ValidRating.PrintValidRating();
-
-                register.addDay(authorName, LocalDate.now().toString(), content, rating);
-                System.out.println("    Entry saved for today!");
-                System.out.println("----------------------------------------");
+                EnterDay.printValidDay(register, authorName);
                 inWriteTodaysEntry = false;
             }
         }
