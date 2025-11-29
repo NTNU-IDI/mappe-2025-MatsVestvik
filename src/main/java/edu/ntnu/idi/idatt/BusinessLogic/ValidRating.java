@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class ValidRating {
     static Scanner scanner;
+
+    /**
+     * Ensures rating variable is an int between 1 and 10
+     * @return
+     */
     public static int PrintValidRating() {
         scanner = new Scanner(System.in);
         int rating;
