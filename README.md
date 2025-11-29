@@ -4,6 +4,16 @@
 STUDENT NAME = "Mats Orpia Vestvik"  
 STUDENT ID = "587996"
 
+## How to use
+
+To use this program you must first clone the ropository to a place on yout computer.
+You can then create a dektopshortcut that exectutes this command
+powershell.exe -NoExit -Command "cd 'C:\Users\user\Yout\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
+And thats it. Now You have a desktop shortcut that starts the program.
+
+With the program you can create a new account with an accosiated pin adn explore the program.
+The program features save and load features so your entries will eb saved between sessions.
+
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
