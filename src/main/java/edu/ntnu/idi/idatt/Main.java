@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt;
 import edu.ntnu.idi.idatt.menu.LoginHandler;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.service.Load;
+import edu.ntnu.idi.idatt.util.ScannerManager;
 import java.util.Scanner;
 
 public class Main{
@@ -17,7 +18,7 @@ public class Main{
         Load load = new Load(register.getAuthors());
 
         // create a scanner and start the login/menu flow using LoginHandler
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerManager.getScanner();
         LoginHandler loginHandler = new LoginHandler(scanner, register);
         loginHandler.login();
     }

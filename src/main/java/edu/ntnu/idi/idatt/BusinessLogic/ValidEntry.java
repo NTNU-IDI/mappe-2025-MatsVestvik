@@ -1,12 +1,12 @@
 package edu.ntnu.idi.idatt.BusinessLogic;
 
 import java.util.Scanner;
+import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidEntry {
-    private static Scanner scanner = new Scanner(System.in);
 
     public static String printValidEntry() {
-        
+        Scanner scanner = ScannerManager.getScanner();
         String entry;
         do {
             System.out.println("    Type in the entry for this day:");
@@ -19,5 +19,6 @@ public class ValidEntry {
         } while (entry.contains("|"));
         
         return entry;
+    
     }
 }

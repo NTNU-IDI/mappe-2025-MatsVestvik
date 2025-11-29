@@ -6,8 +6,6 @@ import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 import edu.ntnu.idi.idatt.BusinessLogic.EnterDay;
-import edu.ntnu.idi.idatt.BusinessLogic.ValidEntry;
-import edu.ntnu.idi.idatt.BusinessLogic.ValidRating;
 
 public class DiaryEntryHandler {
 
@@ -54,7 +52,7 @@ public class DiaryEntryHandler {
                 """);
                 String answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("y")) {
-                    EnterDay.printValidDay(register, authorName);
+                    EnterDay.printValidDay(register, authorName, LocalDate.now().toString());
                     inWriteTodaysEntry = false; 
                 } else if (answer.equalsIgnoreCase("n")) {
                     inWriteTodaysEntry = false; //exit this menu
@@ -64,7 +62,7 @@ public class DiaryEntryHandler {
                 }
             //day does not exist already, normal prompt
             } else {
-                EnterDay.printValidDay(register, authorName);
+                EnterDay.printValidDay(register, authorName, LocalDate.now().toString());
                 inWriteTodaysEntry = false;
             }
         }
@@ -119,7 +117,7 @@ public class DiaryEntryHandler {
                 String eb = scanner.nextLine();
                 //if edit it selected
                 if (eb.equalsIgnoreCase("e")) {
-                    EnterDay.printValidDay(register, authorName);
+                    EnterDay.printValidDay(register, authorName, choice);
                 //for back
                 } else if (eb.equalsIgnoreCase("b")) {
                     return;
@@ -144,7 +142,7 @@ public class DiaryEntryHandler {
         TerminalUtils.clear(); // clear the terminal for clean output.
         System.out.println("----------------------------------------");
         System.out.println("    Enter the date (YYYY-MM-DD): ");
-        String date = null;
+        String date;
         while (true) {
             System.out.print("    ");
             String input = scanner.nextLine().trim();
@@ -163,6 +161,6 @@ public class DiaryEntryHandler {
                 System.out.println("    Invalid date format. Please use YYYY-MM-DD or type 'E' to cancel.");
             }
         }
-        EnterDay.printValidDay(register, authorName);
+        EnterDay.printValidDay(register, authorName, date);
     }
 }

@@ -1,7 +1,6 @@
-package edu.ntnu.idi.idatt.BuisniessLogic;
+package edu.ntnu.idi.idatt.BusinessLogic;
 
 import org.junit.jupiter.api.Test;
-import edu.ntnu.idi.idatt.BusinessLogic.ValidRating;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +31,7 @@ public class ValidRatingTest {
     void testValidRatingWithinRange() {
         // Test valid input: 5
         provideInput("5\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(5, result);
     }
 
@@ -40,7 +39,7 @@ public class ValidRatingTest {
     void testValidRatingLowerBoundary() {
         // Test lower boundary: 1
         provideInput("1\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(1, result);
     }
 
@@ -48,7 +47,7 @@ public class ValidRatingTest {
     void testValidRatingUpperBoundary() {
         // Test upper boundary: 10
         provideInput("10\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(10, result);
     }
 
@@ -56,7 +55,7 @@ public class ValidRatingTest {
     void testInvalidRatingBelowRangeThenValid() {
         // Test invalid input (0) then valid input (7)
         provideInput("0\n7\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(7, result);
     }
 
@@ -64,7 +63,7 @@ public class ValidRatingTest {
     void testInvalidRatingAboveRangeThenValid() {
         // Test invalid input (11) then valid input (3)
         provideInput("11\n3\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(3, result);
     }
 
@@ -72,7 +71,7 @@ public class ValidRatingTest {
     void testNonNumericInputThenValid() {
         // Test non-numeric input then valid input
         provideInput("abc\n5\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(5, result);
     }
 
@@ -80,7 +79,7 @@ public class ValidRatingTest {
     void testMultipleInvalidInputsThenValid() {
         // Test multiple invalid inputs (non-numeric, out of range) then valid
         provideInput("hello\n0\n15\n8\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(8, result);
     }
 
@@ -88,7 +87,7 @@ public class ValidRatingTest {
     void testDecimalInputThenValid() {
         // Test decimal input then valid input
         provideInput("5.5\n6\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(6, result);
     }
 
@@ -96,7 +95,7 @@ public class ValidRatingTest {
     void testNegativeInputThenValid() {
         // Test negative input then valid input
         provideInput("-5\n9\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(9, result);
     }
 
@@ -104,7 +103,7 @@ public class ValidRatingTest {
     void testBoundaryValuesMultipleAttempts() {
         // Test multiple boundary violations then valid boundary
         provideInput("0\n11\n1\n");
-        int result = ValidRating.PrintValidRating();
+        int result = ValidRating.printValidRating();
         assertEquals(1, result);
     }
 }
