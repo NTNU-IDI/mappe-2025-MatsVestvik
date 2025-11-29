@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
+import edu.ntnu.idi.idatt.BusinessLogic.ValidRating;
 
 public class DiaryEntryHandler {
 
@@ -55,21 +56,9 @@ public class DiaryEntryHandler {
                     System.out.println("    What is on your mind today: ");
                     System.out.print("    ");
                     String content = scanner.nextLine();
-                    int rating;
-                    //ensure that rating is an int between 1 and 10
-                    do {
-                        System.out.println("    Please enter a rating (1-10): ");
-                        System.out.print("    ");
-                        while (!scanner.hasNextInt()) {
-                            System.out.println("    Invalid input! Please enter a number (1-10): ");
-                            scanner.next(); 
-                            System.out.print("    ");
-                        }
-                        rating = scanner.nextInt();
-                    } while (rating < 1 || rating > 10);
 
-
-                    scanner.nextLine(); // Consume newline
+                    int rating = ValidRating.PrintValidRating();
+                   
                     register.addDay(authorName, LocalDate.now().toString(), content, rating);
                     System.out.println("    Entry saved for today!");
                     System.out.println("----------------------------------------");
@@ -86,19 +75,9 @@ public class DiaryEntryHandler {
                 System.out.println("    What is on your mind today: ");
                 System.out.print("    ");
                 String content = scanner.nextLine();
-                int rating;
-                do {
-                    System.out.println("    Please enter a rating (1-10): ");
-                    System.out.print("    ");
-                    while (!scanner.hasNextInt()) {
-                        System.out.println("    Invalid input! Please enter a number (1-10): ");
-                        scanner.next(); // Clear the invalid input
-                        System.out.print("    ");
-                    }
-                    rating = scanner.nextInt();
-                } while (rating < 1 || rating > 10);
 
-                scanner.nextLine(); // Consume newline
+                int rating = ValidRating.PrintValidRating();
+
                 register.addDay(authorName, LocalDate.now().toString(), content, rating);
                 System.out.println("    Entry saved for today!");
                 System.out.println("----------------------------------------");
@@ -159,19 +138,9 @@ public class DiaryEntryHandler {
                     System.out.println("    Type in the new entry for this day: ");
                     System.out.print("    ");
                     String entry = scanner.nextLine();
-                    int rating;
-                    do {
-                        System.out.println("    Please enter a rating (1-10): ");
-                        System.out.print("    ");
-                        while (!scanner.hasNextInt()) {
-                            System.out.println("    Invalid input! Please enter a number (1-10): ");
-                            scanner.next(); // Clear the invalid input
-                            System.out.print("    ");
-                        }
-                        rating = scanner.nextInt();
-                    } while (rating < 1 || rating > 10);
 
-                    scanner.nextLine(); // Consume newline
+                    int rating = ValidRating.PrintValidRating();
+
                     register.editDay(choice, entry, authorName, rating);
                     System.out.println("    Entry updated successfully!");
                     System.out.println("----------------------------------------");
@@ -221,20 +190,9 @@ public class DiaryEntryHandler {
         System.out.println("    What is on your mind for " + date + ": ");
         System.out.print("    ");
         String content = scanner.nextLine();
-        int rating;
-        //check validity of rating, prompt new
-        do {
-            System.out.println("    Please enter a rating (1-10): ");
-            System.out.print("    ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("    Invalid input! Please enter a number (1-10): ");
-                scanner.next(); 
-                System.out.print("    ");
-            }
-            rating = scanner.nextInt();
-        } while (rating < 1 || rating > 10);
 
-        scanner.nextLine();
+        int rating = ValidRating.PrintValidRating();
+        
         register.addDay(authorName, date, content, rating);
         System.out.println("    Entry saved for " + date + "!");
         System.out.println("----------------------------------------");

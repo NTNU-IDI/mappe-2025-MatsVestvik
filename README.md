@@ -8,6 +8,9 @@ STUDENT ID = "587996"
 
 To use this program you must first clone the ropository to a place on yout computer.
 You can then create a dektopshortcut that exectutes this command
+
+````markdown
+```bash
 powershell.exe -NoExit -Command "cd 'C:\Users\user\Yout\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
 And thats it. Now You have a desktop shortcut that starts the program.
 
