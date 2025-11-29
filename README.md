@@ -11,7 +11,7 @@ You can then create a dektopshortcut that exectutes this command
 ````markdown
 powershell.exe -NoExit -Command "cd 'C:\Users\user\Your\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
 ````
-
+Remember to replace "C:\Users\user\Your\Path\Here" with your path.
 And thats it. Now You have a desktop shortcut that starts the program.
 
 With the program you can create a new account with an accosiated pin adn explore the program.
