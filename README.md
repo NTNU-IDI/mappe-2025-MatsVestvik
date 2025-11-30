@@ -4,19 +4,6 @@
 STUDENT NAME = "Mats Orpia Vestvik"  
 STUDENT ID = "587996"
 
-## How to use
-
-To use this program you must first clone the ropository to a place on yout computer.
-You can then create a dektopshortcut that exectutes this command
-````markdown
-powershell.exe -NoExit -Command "cd 'C:\Users\user\Your\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
-````
-Remember to replace "C:\Users\user\Your\Path\Here" with your path.
-And thats it. Now You have a desktop shortcut that starts the program.
-
-With the program you can create a new account with an accosiated pin adn explore the program.
-The program features save and load features so your entries will eb saved between sessions.
-
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
@@ -31,9 +18,11 @@ view statistics or search entries. The product is designed to be user friendly a
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
-This Java project follows Maven's standard directory structure with a clear package organization based on the reverse domain naming convention. The main source code resides in src/main/java/edu/ntnu/idi/idatt/ and is logically divided into model, service, controller, and util packages, ensuring proper separation of concerns where models handle data entities, services contain business logic, controllers manage application flow, and util packages provide helper functions. The test code in src/test/java/ mirrors this exact package structure with corresponding *Test.java classes for comprehensive unit testing using JUnit 5 and Mockito. Resource files are organized between src/main/resources/ for application configuration and src/test/resources/ for test-specific data, while quality control is maintained through Maven plugins including Checkstyle for code standards enforcement. This modular architecture supports testability, maintainability, and scalability through clear package boundaries and consistent naming conventions.
+This Java project follows Maven's standard directory structure with a clear package organization based on the reverse domain naming convention. The main source code resides in src/main/java/edu/ntnu/idi/idatt/ and is logically divided into model, service, controller, and util packages, ensuring proper separation of concerns where models handle data entities, services contain business logic, controllers manage application flow, and util packages provide helper functions.
+![class diagram](Diagrams/class.png "class diagram")
+The test code in src/test/java/ mirrors this exact package structure with corresponding *Test.java classes for comprehensive unit testing using JUnit 5 and Mockito. Resource files are organized between src/main/resources/ for application configuration and src/test/resources/ for test-specific data, while quality control is maintained through Maven plugins including Checkstyle for code standards enforcement. This modular architecture supports testability, maintainability, and scalability through clear package boundaries and consistent naming conventions.
 
-![alt text](Diagrams/classfront.png "User experince class diagram")
+![User experince class diagram](Diagrams/classfront.png "User experince class diagram")
 
 
 ## Link to repository
@@ -45,7 +34,16 @@ This Java project follows Maven's standard directory structure with a clear pack
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
 
-The project is executed by running the main class located at edu.ntnu.idi.idatt.Main, which serves as the application entry point and initializes the journal system. Users interact with the program through a console-based menu interface that accepts commands for creating, viewing, editing, deleting, and searching journal entries. The program outputs formatted diary entries with timestamps, provides navigation feedback, and displays success or error messages for user operations. All journal data is automatically persisted to text files in the resources directory, ensuring entries are saved between sessions. The expected behavior includes intuitive menu navigation, robust handling of invalid inputs, and reliable maintenance of chronological journal organization with full search capabilities.
+To use this program you must first clone the ropository to a place on yout computer.
+You can then create a dektopshortcut that exectutes this command
+````markdown
+powershell.exe -NoExit -Command "cd 'C:\Users\user\Your\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
+````
+Remember to replace "C:\Users\user\Your\Path\Here" with your path.
+And thats it. Now You have a desktop shortcut that starts the program.
+
+With the program you can create a new account with an accosiated pin adn explore the program.
+The program features save and load features so your entries will eb saved between sessions.
 
 ## How to run the tests
 
