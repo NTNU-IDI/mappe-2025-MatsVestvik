@@ -33,7 +33,7 @@ view statistics or search entries. The product is designed to be user friendly a
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 This Java project follows Maven's standard directory structure with a clear package organization based on the reverse domain naming convention. The main source code resides in src/main/java/edu/ntnu/idi/idatt/ and is logically divided into model, service, controller, and util packages, ensuring proper separation of concerns where models handle data entities, services contain business logic, controllers manage application flow, and util packages provide helper functions. The test code in src/test/java/ mirrors this exact package structure with corresponding *Test.java classes for comprehensive unit testing using JUnit 5 and Mockito. Resource files are organized between src/main/resources/ for application configuration and src/test/resources/ for test-specific data, while quality control is maintained through Maven plugins including Checkstyle for code standards enforcement. This modular architecture supports testability, maintainability, and scalability through clear package boundaries and consistent naming conventions.
 
-![alt text](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik/Diagrams/classfront.png "User experince class diagram")
+![alt text](Diagrams/classfront.png "User experince class diagram")
 
 
 ## Link to repository
