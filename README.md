@@ -29,13 +29,17 @@ The test code in src/test/java/ mirrors this exact package structure with corres
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
 
+[![Link to this repository](https://img.shields.io/badge/Link_to_this_repository-1e88e5?style=for-the-badge)]([https://matsvestvik.github.io/](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik))
+
 ## How to run the project
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
 
+> [!TIP]
 To use this program you must first clone the ropository to a place on yout computer.
 You can then create a dektopshortcut that exectutes this command
+
 ````markdown
 powershell.exe -NoExit -Command "cd 'C:\Users\user\Your\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
 ````
