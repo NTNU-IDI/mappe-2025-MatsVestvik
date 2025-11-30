@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ScannerManager {
     private static Scanner scanner;
+    private static Scanner testScanner;
     
     private ScannerManager() {
         
@@ -20,5 +21,9 @@ public class ScannerManager {
         if (scanner != null) {
             scanner.close();
         }
+    }
+
+    public static void setScanner(Scanner originalScanner) {
+        testScanner = originalScanner;
     }
 }

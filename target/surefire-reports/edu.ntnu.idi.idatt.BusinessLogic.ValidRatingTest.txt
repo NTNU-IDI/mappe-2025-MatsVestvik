@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 10, Skipped: 0, Time elapsed: 0.070 s <<< FAILURE! -- in edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testValidRatingWithinRange -- Time elapsed: 0.017 s <<< ERROR!
+Tests run: 10, Failures: 0, Errors: 10, Skipped: 0, Time elapsed: 0.117 s <<< FAILURE! -- in edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testValidRatingWithinRange -- Time elapsed: 0.012 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -12,7 +12,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testInvalidRatingBelowRangeThenValid -- Time elapsed: 0.003 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testInvalidRatingBelowRangeThenValid -- Time elapsed: 0.020 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -22,7 +22,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testBoundaryValuesMultipleAttempts -- Time elapsed: 0.001 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testBoundaryValuesMultipleAttempts -- Time elapsed: 0.024 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -32,7 +32,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testMultipleInvalidInputsThenValid -- Time elapsed: 0.006 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testMultipleInvalidInputsThenValid -- Time elapsed: 0.005 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -52,7 +52,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testNonNumericInputThenValid -- Time elapsed: 0.007 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testNonNumericInputThenValid -- Time elapsed: 0.005 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -62,7 +62,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testValidRatingLowerBoundary -- Time elapsed: 0.003 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testValidRatingLowerBoundary -- Time elapsed: 0.008 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
@@ -92,7 +92,7 @@ java.util.NoSuchElementException
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
-edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testInvalidRatingAboveRangeThenValid -- Time elapsed: 0.002 s <<< ERROR!
+edu.ntnu.idi.idatt.BusinessLogic.ValidRatingTest.testInvalidRatingAboveRangeThenValid -- Time elapsed: 0.001 s <<< ERROR!
 java.util.NoSuchElementException
 	at java.base/java.util.Scanner.throwFor(Scanner.java:962)
 	at java.base/java.util.Scanner.next(Scanner.java:1503)
