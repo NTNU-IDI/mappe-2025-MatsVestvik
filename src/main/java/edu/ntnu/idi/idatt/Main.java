@@ -15,7 +15,7 @@ public class Main{
          *calls loginhandler with scanner and register.
          */
         AuthorRegister register = new AuthorRegister();
-        Load load = new Load(register.getAuthors());
+        new Load(register.getAuthors());
 
         // create a scanner and start the login/menu flow using LoginHandler
         Scanner scanner = ScannerManager.getScanner();
