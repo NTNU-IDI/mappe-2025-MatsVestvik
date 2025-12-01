@@ -39,7 +39,7 @@ Due to the lack of encryption for private information, do not use in security de
 Changes have happened to the program since the demonstration was filmed
 
 
-[![Link to this repository](https://img.shields.io/badge/idatt1003-mappe-2024-MatsVestvik-1e88e5?style=for-the-badge)](https://github.com/NTNU-IDI/idatt1003-mappe-2024-MatsVestvik)
+[![Link to this repository](https://img.shields.io/badge/idatt1003_mappe_2024_MatsVestvik-1e88e5?style=for-the-badge)](https://github.com/NTNU-IDI/idatt1003-mappe-2024-MatsVestvik)
 [![Link to this repository](https://img.shields.io/badge/Link_to_this_repository-1e88e5?style=for-the-badge)](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik)
 [![Video Demonstration](https://img.shields.io/badge/Video_demonstration-1e88e5?style=for-the-badge)](https://www.youtube.com/watch?v=n8av8NicRN0)
 
