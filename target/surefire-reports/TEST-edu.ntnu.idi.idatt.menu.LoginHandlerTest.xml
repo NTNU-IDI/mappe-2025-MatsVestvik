@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.224" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.404" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
-    <property name="sun.java.command" value="C:\Users\matso\AppData\Local\Temp\surefire2711485995080100705\surefirebooter-20251130163225370_3.jar C:\Users\matso\AppData\Local\Temp\surefire2711485995080100705 2025-11-30T16-32-25_088-jvmRun1 surefire-20251130163225370_1tmp surefire_0-20251130163225370_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\matso\AppData\Local\Temp\surefire16859733002886323261\surefirebooter-20251201193520797_3.jar C:\Users\matso\AppData\Local\Temp\surefire16859733002886323261 2025-12-01T19-35-20_644-jvmRun1 surefire-20251201193520797_1tmp surefire_0-20251201193520797_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\matso\Desktop\IDATT1003\Mappe\target\test-classes;C:\Users\matso\Desktop\IDATT1003\Mappe\target\classes;C:\Users\matso\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.13.4\junit-jupiter-engine-5.13.4.jar;C:\Users\matso\.m2\repository\org\junit\platform\junit-platform-engine\1.13.4\junit-platform-engine-1.13.4.jar;C:\Users\matso\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\matso\.m2\repository\org\junit\platform\junit-platform-commons\1.13.4\junit-platform-commons-1.13.4.jar;C:\Users\matso\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.13.4\junit-jupiter-api-5.13.4.jar;C:\Users\matso\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\matso\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\matso\.m2\repository\net\bytebuddy\byte-buddy\1.14.6\byte-buddy-1.14.6.jar;C:\Users\matso\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.6\byte-buddy-agent-1.14.6.jar;C:\Users\matso\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\matso\.m2\repository\org\mockito\mockito-junit-jupiter\5.5.0\mockito-junit-jupiter-5.5.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\matso\AppData\Local\Temp\surefire2711485995080100705\surefirebooter-20251130163225370_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\matso\AppData\Local\Temp\surefire16859733002886323261\surefirebooter-20251201193520797_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24.0.2+12-54"/>
@@ -50,7 +50,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\matso\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\matso\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\apache-maven-3.9.11\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-21.0.8.9-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Neovim\bin;C:\Users\matso\AppData\Local\Programs\Python\Launcher\;C:\Users\matso\AppData\Local\Microsoft\WindowsApps;C:\Users\matso\AppData\Local\Programs\Microsoft VS Code\bin;c:\Users\matso\.vscode\extensions\vscjava.vscode-java-debug-0.58.3\bundled\scripts\noConfigScripts;c:\Users\matso\.vscode\extensions\ms-python.debugpy-2025.16.0-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\apache-maven-3.9.11\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-21.0.8.9-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\Neovim\bin;C:\Users\matso\AppData\Local\Programs\Python\Launcher\;C:\Users\matso\AppData\Local\Microsoft\WindowsApps;C:\Users\matso\AppData\Local\Programs\Microsoft VS Code\bin;c:\Users\matso\.vscode\extensions\vscjava.vscode-java-debug-0.58.3\bundled\scripts\noConfigScripts;c:\Users\matso\.vscode\extensions\ms-python.debugpy-2025.16.0-win32-x64\bundled\scripts\noConfigScripts;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -58,7 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="loginHandling_correctPin_logoutReturnsFalse" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.126">
+  <testcase name="loginHandling_correctPin_logoutReturnsFalse" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.203">
     <system-out><![CDATA[----------------------------------------
     You have selected Alice
     Please enter your pin: ----------------------------------------
@@ -74,13 +74,13 @@
     Logging out...
 ]]></system-out>
   </testcase>
-  <testcase name="loginHandling_incorrectPin_returnsFalse" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.03">
+  <testcase name="loginHandling_incorrectPin_returnsFalse" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.068">
     <system-out><![CDATA[----------------------------------------
     You have selected Alice
     Please enter your pin:     entered pin was incorrect. Please try again
 ]]></system-out>
   </testcase>
-  <testcase name="loginHandling_correctPin_saveAndQuitReturnsTrue" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.064">
+  <testcase name="loginHandling_correctPin_saveAndQuitReturnsTrue" classname="edu.ntnu.idi.idatt.menu.LoginHandlerTest" time="0.119">
     <system-out><![CDATA[----------------------------------------
     You have selected Alice
     Please enter your pin: ----------------------------------------

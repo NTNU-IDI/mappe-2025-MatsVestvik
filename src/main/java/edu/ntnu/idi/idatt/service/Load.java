@@ -110,7 +110,7 @@ public class Load {
                     if (values.length >= 2) {
                         String rowDate = values[0].trim();
                         String rowEntry = values[1].trim();
-                        int rating = values.length == 3 ? Integer.parseInt(values[2].trim()) : 0;
+                        int rating = Integer.parseInt(values[2].trim());
                         String title = values[3].trim();
                         // Replace escaped newlines with actual newlines
                         rowEntry = rowEntry.replace("\\n", "\n");
