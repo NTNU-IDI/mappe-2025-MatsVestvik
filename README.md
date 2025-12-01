@@ -30,6 +30,7 @@ The test code in src/test/java/ mirrors this exact package structure with corres
 [//]: # (TODO: Include a link to your GitHub repository here.)
 
 [![Link to this repository](https://img.shields.io/badge/Link_to_this_repository-1e88e5?style=for-the-badge)]([https://matsvestvik.github.io/](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik))
+[![Link to this repository](https://img.shields.io/badge/Link_to_this_repository-1e88e5?style=for-the-badge)]((https://github.com/NTNU-IDI/mappe-2025-MatsVestvik)](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik))
 
 ## How to run the project
 
