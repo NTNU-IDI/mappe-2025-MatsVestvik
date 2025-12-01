@@ -106,12 +106,9 @@ public class DiaryEntryHandler {
             } else {
                 TerminalUtils.clear(); // clear the terminal for clean output
                 //print out all infor for a day with options
-                System.out.println("----------------------------------------");
-                int dayRating = register.getAuthorByName(authorName).getDayRating(choice);
-                System.out.println(choice + "          Rating: " + dayRating);
-                System.out.println("----------------------------------------");
-                System.out.println(register.getAuthorByName(authorName).readDay(choice) );
-                System.out.println("----------------------------------------");
+
+                register.getAuthorByName(authorName).getDayByDate(choice).printDay();
+ 
                 System.out.println("e. Edit         b. back     d. delete");
                 System.out.println("----------------------------------------");
                 String eb = scanner.nextLine();

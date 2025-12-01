@@ -196,9 +196,7 @@ public class Author {
 
     public void printAllContent(){
         for (Day day: days){
-            System.out.println("_");
-            System.out.println("    "+day.getDate() +"      "+ day.getRating());
-            System.out.println("    "+day.getContent());
+            day.printDay();
         }
     }
 

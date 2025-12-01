@@ -106,7 +106,7 @@ public class Load {
                     }
                     
                     // Split by pipe separator instead of comma
-                    String[] values = line.split("\\|", 4); // Split into max 3 parts
+                    String[] values = line.split("\\|", 4); // Split into max 4 parts
                     if (values.length >= 2) {
                         String rowDate = values[0].trim();
                         String rowEntry = values[1].trim();

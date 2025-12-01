@@ -64,9 +64,20 @@ public class Day {
     /**
      * print the days entry
      */
-    public void printDay(){
+    public void printEntry(){
         System.out.println(entry);
     }
+
+    public void printDay(){
+        System.out.println("----------------------------------------");
+                System.out.println(getTitle());
+                System.out.println(getDate() + "          Rating: " + getRating());
+                System.out.println("----------------------------------------");
+                System.out.println(getContent() );
+                System.out.println("----------------------------------------"); 
+    }
+    /*
+    */
 
     /**
      * Returns true if the day's content contains the given keyword (case-insensitive).

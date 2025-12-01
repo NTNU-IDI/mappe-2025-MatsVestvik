@@ -271,7 +271,8 @@ public class AuthorRegister {
     public void printAllDiaries(){
         for (Author author: authors){
             System.out.println("----------------------------------------");
-            System.out.println(author.getName());
+            System.out.println("              "+author.getName());
+
             author.printAllContent();
         }
     }
