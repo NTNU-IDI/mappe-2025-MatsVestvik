@@ -15,6 +15,9 @@ value to represent how good my day was.
 For more functionality there is also the admin account with the password 1234 for demonstrations sake. Here the admin gains access to all diaries, and can 
 view statistics or search entries. The product is designed to be user friendly and fool proof, so the best way to explore the program is to use it.
 
+> [!WARNING]
+All existing users including admin have pwd 1234
+
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
@@ -22,12 +25,18 @@ This Java project follows Maven's standard directory structure with a clear pack
 ![class diagram](Diagrams/class.png "class diagram")
 The test code in src/test/java/ mirrors this exact package structure with corresponding *Test.java classes for comprehensive unit testing using JUnit 5 and Mockito. Resource files are organized between src/main/resources/ for application configuration and src/test/resources/ for test-specific data, while quality control is maintained through Maven plugins including Checkstyle for code standards enforcement. This modular architecture supports testability, maintainability, and scalability through clear package boundaries and consistent naming conventions.
 
+> [!CAUTION]
+Due to the lack of encryption for private information, do not use in security demanding situations.
+
 ![User experince class diagram](Diagrams/classfront.png "User experince class diagram")
 
 
 ## Link to repository
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
+
+> [!NOTE]
+Changes have happened to the program since the demonstration was filmed
 
 [![Link to this repository](https://img.shields.io/badge/Link_to_this_repository-1e88e5?style=for-the-badge)](https://github.com/NTNU-IDI/mappe-2025-MatsVestvik)
 [![Video Demonstration](https://img.shields.io/badge/Video_demonstration-1e88e5?style=for-the-badge)](https://www.youtube.com/watch?v=n8av8NicRN0)
