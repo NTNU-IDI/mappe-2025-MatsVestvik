@@ -7,12 +7,36 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 public class EnterDay {
     
     public static void printValidDay(AuthorRegister register, String authorName, String date){
+        String entry;
+        int rating;
+        String title;
+        String input;
         Scanner scanner = ScannerManager.getScanner();
         System.out.println("-----------------------------------------");
-        String title = ValidTitle.printValidTitle();
-        String entry = ValidEntry.printValidEntry();
-        String input;
-        int rating = -1;
+        
+        
+        title = "-1";
+        while (title.equals("-1")) {
+            System.out.println("    Please enter a title: ");
+            System.out.print("    ");
+            input = scanner.nextLine();
+            title = ValidTitle.isValidTitle(input);
+            if (title.equals("-1")) {
+                System.out.println("    Invalid input! Title cannot be empty, exceed 35 characters, or contain '|' or newline characters.");
+            }
+        }
+        
+        entry = "-1";
+        while (entry.equals("-1")) {
+            System.out.println("    Please enter your entry: ");
+            System.out.print("    ");
+            input = scanner.nextLine();
+            entry = ValidEntry.isValidEntry(input);
+            if (entry.equals("-1")) {
+                System.out.println("    Invalid input! Entry cannot contain '|' character.");
+            }
+        }
+        rating = -1;
         while (rating == -1) {
             System.out.print("    Please enter a rating (1-10): ");
             input = scanner.nextLine();

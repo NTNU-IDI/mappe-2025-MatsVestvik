@@ -30,6 +30,11 @@ public class ValidTitle {
         return title;
     }
 
-    
-
+    public static String isValidTitle(String title) {
+        final int MAX_TITLE_LENGTH = 35;
+        if (title == null || title.trim().isEmpty() || title.length() > MAX_TITLE_LENGTH || title.contains("|") || title.contains("\n")) {
+            return "-1";
+        }
+        return title;
+    }
 }

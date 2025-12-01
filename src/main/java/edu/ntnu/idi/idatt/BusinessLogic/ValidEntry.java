@@ -5,33 +5,30 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidEntry {
 
-    public static String printValidEntry() {
-        Scanner scanner = ScannerManager.getScanner();
-        String entry;
-        final int MAX_CHARS_PER_LINE = 35; // Adjust this value as needed
-        
-        do {
-            System.out.println("    Type in the entry for this day:");
-            System.out.print("    ");
-            entry = scanner.nextLine();
+    /**
+     * Ensures entry variable does not contain '|' and is formatted to 35 characters per line
+     * @param entry
+     * @return
+     */
+
+    public static String isValidEntry(String entry) {
+        if (entry.contains("|")) {
+            return "-1";
+        }
+        else {
+            if (entry.length() <= 35) {
+                return entry;
+            }
             
-            if (entry.contains("|")) {
-                System.out.println("    Error: Entry cannot contain '|' character. Please try again.");
+            StringBuilder formatted = new StringBuilder();
+            for (int i = 0; i < entry.length(); i++) {
+                formatted.append(entry.charAt(i));
+                if ((i + 1) % 35 == 0 && i != entry.length() - 1) {
+                    formatted.append("\n");
+                }
             }
-        } while (entry.contains("|"));
-        
-        if (entry.length() <= MAX_CHARS_PER_LINE) {
-            return entry;
+            
+            return formatted.toString();
         }
-        
-        StringBuilder formatted = new StringBuilder();
-        for (int i = 0; i < entry.length(); i++) {
-            formatted.append(entry.charAt(i));
-            if ((i + 1) % MAX_CHARS_PER_LINE == 0 && i != entry.length() - 1) {
-                formatted.append("\n");
-            }
-        }
-        
-        return formatted.toString();
     }
 }
