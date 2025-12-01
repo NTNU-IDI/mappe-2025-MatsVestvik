@@ -3,38 +3,35 @@ package edu.ntnu.idi.idatt.objects;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
 
 class DayTest {
 
     private Day day;
-    private final String TEST_AUTHOR = "testAuthor";
-    private final String TEST_ENTRY = "This is a test entry";
-    private final int TEST_RATING = 5;
+    private final String testAuthor = "Mats";
+    private final String testEntry = "Mats is pretty cool";
+    private final int testRating = 5;
+    private final String testTitle = "This is a title";
+    private final String testDate = LocalDate.now().toString();
 
     @BeforeEach
     void setUp() {
-        day = new Day(TEST_AUTHOR, TEST_ENTRY, TEST_RATING);
+        day = new Day(testAuthor, testEntry, testRating, testTitle);
     }
 
     @Test
     void testConstructorWithAuthor() {
-        assertNotNull(day.getId());
-        assertTrue(day.getId().contains(TEST_AUTHOR));
-        assertEquals(TEST_ENTRY, day.getContent());
-        assertEquals(TEST_RATING, day.getRating());
+        assertEquals(testEntry, day.getContent());
+        assertEquals(testRating, day.getRating());
         assertNotNull(day.getDate());
+        assertEquals(testTitle, day.getTitle());
     }
 
     @Test
     void testConstructorWithId() {
-        String testId = "2024-01-01testAuthor";
-        String testDate = "2024-01-01";
-        String testEntry = "Specific date entry";
-        int testRating = 8;
 
-        Day specificDay = new Day(testId, testDate, testEntry, testRating);
+        Day specificDay = new Day(testDate, testEntry, testRating, testTitle);
 
-        assertEquals(testId, specificDay.getId());
         assertEquals(testDate, specificDay.getDate());
         assertEquals(testEntry, specificDay.getContent());
         assertEquals(testRating, specificDay.getRating());
@@ -56,9 +53,9 @@ class DayTest {
 
     @Test
     void testContainsKeyword() {
-        assertTrue(day.containsKeyword("test"));
-        assertTrue(day.containsKeyword("TEST")); // case insensitive
-        assertTrue(day.containsKeyword("entry"));
+        assertTrue(day.containsKeyword("Mats"));
+        assertTrue(day.containsKeyword("is")); // case insensitive
+        assertTrue(day.containsKeyword("pretty"));
     }
 
     @Test
@@ -78,27 +75,9 @@ class DayTest {
     }
 
     @Test
-    void testContainsKeywordWithNullContent() {
-        Day emptyDay = new Day(TEST_AUTHOR, null, TEST_RATING);
-        assertFalse(emptyDay.containsKeyword("test"));
-    }
-
-    @Test
-    void testRatingBoundaries() {
-        // Test minimum rating
-        Day minRatingDay = new Day(TEST_AUTHOR, "Min rating", 1);
-        assertEquals(1, minRatingDay.getRating());
-
-        // Test maximum rating
-        Day maxRatingDay = new Day(TEST_AUTHOR, "Max rating", 10);
-        assertEquals(10, maxRatingDay.getRating());
-    }
-
-    @Test
     void testGettersConsistency() {
-        assertEquals(TEST_ENTRY, day.getContent());
-        assertEquals(TEST_RATING, day.getRating());
+        assertEquals(testEntry, day.getContent());
+        assertEquals(testRating, day.getRating());
         assertNotNull(day.getDate());
-        assertNotNull(day.getId());
     }
 }

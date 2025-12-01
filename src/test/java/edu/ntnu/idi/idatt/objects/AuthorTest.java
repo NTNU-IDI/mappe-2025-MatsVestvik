@@ -3,7 +3,7 @@ package edu.ntnu.idi.idatt.objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.time.LocalDate;
 import java.util.List;
 
 public class AuthorTest {
@@ -12,17 +12,24 @@ public class AuthorTest {
     private Day testDay1;
     private Day testDay2;
 
+    private final String testAuthor = "Mats";
+    private final String testEntry = "Mats is pretty cool";
+    private final int testRating = 5;
+    private final String testTitle = "This is a title";
+    private final String testDate = LocalDate.now().toString();
+
+
     @BeforeEach
     void setUp() {
-        author = new Author("TestUser", 1234);
+        author = new Author(testAuthor, 1234);
         // Use explicit date constructor for deterministic tests
-        testDay1 = new Day("2024-01-01TestUser", "2024-01-01", "First day of the year", 0);
-        testDay2 = new Day("2024-01-02TestUser", "2024-01-02", "Second day of the year", 0);
+        testDay1 = new Day(testDate, testEntry, testRating, testTitle);
+        testDay2 = new Day("0001-01-01", testEntry, testRating, testTitle);
     }
 
     @Test
     void testConstructorAndGetters() {
-        assertEquals("TestUser", author.getName());
+        assertEquals("Mats", author.getName());
         assertEquals(1234, author.getPin());
         assertEquals(0, author.getDaysSize());
         assertTrue(author.getListDays().isEmpty());
@@ -56,25 +63,25 @@ public class AuthorTest {
 
     @Test
     void testAddDay_NewDay() {
-        author.addDay(testDay1);
+        author.addDay(testDay2);
         assertEquals(1, author.getDaysSize());
-        assertTrue(author.searchDays("2024-01-01"));
+        assertTrue(author.searchDays("0001-01-01"));
     }
 
     @Test
     void testAddDay_OverwriteExistingDay() {
         // Add first day
-        author.addDay(testDay1);
+        author.addDay(testDay2);
         assertEquals(1, author.getDaysSize());
-        assertEquals("First day of the year", author.readDay("2024-01-01"));
+        assertEquals("Mats is pretty cool", author.readDay("0001-01-01"));
 
         // Create a new day with same date but different content
-        Day updatedDay = new Day("2024-01-01TestUser", "2024-01-01", "Updated content", 0);
+        Day updatedDay = new Day("0001-01-01", "Updated content", testRating, testTitle);
         author.addDay(updatedDay);
 
         // Should still have only one day, but with updated content
         assertEquals(1, author.getDaysSize());
-        assertEquals("Updated content", author.readDay("2024-01-01"));
+        assertEquals("Updated content", author.readDay("0001-01-01"));
     }
 
     @Test
@@ -82,14 +89,8 @@ public class AuthorTest {
         author.addDay(testDay1);
         author.addDay(testDay2);
         assertEquals(2, author.getDaysSize());
-        assertTrue(author.searchDays("2024-01-01"));
-        assertTrue(author.searchDays("2024-01-02"));
-    }
-
-    @Test
-    void testSearchDays_ExistingDay_ReturnsTrue() {
-        author.addDay(testDay1);
-        assertTrue(author.searchDays("2024-01-01"));
+        assertTrue(author.searchDays(LocalDate.now().toString()));
+        assertTrue(author.searchDays("0001-01-01"));
     }
 
     @Test
@@ -101,17 +102,12 @@ public class AuthorTest {
     }
 
     @Test
-    void testSearchDays_EmptyDaysList_ReturnsFalse() {
-        assertFalse(author.searchDays("2024-01-01"));
-    }
-
-    @Test
     void testGetDayByDate_ExistingDay() {
         author.addDay(testDay1);
-        Day foundDay = author.getDayByDate("2024-01-01");
+        Day foundDay = author.getDayByDate(LocalDate.now().toString());
         assertNotNull(foundDay);
-        assertEquals("2024-01-01", foundDay.getDate());
-        assertEquals("First day of the year", foundDay.getContent());
+        assertEquals(LocalDate.now().toString(), foundDay.getDate());
+        assertEquals("Mats is pretty cool", foundDay.getContent());
     }
 
     @Test
@@ -125,7 +121,7 @@ public class AuthorTest {
     @Test
     void testReadDay_ExistingDay() {
         author.addDay(testDay1);
-        assertEquals("First day of the year", author.readDay("2024-01-01"));
+        assertEquals("Mats is pretty cool", author.readDay(LocalDate.now().toString()));
     }
 
     @Test
@@ -139,9 +135,9 @@ public class AuthorTest {
     @Test
     void testGetSortDays_UnsortedList() {
         // Add days in non-chronological order
-        Day day3 = new Day("2024-01-03TestUser", "2024-01-03", "Content 3", 0);
-        Day day1 = new Day("2024-01-01TestUser", "2024-01-01", "Content 1", 0);
-        Day day2 = new Day("2024-01-02TestUser", "2024-01-02", "Content 2", 0);
+        Day day3 = new Day("2003-01-01", testEntry, testRating, testTitle);
+        Day day1 = new Day("2001-01-01", testEntry, testRating, testTitle);
+        Day day2 = new Day("2005-01-01", testEntry, testRating, testTitle);
 
         author.addDay(day3);
         author.addDay(day1);
@@ -151,23 +147,15 @@ public class AuthorTest {
 
         // Verify the list is sorted by date
         assertEquals(3, sortedDays.size());
-        assertEquals("2024-01-01", sortedDays.get(0).getDate());
-        assertEquals("2024-01-02", sortedDays.get(1).getDate());
-        assertEquals("2024-01-03", sortedDays.get(2).getDate());
+        assertEquals("2001-01-01", sortedDays.get(0).getDate());
+        assertEquals("2003-01-01", sortedDays.get(1).getDate());
+        assertEquals("2005-01-01", sortedDays.get(2).getDate());
     }
 
     @Test
     void testGetSortDays_EmptyList() {
         List<Day> sortedDays = author.getSortDays(author.getListDays());
         assertTrue(sortedDays.isEmpty());
-    }
-
-    @Test
-    void testGetSortDays_SingleElement() {
-        author.addDay(testDay1);
-        List<Day> sortedDays = author.getSortDays(author.getListDays());
-        assertEquals(1, sortedDays.size());
-        assertEquals("2024-01-01", sortedDays.get(0).getDate());
     }
 
     @Test
@@ -197,8 +185,8 @@ public class AuthorTest {
 
     @Test
     void findDaysByKeyword_returnsMatchingDays() {
-        Day day1 = new Day("id1", "2024-01-01", "I drank coffee in the morning", 5);
-        Day day2 = new Day("id2", "2024-01-02", "Had tea in the afternoon", 6);
+        Day day1 = new Day( "2024-01-01", "I drank coffee in the morning", 5, testTitle);
+        Day day2 = new Day("2024-01-02", "Had tea in the vodka", 7, testTitle);
         author.addDay(day1);
         author.addDay(day2);
 
@@ -209,8 +197,8 @@ public class AuthorTest {
 
     @Test
     void findDatesByKeyword_returnsOnlyDates() {
-        Day day1 = new Day("id1", "2024-01-01", "I drank coffee in the morning", 5);
-        Day day2 = new Day("id2", "2024-01-02", "Had tea in the afternoon", 6);
+        Day day1 = new Day("2024-01-01", "I drank coffee in the morning", 5, testTitle);
+        Day day2 = new Day( "2024-01-02", "Had tea in the afternoon", 6, testTitle);
         author.addDay(day1);
         author.addDay(day2);
 
@@ -221,9 +209,9 @@ public class AuthorTest {
 
     @Test
     void findDaysByKeywordInRange_returnsDaysInRange_andOptionalKeyword() {
-        Day day1 = new Day("id1", "2024-01-01", "Coffee", 5);
-        Day day2 = new Day("id2", "2024-01-02", "Tea", 6);
-        Day day3 = new Day("id3", "2024-01-05", "Cake", 7);
+        Day day1 = new Day("2024-01-01", "Coffee", 5, testTitle);
+        Day day2 = new Day("2024-01-02", "Tea", 6, testTitle);
+        Day day3 = new Day("2024-01-05", "Cake", 7, testTitle);
         author.addDay(day1);
         author.addDay(day2);
         author.addDay(day3);

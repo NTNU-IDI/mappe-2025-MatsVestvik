@@ -68,8 +68,7 @@ public class AuthorRegister {
     public void addDay(String author, String date, String content, int rating, String title){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
-                String ID = date + auth.getName();
-                Day newDay = new Day(ID, date, content, rating, title);
+                Day newDay = new Day(date, content, rating, title);
                 auth.addDay(newDay);
                 return;
             }
@@ -86,18 +85,8 @@ public class AuthorRegister {
      * @param content
      * @param rating
      */
-    public void addDayToday(String author, String content, int rating){
-        for(Author auth: authors){
-            if(author.equals(auth.getName())){
-                Day newDay = new Day(author, content, rating);
-                auth.addDay(newDay);
-                return;
-            }
-        }
-        System.out.println("""
-                    This author does not exist.
-                    Please create new author or try again.
-                    """); 
+    public void addDayToday(String author, String content, int rating, String title){
+        addDay(author, LocalDate.now().toString(), content, rating, title);
     } 
 
 
@@ -174,9 +163,7 @@ public class AuthorRegister {
                 if (day != null) {
                     day.setEntry(entry);
                 } else {
-                    // Create new day if it doesn't exist
-                    String ID = date + author.getName();
-                    Day newDay = new Day(ID, date, entry, rating, title);
+                    Day newDay = new Day(date, entry, rating, title);
                     author.addDay(newDay);
                 }
                 return;

@@ -137,8 +137,7 @@ public class Load {
     public void addDay(List<Author> authors, String author, String date, String content, int rating, String title){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
-                String ID = date + auth.getName();
-                Day newDay = new Day(ID, date, content, rating, title);
+                Day newDay = new Day(date, content, rating, title);
                 auth.addDay(newDay);
                 return;
             }

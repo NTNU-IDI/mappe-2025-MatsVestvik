@@ -54,7 +54,7 @@ public class AuthorRegisterTest {
     @Test
     void testSearchDays_AuthorExists_DayExists() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Test content", 0);
+        register.addDay("John","2024-01-01", "Test content", 0, "title");
         
         assertTrue(register.searchDays("John", LocalDate.of(2024, 1, 1)));
     }
@@ -62,7 +62,7 @@ public class AuthorRegisterTest {
     @Test
     void testSearchDays_AuthorExists_DayNotExists() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Test content", 0);
+        register.addDay("John", "2024-01-01", "Test content", 0, "title");
         
         assertFalse(register.searchDays("John", LocalDate.of(2024, 1, 2)));
     }
@@ -75,7 +75,7 @@ public class AuthorRegisterTest {
     @Test
     void testAddDay_AuthorExists() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Test content", 0);
+        register.addDay("John", "2024-01-01", "Test content", 0, "title");
         
         Author author = register.getAuthorByName("John");
         assertNotNull(author);
@@ -85,14 +85,14 @@ public class AuthorRegisterTest {
     @Test
     void testAddDay_AuthorNotExists() {
         // This should print an error message but not throw an exception
-        assertDoesNotThrow(() -> register.addDay("NonExistent", "2024-01-01", "Test content", 0));
+        assertDoesNotThrow(() -> register.addDay("NonExistent", "2024-01-01", "Test content", 0, "title"));
     }
 
     @Test
     void testAddDay_OverwriteExistingDay() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Original content", 0);
-        register.addDay("John", "2024-01-01", "Updated content", 0);
+        register.addDay("John", "2024-01-01", "Original content", 0,"title");
+        register.addDay("John", "2024-01-01", "Updated content",0, "title");
         
         Author author = register.getAuthorByName("John");
         assertEquals("Updated content", author.readDay("2024-01-01"));
@@ -102,17 +102,17 @@ public class AuthorRegisterTest {
     void testAddDayToday_AuthorExists() {
         register.addNewAuthor("John", 1234);
         String today = LocalDate.now().toString();
-        register.addDayToday("John", "Today's content", 0);
+        register.addDayToday("John", "Today's content", 0, "title");
         
         Author author = register.getAuthorByName("John");
-        assertNotNull(author.readDay(today));
+        assertNotNull(author.getDayByDate(today).getContent());
         assertEquals("Today's content", author.readDay(today));
     }
 
     @Test
     void testAddDayToday_AuthorNotExists() {
         // This should print an error message but not throw an exception
-        assertDoesNotThrow(() -> register.addDayToday("NonExistent", "Today's content", 0));
+        assertDoesNotThrow(() -> register.addDayToday("NonExistent", "Today's content", 0, "title"));
     }
 
     @Test
@@ -198,8 +198,8 @@ public class AuthorRegisterTest {
     @Test
     void testEditDay_AuthorExists_DayExists() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Original content", 0);
-        register.editDay("2024-01-01", "Edited content", "John", 0);
+        register.addDay("John", "2024-01-01", "Original content", 0, "title");
+        register.editDay("2024-01-01", "Edited content", "John", 0,"title") ;
         
         Author author = register.getAuthorByName("John");
         assertEquals("Edited content", author.readDay("2024-01-01"));
@@ -210,19 +210,19 @@ public class AuthorRegisterTest {
         register.addNewAuthor("John", 1234);
         
         // Should not throw exception when editing non-existent day
-        assertDoesNotThrow(() -> register.editDay("2024-01-01", "New content", "John", 0));
+        assertDoesNotThrow(() -> register.editDay("2024-01-01", "New content", "John", 0,"title"));
     }
 
     @Test
     void testEditDay_AuthorNotExists() {
         // Should not throw exception when author doesn't exist
-        assertDoesNotThrow(() -> register.editDay("2024-01-01", "Content", "NonExistent", 0));
+        assertDoesNotThrow(() -> register.editDay("2024-01-01", "Content", "NonExistent", 0, "title"));
     }
 
     @Test
     void testPrintDaysAuthor_NoExceptionThrown() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Test content", 0);
+        register.addDay("John", "2024-01-01", "Test content", 0, "title");
         
         Author author = register.getAuthorByName("John");
         assertDoesNotThrow(() -> register.printDaysAuthor(author));
@@ -246,8 +246,8 @@ public class AuthorRegisterTest {
     void testSearchEntries_keywordMatchesAcrossAuthors() {
         register.addNewAuthor("John", 1234);
         register.addNewAuthor("Jane", 5678);
-        register.addDay("John", "2024-01-01", "I love coffee", 5);
-        register.addDay("Jane", "2024-01-02", "Coffee is great", 6);
+        register.addDay("John", "2024-01-01", "I love coffee", 5,"title");
+        register.addDay("Jane", "2024-01-02", "Coffee is great", 6,"title");
 
         java.util.List<String> results = register.searchEntries("coffee");
         assertEquals(2, results.size());
@@ -258,8 +258,8 @@ public class AuthorRegisterTest {
     @Test
     void testSearchEntriesInTimeSpan_blankKeywordMatchesAllDaysInRange() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Entry one", 5);
-        register.addDay("John", "2024-01-03", "Entry two", 6);
+        register.addDay("John", "2024-01-01", "Entry one", 5,"title");
+        register.addDay("John", "2024-01-03", "Entry two", 6,"title");
 
         java.util.List<String> results = register.searchEntriesInTimeSpan("", "2024-01-01", "2024-01-02");
         assertEquals(1, results.size());
@@ -269,7 +269,7 @@ public class AuthorRegisterTest {
     @Test
     void testSearchEntries_nonExistingKeywordReturnsEmpty() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Entry one", 5);
+        register.addDay("John", "2024-01-01", "Entry one", 5,"title");
 
         java.util.List<String> results = register.searchEntries("nonexistent");
         assertTrue(results.isEmpty());
@@ -278,7 +278,7 @@ public class AuthorRegisterTest {
     @Test
     void testSearchEntriesInTimeSpan_noMatchesReturnsEmpty() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "Entry one", 5);
+        register.addDay("John", "2024-01-01", "Entry one", 5,"title");
 
         java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-02", "2024-01-03");
         assertTrue(results.isEmpty());
@@ -287,8 +287,8 @@ public class AuthorRegisterTest {
     @Test
     void testSearchEntriesInTimeSpan_keywordMatchesWithinRange() {
         register.addNewAuthor("John", 1234);
-        register.addDay("John", "2024-01-01", "I love coffee", 5);
-        register.addDay("John", "2024-01-02", "No coffee here", 6);
+        register.addDay("John", "2024-01-01", "I love coffee", 5,"title");
+        register.addDay("John", "2024-01-02", "No coffee here", 6,"title");
 
         java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-01", "2024-01-02");
         assertEquals(2, results.size());

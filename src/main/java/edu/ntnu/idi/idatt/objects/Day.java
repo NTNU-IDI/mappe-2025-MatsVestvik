@@ -1,7 +1,5 @@
 package edu.ntnu.idi.idatt.objects;
 
-import java.time.LocalDate;
-
 public class Day {
     /**
      * handles Day object to be put in days list for author
@@ -10,33 +8,16 @@ public class Day {
     private String date;
     private String title;
     private int rating;
-    private final String id;
 
     /**
-     * creates a day object with author for id creation
-     * takes entry and rating and assosiates them to local variable
-     * @param author
-     * @param entry
-     * @param rating
-     */
-    public Day(String author, String entry, int rating){
-        this.id = LocalDate.now().toString() + author;
-        this.entry = entry;
-        this.date = LocalDate.now().toString();
-        this.rating = rating;
-    }
-
-    /**
-     * creates a day object with id
+     * creates a day object
      * sets entry and rating to local variable
-     * @param id
      * @param date
      * @param entry
      * @param rating
      */
 
-    public Day(String id, String date, String entry, int rating, String title){
-        this.id = id;
+    public Day(String date, String entry, int rating, String title){
         this.entry = entry;
         this.date = date;
         this.rating = rating;
@@ -48,7 +29,6 @@ public class Day {
      * getter for all local variables
      * @return
      */
-    public String getId() {return id;}
     public String getContent() {return this.entry;}
     public int getRating() {return rating;}
     public String getDate() {return date;}
