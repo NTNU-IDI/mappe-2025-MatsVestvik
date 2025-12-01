@@ -39,7 +39,7 @@ What is the input and output of the program? What is the expected behaviour of t
 
 > [!TIP]
 To use this program you must first clone the ropository to a place on yout computer.
-You can then create a dektopshortcut that exectutes this command
+You can then create a desktopshortcut that exectutes this command
 
 ````markdown
 powershell.exe -NoExit -Command "cd 'C:\Users\user\Your\Path\Here' ;java -cp target\classes edu.ntnu.idi.idatt.Main"
