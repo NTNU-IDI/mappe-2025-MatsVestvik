@@ -4,28 +4,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidTitleTest {
-
     @Test
-    void isValidTitle_acceptsNonEmptyUnderMax() {
-        assertTrue(ValidTitle.isValidTitle("My title"));
+    void isValidTitle_acceptsNormalTitle() {
+        assertEquals("Hello", ValidTitle.isValidTitle("Hello"));
     }
 
     @Test
     void isValidTitle_rejectsEmptyOrTooLong() {
-        assertFalse(ValidTitle.isValidTitle(""));
-        // 31 chars should be rejected
-        assertFalse(ValidTitle.isValidTitle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        assertEquals("-1", ValidTitle.isValidTitle(""));
+        assertEquals("-1", ValidTitle.isValidTitle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
-    void validateTitle_trimsAndReturns() {
-        String input = "  Hello Title  ";
-        String validated = ValidTitle.validateTitle(input);
-        assertEquals("Hello Title", validated);
-    }
-
-    @Test
-    void validateTitle_throwsForInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> ValidTitle.validateTitle(""));
+    void isValidTitle_rejectsIllegalChars() {
+        assertEquals("-1", ValidTitle.isValidTitle("Bad|title"));
+        assertEquals("-1", ValidTitle.isValidTitle("Title\nNewline"));
     }
 }

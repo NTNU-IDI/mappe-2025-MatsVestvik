@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.029" tests="20" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.BusinessLogic.ValidTitleTest" time="0.006" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,28 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testGetSortDays_UnsortedList" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.003"/>
-  <testcase name="testAddDay_MultipleDifferentDays" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.002"/>
-  <testcase name="testGetDayByDate_NonExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testCheckPin_IncorrectPin_ReturnsFalse" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="findDatesByKeyword_returnsOnlyDates" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="findDaysByKeyword_returnsMatchingDays" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.003"/>
-  <testcase name="testPrintAll_NoExceptionThrown" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001">
-    <system-out><![CDATA[    0001-01-01
-    2025-12-01
-]]></system-out>
-  </testcase>
-  <testcase name="testGetDayByDate_ExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="testSearchDays_NonExistingDay_ReturnsFalse" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testConstructorAndGetters" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="testAddDay_OverwriteExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="findDaysByKeywordInRange_returnsDaysInRange_andOptionalKeyword" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testReadDay_NonExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="testCheckPin_CorrectPin_ReturnsTrue" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testGetListDays_ReturnsCopyNotReference" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testGetSortDays_EmptyList" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testReadDay_ExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.001"/>
-  <testcase name="testAddDay_NewDay" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="testSetName" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.0"/>
-  <testcase name="testSetPin" classname="edu.ntnu.idi.idatt.objects.AuthorTest" time="0.002"/>
+  <testcase name="isValidTitle_acceptsNormalTitle" classname="edu.ntnu.idi.idatt.BusinessLogic.ValidTitleTest" time="0.003"/>
+  <testcase name="isValidTitle_rejectsEmptyOrTooLong" classname="edu.ntnu.idi.idatt.BusinessLogic.ValidTitleTest" time="0.001"/>
+  <testcase name="isValidTitle_rejectsIllegalChars" classname="edu.ntnu.idi.idatt.BusinessLogic.ValidTitleTest" time="0.0"/>
 </testsuite>
