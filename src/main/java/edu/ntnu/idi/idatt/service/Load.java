@@ -106,14 +106,15 @@ public class Load {
                     }
                     
                     // Split by pipe separator instead of comma
-                    String[] values = line.split("\\|", 3); // Split into max 3 parts
+                    String[] values = line.split("\\|", 4); // Split into max 3 parts
                     if (values.length >= 2) {
                         String rowDate = values[0].trim();
                         String rowEntry = values[1].trim();
                         int rating = values.length == 3 ? Integer.parseInt(values[2].trim()) : 0;
+                        String title = values[3].trim();
                         // Replace escaped newlines with actual newlines
                         rowEntry = rowEntry.replace("\\n", "\n");
-                        addDay(authors, author.getName(), rowDate, rowEntry, rating);
+                        addDay(authors, author.getName(), rowDate, rowEntry, rating, title);
                     } else {
                         System.out.println("Invalid line format in " + author.getName() + ".csv: " + line);
                     }
@@ -133,11 +134,11 @@ public class Load {
      * @param rating
      */
 
-    public void addDay(List<Author> authors, String author, String date, String content, int rating){
+    public void addDay(List<Author> authors, String author, String date, String content, int rating, String title){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
                 String ID = date + auth.getName();
-                Day newDay = new Day(ID, date, content, rating);
+                Day newDay = new Day(ID, date, content, rating, title);
                 auth.addDay(newDay);
                 return;
             }

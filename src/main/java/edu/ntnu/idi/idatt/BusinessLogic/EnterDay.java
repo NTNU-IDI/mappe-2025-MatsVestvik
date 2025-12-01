@@ -6,10 +6,11 @@ public class EnterDay {
     
     public static void printValidDay(AuthorRegister register, String authorName, String date){
         System.out.println("-----------------------------------------");
+        String title = ValidTitle.printValidTitle();
         String entry = ValidEntry.printValidEntry();
         int rating = ValidRating.printValidRating();
         System.out.println("-----------------------------------------");
 
-        register.addDay(authorName, date, entry, rating);
+        register.addDay(authorName, date, entry, rating, title);
     }
 }

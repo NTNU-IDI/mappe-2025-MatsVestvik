@@ -65,11 +65,11 @@ public class AuthorRegister {
      * @param content
      * @param rating
      */
-    public void addDay(String author, String date, String content, int rating){
+    public void addDay(String author, String date, String content, int rating, String title){
         for(Author auth: authors){
             if(author.equals(auth.getName())){
                 String ID = date + auth.getName();
-                Day newDay = new Day(ID, date, content, rating);
+                Day newDay = new Day(ID, date, content, rating, title);
                 auth.addDay(newDay);
                 return;
             }
@@ -167,7 +167,7 @@ public class AuthorRegister {
      * @param name
      * @param rating
      */
-    public void editDay(String date, String entry, String name, int rating){
+    public void editDay(String date, String entry, String name, int rating, String title){
         for(Author author: authors){
             if(name.equals(author.getName())){
                 Day day = author.getDayByDate(date);
@@ -176,7 +176,7 @@ public class AuthorRegister {
                 } else {
                     // Create new day if it doesn't exist
                     String ID = date + author.getName();
-                    Day newDay = new Day(ID, date, entry, rating);
+                    Day newDay = new Day(ID, date, entry, rating, title);
                     author.addDay(newDay);
                 }
                 return;

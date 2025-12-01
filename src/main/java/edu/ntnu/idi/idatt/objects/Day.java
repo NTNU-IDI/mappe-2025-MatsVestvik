@@ -8,6 +8,7 @@ public class Day {
      */
     private String entry;
     private String date;
+    private String title;
     private int rating;
     private final String id;
 
@@ -34,11 +35,12 @@ public class Day {
      * @param rating
      */
 
-    public Day(String id, String date, String entry, int rating){
+    public Day(String id, String date, String entry, int rating, String title){
         this.id = id;
         this.entry = entry;
         this.date = date;
         this.rating = rating;
+        this.title = title;
     }
 
     
@@ -50,6 +52,7 @@ public class Day {
     public String getContent() {return this.entry;}
     public int getRating() {return rating;}
     public String getDate() {return date;}
+    public String getTitle() {return title;}
 
     /**
      * setters for contents in the day object
