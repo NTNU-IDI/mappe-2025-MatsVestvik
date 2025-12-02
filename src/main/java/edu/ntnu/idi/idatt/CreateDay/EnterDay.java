@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.BusinessLogic;
+package edu.ntnu.idi.idatt.CreateDay;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;

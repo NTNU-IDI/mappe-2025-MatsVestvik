@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.BusinessLogic;
+package edu.ntnu.idi.idatt.CreateDay;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

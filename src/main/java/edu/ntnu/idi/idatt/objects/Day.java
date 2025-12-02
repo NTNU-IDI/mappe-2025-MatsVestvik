@@ -40,7 +40,15 @@ public class Day {
      */
     public void setRating(int rating) {this.rating = rating;}
     public void setEntry(String entry) {this.entry = entry;}
-
+    public void setTitle(String title) {this.title = title;}
+    
+    public void addToEntry(String additionalEntry) {
+        if (this.entry == null || this.entry.isEmpty()) {
+            this.entry = additionalEntry;
+        } else {
+            this.entry += "\n" + additionalEntry;
+        }
+    }
     /**
      * print the days entry
      */

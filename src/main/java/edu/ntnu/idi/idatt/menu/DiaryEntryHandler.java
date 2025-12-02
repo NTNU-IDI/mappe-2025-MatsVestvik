@@ -3,9 +3,12 @@ package edu.ntnu.idi.idatt.menu;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import edu.ntnu.idi.idatt.CreateDay.EnterDay;
+import edu.ntnu.idi.idatt.CreateDay.ValidEntry;
+import edu.ntnu.idi.idatt.CreateDay.ValidRating;
+import edu.ntnu.idi.idatt.CreateDay.ValidTitle;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
-import edu.ntnu.idi.idatt.BusinessLogic.EnterDay;
 
 public class DiaryEntryHandler {
 
@@ -42,25 +45,8 @@ public class DiaryEntryHandler {
         while (inWriteTodaysEntry) {
             //if the day already exists in authors list
             if (register.searchDays(authorName, LocalDate.now())) {
-                System.out.println("""
-                -----------------------------------------
-                    This day already contains an entry.
-                    are you sure you want to overwrite it?
-                    press y to continue overwrite
-                    press n to go back 
-                ----------------------------------------         
-                """);
-                String answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("y")) {
-                    EnterDay.printValidDay(register, authorName, LocalDate.now().toString());
-                    inWriteTodaysEntry = false; 
-                } else if (answer.equalsIgnoreCase("n")) {
-                    inWriteTodaysEntry = false; //exit this menu
-                } else {
-                    System.out.println("invalid input returning...");
-                    inWriteTodaysEntry = false; // exit this menu
-                }
-            //day does not exist already, normal prompt
+                editMenu(authorName, LocalDate.now().toString());
+                inWriteTodaysEntry = false;
             } else {
                 EnterDay.printValidDay(register, authorName, LocalDate.now().toString());
                 inWriteTodaysEntry = false;
@@ -104,28 +90,73 @@ public class DiaryEntryHandler {
                 scanner.nextLine();
                 continue;
             } else {
-                TerminalUtils.clear(); // clear the terminal for clean output
-                //print out all infor for a day with options
+                editMenu(authorName, choice);
+        }
+    }
 
-                register.getAuthorByName(authorName).getDayByDate(choice).printDay();
- 
-                System.out.println("e. Edit         b. back     d. delete");
-                System.out.println("----------------------------------------");
-                String eb = scanner.nextLine();
-                //if edit it selected
-                if (eb.equalsIgnoreCase("e")) {
-                    EnterDay.printValidDay(register, authorName, choice);
-                //for back
-                } else if (eb.equalsIgnoreCase("b")) {
-                    return;
-                //for delete
-                } else if (eb.equalsIgnoreCase("d")) {
-                    register.getAuthorByName(authorName).removeDay(choice);
-                } else {
-                    return;
+    public void editMenu(String authorName, String choice) {
+         TerminalUtils.clear(); // clear the terminal for clean output
+        //print out all infor for a day with options
+
+        register.getAuthorByName(authorName).getDayByDate(choice).printDay();
+
+        System.out.println("e. Edit    r. Edit rating    d. Delete");
+        System.out.println("a. Add     t. Edit title     b. Back ");
+        System.out.println("----------------------------------------");
+        System.out.print("    ");
+        String eb = scanner.nextLine();
+        //if edit it selected
+        if (eb.equalsIgnoreCase("e")) {
+            EnterDay.printValidDay(register, authorName, choice);
+        //for back
+        } else if (eb.equalsIgnoreCase("b")) {
+            return;
+        //for delete
+        } else if (eb.equalsIgnoreCase("d")) {
+            register.getAuthorByName(authorName).removeDay(choice);
+
+        } else if (eb.equalsIgnoreCase("r")) {
+            String input;
+            int rating = -1;
+            while (rating == -1) {
+                System.out.print("    Please enter a rating (1-10): ");
+                input = scanner.nextLine();
+                rating = ValidRating.isValidRating(input);
+                
+                if (rating == -1) {
+                    System.out.println("    Invalid input!");
                 }
             }
-        }
+            register.getAuthorByName(authorName).getDayByDate(choice).setRating(rating);
+        } else if (eb.equalsIgnoreCase("t")) {
+            String input;
+            String title = "-1";
+            while (title.equals("-1")) {
+                System.out.println("    Please enter a title: ");
+                System.out.print("    ");
+                input = scanner.nextLine();
+                title = ValidTitle.isValidTitle(input);
+                if (title.equals("-1")) {
+                    System.out.println("    Invalid input! Title cannot be empty,\nexceed 35 characters, or contain '|' \nor newline characters.");
+                }
+            }
+            register.getAuthorByName(authorName).getDayByDate(choice).setTitle(title);
+        } else if (eb.equalsIgnoreCase("a")) {
+            String input;
+            String entry = "-1";
+            while (entry.equals("-1")) {
+                System.out.println("    Please enter your entry: ");
+                System.out.print("    ");
+                input = scanner.nextLine();
+                entry = ValidEntry.isValidEntry(input);
+                if (entry.equals("-1")) {
+                    System.out.println("    Invalid input! Entry cannot contain '|' character.");
+                }
+            }
+            register.getAuthorByName(authorName).getDayByDate(choice).addToEntry(entry);
+        } else {
+            System.out.println("    Invalid input! Returning...");
+        } 
     }
 
     /**
