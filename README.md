@@ -61,6 +61,8 @@ And thats it. Now You have a desktop shortcut that starts the program.
 With the program you can create a new account with an accosiated pin adn explore the program.
 The program features save and load features so your entries will eb saved between sessions.
 
+![Overwiev of the menues](Diagrams/FlowChart.png "FlowChart")
+
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
