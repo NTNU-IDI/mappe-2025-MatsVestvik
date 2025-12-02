@@ -105,38 +105,45 @@ public class DiaryEntryHandler {
      * @param choice
      */
     public void editMenu(String authorName, String choice) {
-         TerminalUtils.clear(); // clear the terminal for clean output
-        //print out all infor for a day with options
+        boolean inEditMenu = true;
+        while (inEditMenu) {
+            TerminalUtils.clear(); // clear the terminal for clean output
+            //print out all infor for a day with options
 
-        register.getAuthorByName(authorName).getDayByDate(choice).printDay();
+            register.getAuthorByName(authorName).getDayByDate(choice).printDay();
 
-        System.out.println("e. Edit    r. Edit rating    d. Delete");
-        System.out.println("a. Add     t. Edit title     b. Back ");
-        System.out.println("----------------------------------------");
-        System.out.print("    ");
-        String eb = scanner.nextLine();
-        //if edit it selected
-        if (eb.equalsIgnoreCase("e")) {
-            EnterDay.printValidDay(register, authorName, choice);
-        //for back
-        } else if (eb.equalsIgnoreCase("b")) {
-            return;
-        //for delete
-        } else if (eb.equalsIgnoreCase("d")) {
-            register.getAuthorByName(authorName).removeDay(choice);
+            System.out.println("e. Edit    r. Edit rating    d. Delete");
+            System.out.println("a. Add     t. Edit title     b. Back ");
+            System.out.println("----------------------------------------");
+            System.out.print("    ");
+            String eb = scanner.nextLine();
+            //if edit it selected
+            if (eb.equalsIgnoreCase("e")) {
+                EnterDay.printValidDay(register, authorName, choice);
+            //for back
+            } else if (eb.equalsIgnoreCase("b")) {
+                inEditMenu = false;
+                return;
+            //for delete
+            } else if (eb.equalsIgnoreCase("d")) {
+                register.getAuthorByName(authorName).removeDay(choice);
+                inEditMenu = false;
+                System.out.println("    Day deleted! Returning...");
 
-        } else if (eb.equalsIgnoreCase("r")) {
-            int rating = ValidRating.promptValidRating();
-            register.getAuthorByName(authorName).getDayByDate(choice).setRating(rating);
-        } else if (eb.equalsIgnoreCase("t")) {
-            String title = ValidTitle.promptValidTitle();
-            register.getAuthorByName(authorName).getDayByDate(choice).setTitle(title);
-        } else if (eb.equalsIgnoreCase("a")) {
-            String entry = ValidEntry.promptValidEntry();
-            register.getAuthorByName(authorName).getDayByDate(choice).addToEntry(entry);
-        } else {
-            System.out.println("    Invalid input! Returning...");
-        } 
+            } else if (eb.equalsIgnoreCase("r")) {
+                int rating = ValidRating.promptValidRating();
+                register.getAuthorByName(authorName).getDayByDate(choice).setRating(rating);
+            } else if (eb.equalsIgnoreCase("t")) {
+                String title = ValidTitle.promptValidTitle();
+                register.getAuthorByName(authorName).getDayByDate(choice).setTitle(title);
+            } else if (eb.equalsIgnoreCase("a")) {
+                String entry = ValidEntry.promptValidEntry();
+                register.getAuthorByName(authorName).getDayByDate(choice).addToEntry(entry);
+            } else {
+                System.out.println("    Invalid input! Returning...");
+            }
+        }
+         
     }
 
     /**
