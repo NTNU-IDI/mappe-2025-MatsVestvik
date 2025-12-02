@@ -1,17 +1,22 @@
-#Mon Dec 01 11:35:04 CET 2025
+#Tue Dec 02 18:58:36 CET 2025
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\BusinessLogic\\EnterDay.java=1764454459665
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\BusinessLogic\\ValidEntry.java=1764456184931
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\BusinessLogic\\ValidRating.java=1764456155229
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\Main.java=1764516569907
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\DiaryEntryHandler.java=1764454639397
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\LoginHandler.java=1764453206103
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\CreateDay\\EnterDay.java=1764688289496
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\CreateDay\\ValidEntry.java=1764688101441
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\CreateDay\\ValidRating.java=1764688048035
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\CreateDay\\ValidTitle.java=1764698105668
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\Main.java=1764606701606
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\Admin.java=1764698227174
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\DiaryEntryHandler.java=1764688493137
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\LoginHandler.java=1764688253381
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\SettingsHandler.java=1764454857252
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\UserMenuHandler.java=1764266835213
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\Author.java=1764268333017
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\AuthorRegister.java=1764268166172
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\Day.java=1764266835213
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\service\\Load.java=1764266835249
-C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\service\\Save.java=1764268166181
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\menu\\UserMenuHandler.java=1764688241632
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\Author.java=1764614426625
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\AuthorRegister.java=1764696984600
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\objects\\Day.java=1764698010153
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\service\\Load.java=1764614578779
+C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\service\\Save.java=1764698277153
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\util\\ClearCSV.java=1764266835251
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\util\\ScannerManager.java=1764516227808
 C\:\\Users\\matso\\Desktop\\IDATT1003\\Mappe\\src\\main\\java\\edu\\ntnu\\idi\\idatt\\util\\TerminalUtils.java=1764266835250

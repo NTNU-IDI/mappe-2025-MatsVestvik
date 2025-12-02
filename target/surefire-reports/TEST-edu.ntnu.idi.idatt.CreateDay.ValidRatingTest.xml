@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.111" tests="31" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.ntnu.idi.idatt.CreateDay.ValidRatingTest" time="0.02" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,58 +58,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testDeleteAuthor_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.005"/>
-  <testcase name="testAddNewAuthor_DuplicateAuthor" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002">
-    <system-out><![CDATA[This author already exists
-]]></system-out>
-  </testcase>
-  <testcase name="testGetAuthorPos_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testEditDay_AuthorExists_DayNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.006"/>
-  <testcase name="testGetAuthorByName_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testAddDay_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.0">
-    <system-out><![CDATA[This author does not exist.
-Please create new author or try again.
-
-]]></system-out>
-  </testcase>
-  <testcase name="testDeleteAuthor_AuthorExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testConstructor_InitializesEmptyAuthorsList" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testGetAuthorByName_AuthorExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testSearchEntriesInTimeSpan_blankKeywordMatchesAllDaysInRange" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.005"/>
-  <testcase name="testSearchEntriesInTimeSpan_keywordMatchesWithinRange" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testSearchDays_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.0"/>
-  <testcase name="testAddNewAuthor_MultipleAuthors" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testGetAuthors_ReturnsCopyNotReference" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.0"/>
-  <testcase name="testEditDay_AuthorExists_DayExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.0"/>
-  <testcase name="testAddDay_OverwriteExistingDay" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testPrintDaysAuthor_NoExceptionThrown" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.004">
-    <system-out><![CDATA[edu.ntnu.idi.idatt.objects.Day@2525ff7e
-]]></system-out>
-  </testcase>
-  <testcase name="testGetAuthorName_ValidPosition" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testSearchEntriesInTimeSpan_noMatchesReturnsEmpty" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testSearchEntries_nonExistingKeywordReturnsEmpty" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testSearchDays_AuthorExists_DayExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testSearchEntries_keywordMatchesAcrossAuthors" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.003"/>
-  <testcase name="testSearchDays_AuthorExists_DayNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.004"/>
-  <testcase name="testPrintAllAuthors_NoExceptionThrown" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.006">
-    <system-out><![CDATA[    1. John
-    2. Jane
-]]></system-out>
-  </testcase>
-  <testcase name="testGetAuthorPos_AuthorExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testAddDay_AuthorExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002"/>
-  <testcase name="testEditDay_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.003">
-    <system-out><![CDATA[Author not found: NonExistent
-]]></system-out>
-  </testcase>
-  <testcase name="testAddNewAuthor_NewAuthor" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.001"/>
-  <testcase name="testAddDayToday_AuthorExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.014"/>
-  <testcase name="testGetAuthorName_InvalidPosition" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.004"/>
-  <testcase name="testAddDayToday_AuthorNotExists" classname="edu.ntnu.idi.idatt.objects.AuthorRegisterTest" time="0.002">
-    <system-out><![CDATA[This author does not exist.
-Please create new author or try again.
-
-]]></system-out>
-  </testcase>
+  <testcase name="isValidRating_rejectsOutOfRangeOrInvalid" classname="edu.ntnu.idi.idatt.CreateDay.ValidRatingTest" time="0.005"/>
+  <testcase name="isValidRating_acceptsValidNumericValues" classname="edu.ntnu.idi.idatt.CreateDay.ValidRatingTest" time="0.003"/>
 </testsuite>

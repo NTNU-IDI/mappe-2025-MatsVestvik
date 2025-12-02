@@ -117,7 +117,10 @@ public class Admin {
                     }
 
                     if (end.isBefore(start)) {
-                        System.out.println("    End date must be the same or after start date. Press enter to continue...");
+                        System.out.println("""
+                                    End date must be the same or after start date.
+                                    Press enter to continue...
+                                """);
                         scanner.nextLine();
                     }
 
@@ -128,7 +131,10 @@ public class Admin {
 
                     String startStr = start.toString();
                     String endStr = end.toString();
-                    java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan(keyword, startStr, endStr);
+                    
+                    java.util.List<edu.ntnu.idi.idatt.objects.Day> results = 
+                    register.searchEntriesInTimeSpan(keyword, startStr, endStr);
+
                     TerminalUtils.clear();
                     System.out.println("----------------------------------------");
                     if (results.isEmpty()) {

@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\BusinessLogic\EnterDay.java">
+<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\CreateDay\ValidTitle.java">
 </file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\BusinessLogic\ValidEntry.java">
+<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\Admin.java">
 </file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\BusinessLogic\ValidRating.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\Main.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\DiaryEntryHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\LoginHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\SettingsHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\util\ScannerManager.java">
+<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\service\Save.java">
 </file>
 </checkstyle>
