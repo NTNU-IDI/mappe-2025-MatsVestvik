@@ -102,7 +102,7 @@ public class LoginHandler {
 
         //check if pin match
         if (register.getAuthorByName(authorName).checkPin(ePin)) {
-            UserMenuHandler userMenuHandler = new UserMenuHandler(scanner, register, this);
+            UserMenuHandler userMenuHandler = new UserMenuHandler(register, this);
             return userMenuHandler.showUserMenu(authorName);
         } else {
             System.out.println("    entered pin was incorrect. Please try again");

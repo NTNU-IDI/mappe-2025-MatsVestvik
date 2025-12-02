@@ -5,6 +5,22 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidEntry {
 
+
+    public static String promptValidEntry() {
+        Scanner scanner = ScannerManager.getScanner();
+        String input;
+        String entry = "-1";
+        while (entry.equals("-1")) {
+            System.out.println("    Please enter your entry: ");
+            System.out.print("    ");
+            input = scanner.nextLine();
+            entry = isValidEntry(input);
+            if (entry.equals("-1")) {
+                System.out.println("    Invalid input! Entry cannot contain '|' character.");
+            }
+        }
+        return entry;
+    }
     /**
      * Ensures entry variable does not contain '|' and is formatted to 35 characters per line
      * @param entry

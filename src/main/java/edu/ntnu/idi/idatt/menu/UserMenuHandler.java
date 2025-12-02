@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.menu;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
+import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class UserMenuHandler {
 
@@ -17,13 +18,14 @@ public class UserMenuHandler {
 
     /**
      * create usermenu with specified parameters.
+     * 
      * @param scanner
      * @param register
      * @param menu
      */
 
-    public UserMenuHandler(Scanner scanner, AuthorRegister register, LoginHandler menu) {
-        this.scanner = scanner;
+    public UserMenuHandler(AuthorRegister register, LoginHandler menu) {
+        this.scanner = ScannerManager.getScanner();
         this.register = register;
         this.menu = menu;
         this.diaryHandler = new DiaryEntryHandler(scanner, register);

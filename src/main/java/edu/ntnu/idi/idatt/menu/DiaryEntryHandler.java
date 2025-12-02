@@ -126,47 +126,13 @@ public class DiaryEntryHandler {
             register.getAuthorByName(authorName).removeDay(choice);
 
         } else if (eb.equalsIgnoreCase("r")) {
-            String input;
-            int rating = -1;
-            while (rating == -1) {
-                System.out.print("    Please enter a rating (1-10): ");
-                input = scanner.nextLine();
-                rating = ValidRating.isValidRating(input);
-                
-                if (rating == -1) {
-                    System.out.println("    Invalid input!");
-                }
-            }
+            int rating = ValidRating.promptValidRating();
             register.getAuthorByName(authorName).getDayByDate(choice).setRating(rating);
         } else if (eb.equalsIgnoreCase("t")) {
-            String input;
-            String title = "-1";
-            while (title.equals("-1")) {
-                System.out.println("    Please enter a title: ");
-                System.out.print("    ");
-                input = scanner.nextLine();
-                title = ValidTitle.isValidTitle(input);
-                if (title.equals("-1")) {
-                    System.out.println("""
-                                Invalid input! Title cannot be empty,
-                                exceed 35 characters, or contain '|' 
-                                or newline characters.
-                            """);
-                }
-            }
+            String title = ValidTitle.promptValidTitle();
             register.getAuthorByName(authorName).getDayByDate(choice).setTitle(title);
         } else if (eb.equalsIgnoreCase("a")) {
-            String input;
-            String entry = "-1";
-            while (entry.equals("-1")) {
-                System.out.println("    Please enter your entry: ");
-                System.out.print("    ");
-                input = scanner.nextLine();
-                entry = ValidEntry.isValidEntry(input);
-                if (entry.equals("-1")) {
-                    System.out.println("    Invalid input! Entry cannot contain '|' character.");
-                }
-            }
+            String entry = ValidEntry.promptValidEntry();
             register.getAuthorByName(authorName).getDayByDate(choice).addToEntry(entry);
         } else {
             System.out.println("    Invalid input! Returning...");

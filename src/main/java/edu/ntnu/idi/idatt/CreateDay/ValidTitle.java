@@ -5,6 +5,26 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidTitle {
 
+    public static String promptValidTitle() {
+        Scanner scanner = ScannerManager.getScanner();
+        String input;
+            String title = "-1";
+            while (title.equals("-1")) {
+                System.out.println("    Please enter a title: ");
+                System.out.print("    ");
+                input = scanner.nextLine();
+                title = ValidTitle.isValidTitle(input);
+                if (title.equals("-1")) {
+                    System.out.println("""
+                                Invalid input! Title cannot be empty,
+                                exceed 35 characters, or contain '|' 
+                                or newline characters.
+                            """);
+                }
+            }
+            return title;
+    }
+
     /**
      * Ensures title is not empty and within maximum length
      * @return title
