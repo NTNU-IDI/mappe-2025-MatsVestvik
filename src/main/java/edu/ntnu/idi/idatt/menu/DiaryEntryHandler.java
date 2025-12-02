@@ -45,6 +45,8 @@ public class DiaryEntryHandler {
         while (inWriteTodaysEntry) {
             //if the day already exists in authors list
             if (register.searchDays(authorName, LocalDate.now())) {
+                //prompt user with existing day and options
+                System.out.println("    You already have an entry for today.");
                 editMenu(authorName, LocalDate.now().toString());
                 inWriteTodaysEntry = false;
             } else {
@@ -91,9 +93,17 @@ public class DiaryEntryHandler {
                 continue;
             } else {
                 editMenu(authorName, choice);
+                inLookAtExistingDay = false;
+            }
         }
     }
 
+    /**
+     * edit menu allows user to edit day entry rating title
+     * delete day or add to entry.
+     * @param authorName
+     * @param choice
+     */
     public void editMenu(String authorName, String choice) {
          TerminalUtils.clear(); // clear the terminal for clean output
         //print out all infor for a day with options
@@ -137,7 +147,11 @@ public class DiaryEntryHandler {
                 input = scanner.nextLine();
                 title = ValidTitle.isValidTitle(input);
                 if (title.equals("-1")) {
-                    System.out.println("    Invalid input! Title cannot be empty,\nexceed 35 characters, or contain '|' \nor newline characters.");
+                    System.out.println("""
+                                Invalid input! Title cannot be empty,
+                                exceed 35 characters, or contain '|' 
+                                or newline characters.
+                            """);
                 }
             }
             register.getAuthorByName(authorName).getDayByDate(choice).setTitle(title);
