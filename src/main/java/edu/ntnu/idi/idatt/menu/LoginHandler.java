@@ -177,9 +177,7 @@ public class LoginHandler {
         TerminalUtils.clear();
         running = false;
         Save save = new Save();
-        System.out.println("Saving data...");
         save.saveToCSV(register.getAuthors());
-        System.out.println("Save completed.");
         scanner.close();
         System.out.println("Goodbye!");
     }

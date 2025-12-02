@@ -30,7 +30,6 @@ public class Save {
         
         for (Author author : authors) {
             String filename = directoryPath + author.getName() + ".csv";
-            System.out.println("Attempting to save to: " + filename);
             
             try (FileWriter writer = new FileWriter(filename, false)) {
                 // Write header with author's PIN
@@ -46,12 +45,11 @@ public class Save {
                                  contentEscaped + "|" + 
                                  day.getRating() + "|" + 
                                  day.getTitle() + "\n";
-                                 
+
                     writer.write(line);
                 }
                 
                 writer.flush();
-                System.out.println("Successfully saved " + days.size() + " entries for " + author.getName());
                 
             } catch (IOException e) {
                 System.out.println("Error saving data for " + author.getName() + ": " + e.getMessage());
