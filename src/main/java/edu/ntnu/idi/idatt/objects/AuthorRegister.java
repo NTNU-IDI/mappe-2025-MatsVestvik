@@ -214,18 +214,15 @@ public class AuthorRegister {
     /**
      * Search across all authors' days for diary entries containing the given keyword.
      * The search is case-insensitive and matches if the entry content contains the keyword as a substring.
-     * Returns a list of formatted strings: "Author - YYYY-MM-DD: <content>".
+     * Returns a list of Day objects. The caller may use `getAuthorOfDay(Day)` if author info is required.
      */
-    public java.util.List<String> searchEntries(String keyword) {
-        java.util.List<String> results = new java.util.ArrayList<>();
+    public java.util.List<Day> searchEntries(String keyword) {
+        java.util.List<Day> results = new java.util.ArrayList<>();
         if (keyword == null || keyword.isEmpty()) return results;
         for (Author author : authors) {
-            java.util.List<String> dates = author.findDatesByKeyword(keyword);
-            for (String date : dates) {
-                Day d = author.getDayByDate(date);
-                if (d != null) {
-                    results.add(author.getName() + " - " + date + ": " + d.getContent());
-                }
+            java.util.List<Day> matches = author.findDaysByKeyword(keyword);
+            for (Day d : matches) {
+                results.add(d);
             }
         }
         return results;
@@ -238,14 +235,14 @@ public class AuthorRegister {
      *  
      */ 
 
-    public java.util.List<String> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
-        java.util.List<String> results = new java.util.ArrayList<>();
+    public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
+        java.util.List<Day> results = new java.util.ArrayList<>();
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
         for (Author author : authors) {
             java.util.List<Day> matches = author.findDaysByKeywordInRange(keyword, start, end);
             for (Day d : matches) {
-                results.add(author.getName() + " - " + d.getDate() + ": " + d.getContent());
+                results.add(d);
             }
         }
         return results;
@@ -263,6 +260,21 @@ public class AuthorRegister {
             author.printAllContent();
         }
     }
-
     
+    /**
+     * Returns the author name for the specified Day object if it exists in the register,
+     * otherwise returns null. This is useful when searches return Day objects but callers
+     * still need to display the author associated with a day.
+     */
+    public String getAuthorOfDay(Day day) {
+        if (day == null) return null;
+        for (Author author : authors) {
+            for (Day d : author.getListDays()) {
+                if (d == day) { // identity comparison is valid because we return the same Day instances
+                    return author.getName();
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -249,10 +249,13 @@ public class AuthorRegisterTest {
         register.addDay("John", "2024-01-01", "I love coffee", 5,"title");
         register.addDay("Jane", "2024-01-02", "Coffee is great", 6,"title");
 
-        java.util.List<String> results = register.searchEntries("coffee");
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries("coffee");
         assertEquals(2, results.size());
-        assertTrue(results.get(0).contains("John - 2024-01-01"));
-        assertTrue(results.get(1).contains("Jane - 2024-01-02"));
+        // Verify that each result has the expected dates and author
+        assertEquals("2024-01-01", results.get(0).getDate());
+        assertEquals("2024-01-02", results.get(1).getDate());
+        assertEquals("John", register.getAuthorOfDay(results.get(0)));
+        assertEquals("Jane", register.getAuthorOfDay(results.get(1)));
     }
 
     @Test
@@ -261,9 +264,9 @@ public class AuthorRegisterTest {
         register.addDay("John", "2024-01-01", "Entry one", 5,"title");
         register.addDay("John", "2024-01-03", "Entry two", 6,"title");
 
-        java.util.List<String> results = register.searchEntriesInTimeSpan("", "2024-01-01", "2024-01-02");
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan("", "2024-01-01", "2024-01-02");
         assertEquals(1, results.size());
-        assertTrue(results.get(0).contains("2024-01-01"));
+        assertEquals("2024-01-01", results.get(0).getDate());
     }
 
     @Test
@@ -271,7 +274,7 @@ public class AuthorRegisterTest {
         register.addNewAuthor("John", 1234);
         register.addDay("John", "2024-01-01", "Entry one", 5,"title");
 
-        java.util.List<String> results = register.searchEntries("nonexistent");
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries("nonexistent");
         assertTrue(results.isEmpty());
     }
 
@@ -280,7 +283,7 @@ public class AuthorRegisterTest {
         register.addNewAuthor("John", 1234);
         register.addDay("John", "2024-01-01", "Entry one", 5,"title");
 
-        java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-02", "2024-01-03");
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan("coffee", "2024-01-02", "2024-01-03");
         assertTrue(results.isEmpty());
     }
 
@@ -290,8 +293,8 @@ public class AuthorRegisterTest {
         register.addDay("John", "2024-01-01", "I love coffee", 5,"title");
         register.addDay("John", "2024-01-02", "No coffee here", 6,"title");
 
-        java.util.List<String> results = register.searchEntriesInTimeSpan("coffee", "2024-01-01", "2024-01-02");
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan("coffee", "2024-01-01", "2024-01-02");
         assertEquals(2, results.size());
-        assertTrue(results.get(0).contains("2024-01-01") || results.get(1).contains("2024-01-01"));
+        assertTrue(results.get(0).getDate().equals("2024-01-01") || results.get(1).getDate().equals("2024-01-01"));
     }
 }

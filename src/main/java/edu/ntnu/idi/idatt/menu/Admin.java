@@ -47,7 +47,8 @@ public class Admin {
                 if(choice == 1){
                     TerminalUtils.clear();
                     register.getStatisticsAll();
-                    System.out.println("e.Exit");
+                    System.out.println("----------------------------------------");
+                    System.out.println("    Press enter to continue...");
                     scanner.nextLine();
                 }
                 else if(choice == 2){
@@ -61,15 +62,17 @@ public class Admin {
                         System.out.println("    Cancelled. Press enter to continue...");
                         scanner.nextLine();
                     } else {
-                        java.util.List<String> results = register.searchEntries(keyword);
+                            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries(keyword);
                         TerminalUtils.clear();
                         System.out.println("----------------------------------------");
                         if (results.isEmpty()) {
                             System.out.println("    No diary entries found containing '" + keyword + "'.");
                         } else {
                             System.out.println("    Results for '" + keyword + "':");
-                            for (String line : results) {
-                                System.out.println("    " + line);
+                            for (edu.ntnu.idi.idatt.objects.Day day : results) {
+                                System.out.println(register.getAuthorOfDay(day));
+                                day.printDay();
+                                System.out.println("\n");
                             }
                         }
                         System.out.println("----------------------------------------");
@@ -125,15 +128,16 @@ public class Admin {
 
                     String startStr = start.toString();
                     String endStr = end.toString();
-                    java.util.List<String> results = register.searchEntriesInTimeSpan(keyword, startStr, endStr);
+                    java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan(keyword, startStr, endStr);
                     TerminalUtils.clear();
                     System.out.println("----------------------------------------");
                     if (results.isEmpty()) {
                         System.out.println("    No diary entries found in the given timespan");
                     } else {
-                        System.out.println("    Results:");
-                        for (String line : results) {
-                            System.out.println("    " + line);
+                        for (edu.ntnu.idi.idatt.objects.Day day : results) {
+                            System.out.println(register.getAuthorOfDay(day));
+                            day.printDay();
+                            System.out.println("\n");
                         }
                     }
                     System.out.println("----------------------------------------");
