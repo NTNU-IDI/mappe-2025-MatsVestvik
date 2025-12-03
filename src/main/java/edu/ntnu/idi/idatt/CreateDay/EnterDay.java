@@ -3,7 +3,14 @@ package edu.ntnu.idi.idatt.CreateDay;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 
 public class EnterDay {
-    
+
+
+    /**
+     * Prompts user for valid day details and adds the day to the author's register
+     * @param register
+     * @param authorName
+     * @param date
+     */
     public static void printValidDay(AuthorRegister register, String authorName, String date){
         String entry;
         int rating;

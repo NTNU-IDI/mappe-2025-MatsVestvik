@@ -5,6 +5,10 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidTitle {
 
+    /**
+     * Prompts user until a valid title is provided
+     * @return valid title
+     */
     public static String promptValidTitle() {
         Scanner scanner = ScannerManager.getScanner();
         String input;

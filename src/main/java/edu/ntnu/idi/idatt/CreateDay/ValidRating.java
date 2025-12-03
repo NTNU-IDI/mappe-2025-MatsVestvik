@@ -5,6 +5,10 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidRating {
 
+    /**
+     * Prompts user until a valid rating is provided
+     * @return valid rating
+     */
     public static int promptValidRating() {
         Scanner scanner = ScannerManager.getScanner();
         String input;

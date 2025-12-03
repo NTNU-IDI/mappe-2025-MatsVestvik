@@ -22,6 +22,63 @@ public class AuthorRegister {
      * @return
      */
     public List<Author> getAuthors(){ return authors;}
+    /**
+     * returns a list of all days from all authors
+     * @return
+     */
+    public java.util.List<Day> getAllDays(){
+        java.util.List<Day> allDays = new java.util.ArrayList<>();
+        for (Author author : authors) {
+            allDays.addAll(author.getListDays());
+        }
+        return allDays;
+    }
+
+    public String getAuthorName(int pos){
+        return authors.get(pos).getName();
+    }
+
+    /**
+     * return author object of object with matching name
+     * @param name
+     * @return
+     */
+    public Author getAuthorByName(String name){
+        for (Author author : authors){
+            if (name.equals(author.getName())){
+                return author;
+            }
+        }
+        return null;
+    }
+
+        /**
+     * get statistics for specified user
+     * @param author
+     */
+
+    public void getStatistics(String author){
+        double avg = getAuthorByName(author).getAvrgRating();
+        int numDays = getAuthorByName(author).getDaysSize();
+        System.out.println("Avrg rating: " + avg + " | Num of days: " + numDays);
+    }
+
+    /**
+     * print all statistics in a nice easy to vie format
+     */
+    public void getStatisticsAll(){
+        int totalDays = 0;
+        double totalAvrgRating = 0;
+        for (Author author:authors){
+            System.out.println("----------------------------------------");
+            System.out.println(author.getName());
+            getStatistics(author.getName());
+            totalAvrgRating += author.getAvrgRating();
+            totalDays += author.getDaysSize();
+        }
+        System.out.println("----------------------------------------");
+        System.out.println("Total num of days: "+totalDays +"\nAvrg avrg rating: " +totalAvrgRating/authors.size());
+    }  
 
     /**
      * sanitizes input, ensures the author name does not exist in system. 
@@ -114,23 +171,7 @@ public class AuthorRegister {
      * @return
      */
 
-    public String getAuthorName(int pos){
-        return authors.get(pos).getName();
-    }
 
-    /**
-     * return author object of object with matching name
-     * @param name
-     * @return
-     */
-    public Author getAuthorByName(String name){
-        for (Author author : authors){
-            if (name.equals(author.getName())){
-                return author;
-            }
-        }
-        return null;
-    }
 
     /**
      * returns int of position to author object in authors list
@@ -172,33 +213,7 @@ public class AuthorRegister {
         System.out.println("Author not found: " + name);
     }
 
-    /**
-     * get statistics for specified user
-     * @param author
-     */
 
-    public void getStatistics(String author){
-        double avg = getAuthorByName(author).getAvrgRating();
-        int numDays = getAuthorByName(author).getDaysSize();
-        System.out.println("Avrg rating: " + avg + " | Num of days: " + numDays);
-    }
-
-    /**
-     * print all statistics in a nice easy to vie format
-     */
-    public void getStatisticsAll(){
-        int totalDays = 0;
-        double totalAvrgRating = 0;
-        for (Author author:authors){
-            System.out.println("----------------------------------------");
-            System.out.println(author.getName());
-            getStatistics(author.getName());
-            totalAvrgRating += author.getAvrgRating();
-            totalDays += author.getDaysSize();
-        }
-        System.out.println("----------------------------------------");
-        System.out.println("Total num of days: "+totalDays +"\nAvrg avrg rating: " +totalAvrgRating/authors.size());
-    }  
 
     /**
      * print all the days assosiated with a author. 
@@ -216,8 +231,8 @@ public class AuthorRegister {
      * The search is case-insensitive and matches if the entry content contains the keyword as a substring.
      * Returns a list of Day objects. The caller may use `getAuthorOfDay(Day)` if author info is required.
      */
-    public java.util.List<Day> searchEntries(String keyword) {
-        java.util.List<Day> results = new java.util.ArrayList<>();
+    public java.util.List<Day> searchEntries(String keyword, java.util.List<Day> days) {
+        java.util.List<Day> results = days;
         if (keyword == null || keyword.isEmpty()) return results;
         for (Author author : authors) {
             java.util.List<Day> matches = author.findDaysByKeyword(keyword);
@@ -235,8 +250,8 @@ public class AuthorRegister {
      *  
      */ 
 
-    public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
-        java.util.List<Day> results = new java.util.ArrayList<>();
+    public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate, java.util.List<Day> days) {
+        java.util.List<Day> results = days;
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
         for (Author author : authors) {
@@ -246,6 +261,15 @@ public class AuthorRegister {
             }
         }
         return results;
+    }
+
+    public void printDays(java.util.List<Day> days){
+        for (Day day: days){
+            String authorName = getAuthorOfDay(day);
+            System.out.println("----------------------------------------");
+            System.out.println("Author: " + authorName);
+            day.printDay();
+        }
     }
 
     /**

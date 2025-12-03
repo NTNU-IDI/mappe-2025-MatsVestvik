@@ -5,7 +5,10 @@ import edu.ntnu.idi.idatt.util.ScannerManager;
 
 public class ValidEntry {
 
-
+    /**
+     * Prompts user until a valid entry is provided
+     * @return valid entry
+     */
     public static String promptValidEntry() {
         Scanner scanner = ScannerManager.getScanner();
         String input;

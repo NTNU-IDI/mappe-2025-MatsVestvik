@@ -37,10 +37,9 @@ public class Admin {
                 System.out.println("""
                     ----------------------------------------
                         1. Statistics
-                        2. Search Keyword
-                        3. Search in timespan
-                        4. Read all
-                        5. Exit
+                        2. Search
+                        3. Read all
+                        4. Exit
                     ----------------------------------------""");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -53,111 +52,16 @@ public class Admin {
                 }
                 else if(choice == 2){
                     // Search all diaries for a keyword
-                    TerminalUtils.clear();
-                    System.out.println("----------------------------------------");
-                    System.out.print("    Enter keyword to search for (or blank to cancel): ");
-                    String keyword = scanner.nextLine().trim();
-                    if (keyword.isEmpty()) {
-                        // cancel
-                        System.out.println("    Cancelled. Press enter to continue...");
-                        scanner.nextLine();
-                    } else {
-                            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries(keyword);
-                        TerminalUtils.clear();
-                        System.out.println("----------------------------------------");
-                        if (results.isEmpty()) {
-                            System.out.println("    No diary entries found containing '" + keyword + "'.");
-                        } else {
-                            System.out.println("    Results for '" + keyword + "':");
-                            for (edu.ntnu.idi.idatt.objects.Day day : results) {
-                                System.out.println(register.getAuthorOfDay(day));
-                                day.printDay();
-                                System.out.println("\n");
-                            }
-                        }
-                        System.out.println("----------------------------------------");
-                        System.out.println("    Press enter to continue...");
-                        scanner.nextLine();
-                    }
+                    search(register);;
                 }
                 else if(choice == 3){
-                    TerminalUtils.clear();
-                    System.out.println("----------------------------------------");
-
-                    // Read and validate start date
-                    java.time.LocalDate start = null;
-                    while (start == null) {
-                        System.out.print("    Enter start date (YYYY-MM-DD) or 'E' to cancel: ");
-                        String startInput = scanner.nextLine().trim();
-                        if (startInput.equalsIgnoreCase("e")) {
-                            System.out.println("    Cancelled. Press enter to continue...");
-                            scanner.nextLine();
-                        }
-                        try {
-                            start = java.time.LocalDate.parse(startInput);
-                        } catch (java.time.format.DateTimeParseException ex) {
-                            System.out.println("    Invalid date format. Please use YYYY-MM-DD.");
-                        }
-                    }
-
-                    // Read and validate end date
-                    java.time.LocalDate end = null;
-                    while (end == null) {
-                        System.out.print("    Enter end date (YYYY-MM-DD) or 'E' to cancel: ");
-                        String endInput = scanner.nextLine().trim();
-                        if (endInput.equalsIgnoreCase("e")) {
-                            System.out.println("    Cancelled. Press enter to continue...");
-                            scanner.nextLine();
-                        }
-                        try {
-                            end = java.time.LocalDate.parse(endInput);
-                        } catch (java.time.format.DateTimeParseException ex) {
-                            System.out.println("    Invalid date format. Please use YYYY-MM-DD.");
-                        }
-                    }
-
-                    if (end.isBefore(start)) {
-                        System.out.println("""
-                                    End date must be the same or after start date.
-                                    Press enter to continue...
-                                """);
-                        scanner.nextLine();
-                    }
-
-                    // Prompt for optional keyword (empty = match all)
-                    System.out.print("    Enter keyword to search for within timespan ");
-                    System.out.print("(blank = all): ");
-                    String keyword = scanner.nextLine().trim();
-
-                    String startStr = start.toString();
-                    String endStr = end.toString();
-                    
-                    java.util.List<edu.ntnu.idi.idatt.objects.Day> results = 
-                    register.searchEntriesInTimeSpan(keyword, startStr, endStr);
-
-                    TerminalUtils.clear();
-                    System.out.println("----------------------------------------");
-                    if (results.isEmpty()) {
-                        System.out.println("    No diary entries found in the given timespan");
-                    } else {
-                        for (edu.ntnu.idi.idatt.objects.Day day : results) {
-                            System.out.println(register.getAuthorOfDay(day));
-                            day.printDay();
-                            System.out.println("\n");
-                        }
-                    }
-                    System.out.println("----------------------------------------");
-                    System.out.println("    Press enter to continue...");
-                    scanner.nextLine();
-                }
-                else if(choice == 4){
                     TerminalUtils.clear();
                     register.printAllDiaries();
                     System.out.println("----------------------------------------");
                     System.out.println("    Press enter to continue...");
                     scanner.nextLine();
                 }
-                else if (choice == 5){
+                else if (choice == 4){
                     inAdminMenu = false;
                     return;
                 }
@@ -173,4 +77,41 @@ public class Admin {
         }
         
     }
+
+    public static void  search(AuthorRegister register){
+        Scanner scanner = ScannerManager.getScanner();
+        TerminalUtils.clear();
+        System.out.println("----------------------------------------");
+        System.out.println("    Enter keyword to search for (or blank): ");
+        System.out.print("    "); 
+        String keyword = scanner.nextLine().trim();
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> days = register.getAllDays();
+  
+        System.out.println("    Enter a start date (YYYY-MM-DD) or blank: ");
+        System.out.print("    ");
+        String dateInput = scanner.nextLine().trim();
+        if(dateInput.isEmpty()){
+            dateInput = null;
+        }
+        System.out.println("    Enter an end date (YYYY-MM-DD) or blank: ");
+        System.out.print("    ");
+        String endDateInput = scanner.nextLine().trim();
+        if(endDateInput.isEmpty()){
+            endDateInput = null;
+        }
+        if(dateInput == null || endDateInput == null){
+            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries(keyword, days);
+        }
+        else{
+            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan(keyword, dateInput, endDateInput, days);
+        }
+
+        TerminalUtils.clear();
+        System.out.println("----------------------------------------");
+        register.printDays(days);
+        System.out.println("----------------------------------------");
+        System.out.println("    Press enter to continue...");
+        scanner.nextLine();
+    }
+
 }
