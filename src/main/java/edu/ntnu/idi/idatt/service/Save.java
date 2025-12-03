@@ -40,7 +40,7 @@ public class Save {
                 
                 for (Day day : days) {
                     // Format: date|content (pipe separator is less common in text)
-                    String contentEscaped = day.getContent() == null ? "" : day.getContent().replace("\n", "\\n");
+                    String contentEscaped = day.getEntry() == null ? "" : day.getEntry().replace("\n", "\\n");
                     String line = day.getDate() + "|" +
                                  contentEscaped + "|" + 
                                  day.getRating() + "|" + 

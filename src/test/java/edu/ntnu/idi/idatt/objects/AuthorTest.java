@@ -107,7 +107,7 @@ public class AuthorTest {
         Day foundDay = author.getDayByDate(LocalDate.now().toString());
         assertNotNull(foundDay);
         assertEquals(LocalDate.now().toString(), foundDay.getDate());
-        assertEquals("Mats is pretty cool", foundDay.getContent());
+        assertEquals("Mats is pretty cool", foundDay.getEntry());
     }
 
     @Test

@@ -144,7 +144,7 @@ public class Author {
     public String readDay(String date){
         for(Day day : days){
             if(day.getDate().equals(date)){
-                return day.getContent();
+                return day.getEntry();
             }
         }
         return null;

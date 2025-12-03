@@ -21,7 +21,7 @@ class DayTest {
 
     @Test
     void testConstructorWithAuthor() {
-        assertEquals(testEntry, day.getContent());
+        assertEquals(testEntry, day.getEntry());
         assertEquals(testRating, day.getRating());
         assertNotNull(day.getDate());
         assertEquals(testTitle, day.getTitle());
@@ -33,7 +33,7 @@ class DayTest {
         Day specificDay = new Day(testDate, testEntry, testRating, testTitle);
 
         assertEquals(testDate, specificDay.getDate());
-        assertEquals(testEntry, specificDay.getContent());
+        assertEquals(testEntry, specificDay.getEntry());
         assertEquals(testRating, specificDay.getRating());
     }
 
@@ -48,7 +48,7 @@ class DayTest {
     void testSetEntry() {
         String newEntry = "Updated entry content";
         day.setEntry(newEntry);
-        assertEquals(newEntry, day.getContent());
+        assertEquals(newEntry, day.getEntry());
     }
 
     @Test
@@ -76,7 +76,7 @@ class DayTest {
 
     @Test
     void testGettersConsistency() {
-        assertEquals(testEntry, day.getContent());
+        assertEquals(testEntry, day.getEntry());
         assertEquals(testRating, day.getRating());
         assertNotNull(day.getDate());
     }

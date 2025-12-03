@@ -105,7 +105,7 @@ public class AuthorRegisterTest {
         register.addDayToday("John", "Today's content", 0, "title");
         
         Author author = register.getAuthorByName("John");
-        assertNotNull(author.getDayByDate(today).getContent());
+        assertNotNull(author.getDayByDate(today).getEntry());
         assertEquals("Today's content", author.readDay(today));
     }
 

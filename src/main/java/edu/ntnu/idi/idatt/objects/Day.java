@@ -29,7 +29,7 @@ public class Day {
      * getter for all local variables
      * @return
      */
-    public String getContent() {return this.entry;}
+    public String getEntry() {return this.entry;}
     public int getRating() {return rating;}
     public String getDate() {return date;}
     public String getTitle() {return title;}
@@ -42,6 +42,10 @@ public class Day {
     public void setEntry(String entry) {this.entry = entry;}
     public void setTitle(String title) {this.title = title;}
     
+    /**
+     * appends additional text to the existing entry
+     * @param additionalEntry
+     */
     public void addToEntry(String additionalEntry) {
         if (this.entry == null || this.entry.isEmpty()) {
             this.entry = additionalEntry;
@@ -61,7 +65,7 @@ public class Day {
                 System.out.println(getTitle());
                 System.out.println(getDate() + "          Rating: " + getRating());
                 System.out.println("----------------------------------------");
-                System.out.println(getContent() );
+                System.out.println(getEntry() );
                 System.out.println("----------------------------------------"); 
     }
 
