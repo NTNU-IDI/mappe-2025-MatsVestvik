@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.menu;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
+import edu.ntnu.idi.idatt.util.IntCheck;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class SettingsHandler {
@@ -49,11 +50,7 @@ public class SettingsHandler {
                         ----------------------------------------
                         """.formatted(this.authorName));
             System.out.println("    ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("    Invalid input! Enter a valid number: ");
-                scanner.next(); // Clear the invalid input
-            }   
-            int choice = scanner.nextInt();
+            int choice = IntCheck.isInt();
             if (choice == 4) {
                 inSetting = false;
             } else {
@@ -148,31 +145,10 @@ public class SettingsHandler {
         TerminalUtils.clear();
         System.out.println("----------------------------------------");
         System.out.print("    Please enter your current pin: ");
-        int triedPin = scanner.nextInt();
+        int triedPin = IntCheck.isInt();
         scanner.nextLine(); // Consume newline
-
         if (register.getAuthorByName(authorName).checkPin(triedPin)) {
-            int newPin = 0;
-            boolean validPin = false;
-
-            while (!validPin) {
-                System.out.print("    Please enter a 4-digit pin: ");
-                String pinInput = scanner.nextLine().trim();
-
-                try {
-                    newPin = Integer.parseInt(pinInput);
-
-                    // Check if PIN is exactly 4 digits
-                    if (pinInput.length() == 4 && newPin >= 1000 && newPin <= 9999) {
-                        validPin = true;
-                    } else {
-                        System.out.println("    Error: PIN must be exactly 4 digits (0000-9999)!");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("    Error: PIN must contain only numbers!");
-                }
-            }
-
+            int newPin = IntCheck.validPin();
             register.getAuthorByName(authorName).setPin(newPin);
             System.out.println("    PIN changed successfully!");
 
@@ -223,10 +199,4 @@ public class SettingsHandler {
         }
         return false;
     }
-
-    /**
-     * clear the terminal inbetween menuscreens for readability
-     */
-
-    // Terminal clearing is handled by TerminalUtils.clear()
 }

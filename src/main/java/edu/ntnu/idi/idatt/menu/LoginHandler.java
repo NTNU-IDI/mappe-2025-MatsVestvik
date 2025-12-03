@@ -3,6 +3,8 @@ package edu.ntnu.idi.idatt.menu;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.service.Save;
+import edu.ntnu.idi.idatt.util.HasInt;
+import edu.ntnu.idi.idatt.util.IntCheck;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 
 public class LoginHandler {
@@ -49,12 +51,7 @@ public class LoginHandler {
             System.out.println("    " + (register.getAuthors().size() + 3) + ". Save and Exit");
             System.out.print("----------------------------------------\n    ");
             //ensure that input is an int
-            while (!scanner.hasNextInt()) {
-                System.out.println("    Invalid input! Enter a valid number: ");
-                System.out.print("    ");
-                scanner.next(); // Clear the invalid input
-            }
-            int choice = scanner.nextInt();
+            int choice = IntCheck.isInt();
             scanner.nextLine();
             //if choice was an author take them to personal loginscreen
             if (choice > 0 && choice < register.getAuthors().size() + 1) {
@@ -93,12 +90,7 @@ public class LoginHandler {
         System.out.print("    Please enter your pin: ");
         
         //ensure input is int
-        while (!scanner.hasNextInt()) {
-            TerminalUtils.clear();
-            System.out.println("    Invalid input! Please enter a pin (0000-9999): ");
-            scanner.next(); // Clear the invalid input
-        }
-        int ePin = scanner.nextInt();
+        int ePin = IntCheck.isInt();
         scanner.nextLine(); // Consume newline
 
         //check if pin match
@@ -141,26 +133,7 @@ public class LoginHandler {
             name = scanner.nextLine().trim();
         }
 
-        int pin = 0;
-        boolean validPin = false;
-
-        while (!validPin) {
-            System.out.print("    Please enter a 4-digit pin: ");
-            String pinInput = scanner.nextLine().trim();
-
-            try {
-                pin = Integer.parseInt(pinInput);
-
-                // Check if PIN is exactly 4 digits
-                if (pinInput.length() == 4 && pin >= 1000 && pin <= 9999) {
-                    validPin = true;
-                } else {
-                    System.out.println("    Error: PIN must be exactly 4 digits (0000-9999)!");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("    Error: PIN must contain only numbers!");
-            }
-        }
+        int pin = IntCheck.validPin();
 
         register.addNewAuthor(name, pin);
         System.out.println("----------------------------------------");

@@ -23,12 +23,8 @@ public class Admin {
                 ----------------------------------------
                     Enter Admin password:  """);
         
-        while (!scanner.hasNextInt()) {
-            TerminalUtils.clear();
-            System.out.print("    Invalid input! \n    Please enter a pin (0000-9999): ");
-            scanner.next(); // Clear the invalid input
-        }
-        int ePin = scanner.nextInt();
+       
+        int ePin = IntCheck.isInt();
         scanner.nextLine();
 
         if(ePin == 1234){
@@ -43,11 +39,8 @@ public class Admin {
                         4. Exit
                     ----------------------------------------""");
                 //ensure that input is an int
-                while (!scanner.hasNextInt()) {
-                    System.out.println("    Invalid input! Enter a valid number: ");
-                    scanner.next(); // Clear the invalid input
-                }
-                int choice = scanner.nextInt();
+                
+                int choice = IntCheck.isInt();
                 scanner.nextLine();
                 if(choice == 1){
                     TerminalUtils.clear();

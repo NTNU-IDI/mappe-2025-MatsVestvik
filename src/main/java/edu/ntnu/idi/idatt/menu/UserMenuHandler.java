@@ -58,12 +58,9 @@ public class UserMenuHandler {
                         6. Save and quit
                     ----------------------------------------""");
             System.out.print("    ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("    Invalid input! Enter a valid number: ");
-                scanner.next(); // Clear the invalid input
-            }
+            
 
-            int choice = scanner.nextInt();
+            int choice = IntCheck.isInt();
             scanner.nextLine(); // Consume newline
 
             if (choice == 5) {
