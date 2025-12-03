@@ -64,8 +64,7 @@ public class Day {
         System.out.println("----------------------------------------");
                 System.out.println(getTitle());
                 System.out.println(getDate() + "          Rating: " + getRating());
-                System.out.println("----------------------------------------");
-                System.out.println(getEntry() );
+                System.out.println("\n" + getEntry() );
                 System.out.println("----------------------------------------"); 
     }
 
