@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.objects;
 
 import java.time.LocalDate;
+import edu.ntnu.idi.idatt.util.DateUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -232,8 +233,8 @@ public class AuthorRegister {
      * Returns a list of Day objects. The caller may use `getAuthorOfDay(Day)` if author info is required.
      */
     public java.util.List<Day> searchEntries(String keyword, java.util.List<Day> days) {
-        java.util.List<Day> results = days;
-        if (keyword == null || keyword.isEmpty()) return results;
+        java.util.List<Day> results = new java.util.ArrayList<>();
+        if (keyword == null || keyword.isEmpty()) return new java.util.ArrayList<>(days);
         for (Author author : authors) {
             java.util.List<Day> matches = author.findDaysByKeyword(keyword);
             for (Day d : matches) {
@@ -241,6 +242,11 @@ public class AuthorRegister {
             }
         }
         return results;
+    }
+
+    /** Convenience overload that searches across all days in the register. */
+    public java.util.List<Day> searchEntries(String keyword) {
+        return searchEntries(keyword, getAllDays());
     }
 
     /**
@@ -251,9 +257,13 @@ public class AuthorRegister {
      */ 
 
     public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate, java.util.List<Day> days) {
-        java.util.List<Day> results = days;
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        java.util.List<Day> results = new java.util.ArrayList<>();
+        // Validate and parse dates; DateUtils will throw IllegalArgumentException on invalid input
+        LocalDate start = DateUtils.parseIsoDate(startDate);
+        LocalDate end = DateUtils.parseIsoDate(endDate);
+        if (end.isBefore(start)) {
+            throw new IllegalArgumentException("End date must be the same or after start date");
+        }
         for (Author author : authors) {
             java.util.List<Day> matches = author.findDaysByKeywordInRange(keyword, start, end);
             for (Day d : matches) {
@@ -261,6 +271,11 @@ public class AuthorRegister {
             }
         }
         return results;
+    }
+
+    /** Convenience overload that searches across all days in the register. */
+    public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate) {
+        return searchEntriesInTimeSpan(keyword, startDate, endDate, getAllDays());
     }
 
     public void printDays(java.util.List<Day> days){

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 import edu.ntnu.idi.idatt.util.ScannerManager;
+import edu.ntnu.idi.idatt.util.DateUtils;
 
 public class Admin {
 
@@ -90,25 +91,44 @@ public class Admin {
         System.out.println("    Enter a start date (YYYY-MM-DD) or blank: ");
         System.out.print("    ");
         String dateInput = scanner.nextLine().trim();
-        if(dateInput.isEmpty()){
+        // keep prompting until blank or valid
+        while (!dateInput.isEmpty() && !DateUtils.isValidIsoDate(dateInput)) {
+            System.out.println("    Invalid date format. Please enter date as YYYY-MM-DD or blank: ");
+            System.out.print("    ");
+            dateInput = scanner.nextLine().trim();
+        }
+        if (dateInput.isEmpty()) {
             dateInput = null;
         }
+
         System.out.println("    Enter an end date (YYYY-MM-DD) or blank: ");
         System.out.print("    ");
         String endDateInput = scanner.nextLine().trim();
-        if(endDateInput.isEmpty()){
+        while (!endDateInput.isEmpty() && !DateUtils.isValidIsoDate(endDateInput)) {
+            System.out.println("    Invalid date format. Please enter date as YYYY-MM-DD or blank: ");
+            System.out.print("    ");
+            endDateInput = scanner.nextLine().trim();
+        }
+        if (endDateInput.isEmpty()) {
             endDateInput = null;
         }
+
+        java.util.List<edu.ntnu.idi.idatt.objects.Day> results;
         if(dateInput == null || endDateInput == null){
-            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntries(keyword, days);
+            results = register.searchEntries(keyword, days);
         }
         else{
-            java.util.List<edu.ntnu.idi.idatt.objects.Day> results = register.searchEntriesInTimeSpan(keyword, dateInput, endDateInput, days);
+            try {
+                results = register.searchEntriesInTimeSpan(keyword, dateInput, endDateInput, days);
+            } catch (IllegalArgumentException e) {
+                System.out.println("    Date range invalid: " + e.getMessage());
+                results = register.searchEntries(keyword, days);
+            }
         }
 
         TerminalUtils.clear();
         System.out.println("----------------------------------------");
-        register.printDays(days);
+        register.printDays(results);
         System.out.println("----------------------------------------");
         System.out.println("    Press enter to continue...");
         scanner.nextLine();
