@@ -6,6 +6,7 @@ import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 import edu.ntnu.idi.idatt.util.ScannerManager;
 import edu.ntnu.idi.idatt.util.DateUtils;
+import edu.ntnu.idi.idatt.util.IntCheck;
 
 public class Admin {
 

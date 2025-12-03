@@ -3,7 +3,6 @@ package edu.ntnu.idi.idatt.menu;
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.objects.AuthorRegister;
 import edu.ntnu.idi.idatt.service.Save;
-import edu.ntnu.idi.idatt.util.HasInt;
 import edu.ntnu.idi.idatt.util.IntCheck;
 import edu.ntnu.idi.idatt.util.TerminalUtils;
 

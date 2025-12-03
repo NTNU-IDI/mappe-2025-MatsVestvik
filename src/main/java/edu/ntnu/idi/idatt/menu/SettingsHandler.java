@@ -176,22 +176,23 @@ public class SettingsHandler {
                 ----------------------------------------
                     Warning you are about to delete
                     your account %s
-                    Type your username to confirm:
+                    Type your username to confirm
+                    or 'e' to go back.
                 ----------------------------------------""".formatted(authorName));
-
+            System.out.print("    ");
             username = scanner.nextLine();
             if (!username.equals("")) {
                 if (username.equals(authorName)) {
                     register.deleteAuthor(authorName);
                     System.out.println("Account deleted successfully!");
                     return true;
-                } else if (username.equalsIgnoreCase("cancel")) {
+                } else if (username.equalsIgnoreCase("e")) {
                     System.out.println("Account deletion cancelled.");
                     return false;
                 } else {
-                    System.out.println("What you typed did not match your username. Type 'cancel' to go back.");
+                    System.out.println("What you typed did not match your username. Type 'e' to go back.");
                     String cancel = scanner.nextLine();
-                    if (cancel.equalsIgnoreCase("cancel")) {
+                    if (cancel.equalsIgnoreCase("e")) {
                         return false;
                     }
                 }
