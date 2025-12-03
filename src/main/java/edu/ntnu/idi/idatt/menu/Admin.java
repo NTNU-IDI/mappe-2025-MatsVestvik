@@ -25,7 +25,7 @@ public class Admin {
         
         while (!scanner.hasNextInt()) {
             TerminalUtils.clear();
-            System.out.print("    Invalid input! \nPlease enter a pin (0000-9999): ");
+            System.out.print("    Invalid input! \n    Please enter a pin (0000-9999): ");
             scanner.next(); // Clear the invalid input
         }
         int ePin = scanner.nextInt();
@@ -42,6 +42,11 @@ public class Admin {
                         3. Read all
                         4. Exit
                     ----------------------------------------""");
+                //ensure that input is an int
+                while (!scanner.hasNextInt()) {
+                    System.out.println("    Invalid input! Enter a valid number: ");
+                    scanner.next(); // Clear the invalid input
+                }
                 int choice = scanner.nextInt();
                 scanner.nextLine();
                 if(choice == 1){

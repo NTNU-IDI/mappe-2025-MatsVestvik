@@ -90,11 +90,11 @@ public class AuthorRegister {
     public void addNewAuthor(String name, int pin) {
         for (Author author : authors) {
             if (author.getName().equals(name)) {
-                System.out.println("This author already exists");
+                System.out.println("    This author already exists");
                 return;
             }
         }
-        
+        System.out.println("    Author added successfully.");
         Author newAuthor = new Author(name, pin);
         authors.add(newAuthor);
     }

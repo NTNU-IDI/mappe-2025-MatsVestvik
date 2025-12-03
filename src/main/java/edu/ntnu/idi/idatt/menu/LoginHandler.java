@@ -51,6 +51,7 @@ public class LoginHandler {
             //ensure that input is an int
             while (!scanner.hasNextInt()) {
                 System.out.println("    Invalid input! Enter a valid number: ");
+                System.out.print("    ");
                 scanner.next(); // Clear the invalid input
             }
             int choice = scanner.nextInt();
@@ -162,7 +163,6 @@ public class LoginHandler {
         }
 
         register.addNewAuthor(name, pin);
-        System.out.println("\n    Welcome to the system " + name);
         System.out.println("----------------------------------------");
         System.out.println("    Press enter to continue...");
         scanner.nextLine();
