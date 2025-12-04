@@ -256,7 +256,10 @@ public class AuthorRegister {
      *  
      */ 
 
-    public java.util.List<Day> searchEntriesInTimeSpan(String keyword, String startDate, String endDate, java.util.List<Day> days) {
+    public java.util.List<Day> searchEntriesInTimeSpan(
+        String keyword, String startDate,
+        String endDate, java.util.List<Day> days) {
+        
         java.util.List<Day> results = new java.util.ArrayList<>();
         // Validate and parse dates; DateUtils will throw IllegalArgumentException on invalid input
         LocalDate start = DateUtils.parseIsoDate(startDate);

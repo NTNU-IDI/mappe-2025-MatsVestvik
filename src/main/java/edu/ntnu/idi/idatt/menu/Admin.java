@@ -39,6 +39,7 @@ public class Admin {
                         3. Read all
                         4. Exit
                     ----------------------------------------""");
+                System.out.println("    ");
                 //ensure that input is an int
                 
                 int choice = IntCheck.isInt();

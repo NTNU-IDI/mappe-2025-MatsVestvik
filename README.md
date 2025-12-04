@@ -67,6 +67,11 @@ The program features save and load features so your entries will eb saved betwee
 
 [//]: # (TODO: Describe how to run the tests here.)
 
+> [!TIP]
+````markdown
+mvn test
+````
+
 The project's test suite can be executed using Maven commands, primarily through mvn test which runs all unit tests located in the parallel test directory structure under src/test/java/. Developers can run specific test classes with mvn test -Dtest=ClassName or individual methods using mvn test -Dtest=ClassName#methodName, while the Maven Surefire plugin automatically generates detailed reports in both console output and HTML format at target/site/surefire-report.html. The tests are integrated into the build lifecycle and also run during mvn verify or mvn package commands, ensuring code quality is maintained through continuous validation using JUnit 5 and Mockito frameworks.
 
 ## References
