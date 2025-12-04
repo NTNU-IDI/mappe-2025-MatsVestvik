@@ -68,6 +68,7 @@ The program features save and load features so your entries will eb saved betwee
 [//]: # (TODO: Describe how to run the tests here.)
 
 > [!TIP]
+Line to run in the project:
 ````markdown
 mvn test
 ````
