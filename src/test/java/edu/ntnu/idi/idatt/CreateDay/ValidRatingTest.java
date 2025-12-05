@@ -19,4 +19,20 @@ public class ValidRatingTest {
         assertEquals(-1, ValidRating.isValidRating("abc"));
         assertEquals(-1, ValidRating.isValidRating("7.5"));
     }
+
+    @Test
+    void isValidRating_emptyOrWhitespace_returnsMinusOne() {
+        assertEquals(-1, ValidRating.isValidRating(""));
+        assertEquals(-1, ValidRating.isValidRating("   "));
+    }
+
+    @Test
+    void isValidRating_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> ValidRating.isValidRating(null));
+    }
+
+    @Test
+    void isValidRating_negativeSign_returnsMinusOne() {
+        assertEquals(-1, ValidRating.isValidRating("-3"));
+    }
 }

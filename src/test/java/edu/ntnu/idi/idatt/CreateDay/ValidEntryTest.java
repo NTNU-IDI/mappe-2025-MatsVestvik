@@ -23,4 +23,14 @@ public class ValidEntryTest {
     void isValidEntry_invalidPipe_returnsMinusOne() {
         assertEquals("-1", ValidEntry.isValidEntry("Bad|entry"));
     }
+
+    @Test
+    void isValidEntry_onlyPipe_returnsMinusOne() {
+        assertEquals("-1", ValidEntry.isValidEntry("|"));
+    }
+
+    @Test
+    void isValidEntry_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> ValidEntry.isValidEntry(null));
+    }
 }
