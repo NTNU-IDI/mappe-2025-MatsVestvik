@@ -57,7 +57,7 @@ public class Day {
     public static String addTimeToEntry(String entry) {
         String timeStamp = java.time.LocalTime.now().withNano(0).toString();
         String DateStamp = java.time.LocalDate.now().toString();
-        return "[" + DateStamp + " " + timeStamp + "]\n" + entry;
+        return "[DATE: " + DateStamp + " TIME: " + timeStamp + "]\n" + entry;
     }
     /**
      * print the days entry
