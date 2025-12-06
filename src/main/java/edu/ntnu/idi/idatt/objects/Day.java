@@ -50,8 +50,13 @@ public class Day {
         if (this.entry == null || this.entry.isEmpty()) {
             this.entry = additionalEntry;
         } else {
-            this.entry += "\n" + additionalEntry;
+            this.entry += "\n\n" + additionalEntry;
         }
+    }
+
+    public static String addTimeToEntry(String entry) {
+        String timeStamp = java.time.LocalTime.now().withNano(0).toString();
+        return "[" + timeStamp + "]\n" + entry;
     }
     /**
      * print the days entry

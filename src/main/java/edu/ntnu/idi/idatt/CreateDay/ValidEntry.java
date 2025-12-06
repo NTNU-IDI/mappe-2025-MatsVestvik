@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.CreateDay;
 
 import java.util.Scanner;
 import edu.ntnu.idi.idatt.util.ScannerManager;
+import edu.ntnu.idi.idatt.objects.Day;
 
 public class ValidEntry {
 
@@ -22,6 +23,7 @@ public class ValidEntry {
                 System.out.println("    Invalid input! Entry cannot contain '|' character.");
             }
         }
+        entry = Day.addTimeToEntry(entry);
         return entry;
     }
     /**
