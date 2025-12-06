@@ -20,6 +20,8 @@ All existing users including admin have pwd 1234
 
 ## Project structure
 
+![Program functions](Diagrams/UML.png "UML")
+
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 This Java project follows Maven's standard directory structure with a clear package organization based on the reverse domain naming convention. The main source code resides in src/main/java/edu/ntnu/idi/idatt/ and is logically divided into model, service, controller, and util packages, ensuring proper separation of concerns where models handle data entities, services contain business logic, controllers manage application flow, and util packages provide helper functions.
 ![class diagram](Diagrams/class.png "class diagram")

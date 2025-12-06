@@ -24,7 +24,6 @@ public class Admin {
                 ----------------------------------------
                     Enter Admin password:  """);
         
-       
         int ePin = IntCheck.isInt();
         scanner.nextLine();
 
@@ -37,7 +36,7 @@ public class Admin {
                         1. Statistics
                         2. Search
                         3. Read all
-                        4. Exit
+                        4. Logout
                     ----------------------------------------""");
                 System.out.println("    ");
                 //ensure that input is an int
@@ -79,7 +78,7 @@ public class Admin {
         
     }
 
-    public static void  search(AuthorRegister register){
+    private static void  search(AuthorRegister register){
         Scanner scanner = ScannerManager.getScanner();
         TerminalUtils.clear();
         System.out.println("----------------------------------------");
