@@ -112,13 +112,13 @@ public class DiaryEntryHandler {
 
             register.getAuthorByName(authorName).getDayByDate(choice).printDay();
 
-            System.out.println("e. Edit Entry  r. Edit rating  d. Delete");
+            System.out.println("o. OverWrite   r. Edit rating  d. Delete");
             System.out.println("a. Add Entry   t. Edit title   b. Back ");
             System.out.println("----------------------------------------");
             System.out.print("    ");
             String eb = scanner.nextLine();
             //if edit it selected
-            if (eb.equalsIgnoreCase("e")) {
+            if (eb.equalsIgnoreCase("o")) {
                 register.getAuthorByName(authorName).getDayByDate(choice).setEntry(
                 ValidEntry.promptValidEntry());
             //for back
