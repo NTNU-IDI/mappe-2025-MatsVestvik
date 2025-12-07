@@ -46,11 +46,20 @@ public class Author {
     }
 
     /**
-     * setters chages variables
+     * sets new pin for author object
      * @param pin
-     * @param name
      */
-    public void setPin(int pin){this.pin = pin;}
+    public void setPin(int pin) {
+        if (pin <= 0 || pin >= 9999) {
+            throw new IllegalArgumentException("PIN must be between 0000 and 9999");
+        }
+        this.pin = pin;
+    }
+
+    /**
+     * sets new name for author object
+     * @param newName
+     */
     public void setName(String newName){this.name = newName;}
 
     /**

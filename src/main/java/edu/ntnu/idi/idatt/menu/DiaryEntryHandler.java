@@ -122,7 +122,7 @@ public class DiaryEntryHandler {
                 register.getAuthorByName(authorName).getDayByDate(choice).setEntry(
                 ValidEntry.promptValidEntry());
             //for back
-            } else if (eb.equalsIgnoreCase("b")) {
+            } else if (eb.equalsIgnoreCase("b")) { 
                 inEditMenu = false;
                 return;
             //for delete

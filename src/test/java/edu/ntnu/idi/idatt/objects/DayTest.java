@@ -8,7 +8,6 @@ import java.time.LocalDate;
 class DayTest {
 
     private Day day;
-    private final String testAuthor = "Mats";
     private final String testEntry = "Mats is pretty cool";
     private final int testRating = 5;
     private final String testTitle = "This is a title";
@@ -16,14 +15,14 @@ class DayTest {
 
     @BeforeEach
     void setUp() {
-        day = new Day(testAuthor, testEntry, testRating, testTitle);
+        day = new Day(testDate, testEntry, testRating, testTitle);
     }
 
     @Test
     void testConstructorWithAuthor() {
         assertEquals(testEntry, day.getEntry());
         assertEquals(testRating, day.getRating());
-        assertNotNull(day.getDate());
+        assertEquals(testDate, day.getDate());
         assertEquals(testTitle, day.getTitle());
     }
 
@@ -79,5 +78,37 @@ class DayTest {
         assertEquals(testEntry, day.getEntry());
         assertEquals(testRating, day.getRating());
         assertNotNull(day.getDate());
+    }
+
+    @Test
+    void testSetRating_invalidLow_throws() {
+        assertThrows(IllegalArgumentException.class, () -> day.setRating(0));
+    }
+
+    @Test
+    void testSetRating_invalidHigh_throws() {
+        assertThrows(IllegalArgumentException.class, () -> day.setRating(11));
+    }
+
+    @Test
+    void testSetEntry_containsPipe_throws() {
+        assertThrows(IllegalArgumentException.class, () -> day.setEntry("Bad|entry"));
+    }
+
+    @Test
+    void testSetTitle_null_throws() {
+        assertThrows(IllegalArgumentException.class, () -> day.setTitle(null));
+    }
+
+    @Test
+    void testSetTitle_tooLong_throws() {
+        String tooLong = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; // 36 chars
+        assertTrue(tooLong.length() > 35);
+        assertThrows(IllegalArgumentException.class, () -> day.setTitle(tooLong));
+    }
+
+    @Test
+    void testSetTitle_containsPipe_throws() {
+        assertThrows(IllegalArgumentException.class, () -> day.setTitle("Bad|title"));
     }
 }

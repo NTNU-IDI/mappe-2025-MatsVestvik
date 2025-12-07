@@ -35,22 +35,56 @@ public class Day {
     public String getTitle() {return title;}
 
     /**
-     * setters for contents in the day object
+     * Checks and sets rating between 1 and 10
      * @param rating
      */
-    public void setRating(int rating) {this.rating = rating;}
-    public void setEntry(String entry) {this.entry = entry;}
-    public void setTitle(String title) {this.title = title;}
-    
+    public void setRating(int rating) {
+        if (rating < 1 || rating > 10) {
+            throw new IllegalArgumentException("Rating must be between 1 and 10");
+        }
+        this.rating = rating;
+    }
+
+    /**
+     * sets the entry content for the day adn checks for invalid characters
+     * @param entry
+     */
+    public void setEntry(String entry) {
+        if (entry.contains("|")) {
+            throw new IllegalArgumentException("Entry cannot contain '|' character");
+        }
+        this.entry = entry;
+    }
+
+    /**
+     * validates that title is not null and not too long
+     * @param title
+     */
+    public void setTitle(String title) {
+        if (title == null) {
+            throw new IllegalArgumentException("Title cannot be null");
+        }
+        if (title.length() > 35) {
+            throw new IllegalArgumentException("Title cannot exceed 35 characters. Length: " + title.length());
+        }
+        if (title.contains("|")) {
+            throw new IllegalArgumentException("Title cannot contain '|' character");
+        }
+        if (title.contains("\n")) {
+            throw new IllegalArgumentException("Title cannot contain newline characters");
+        }
+        this.title = title;
+    }
+        
     /**
      * appends additional text to the existing entry
      * @param additionalEntry
      */
     public void addToEntry(String additionalEntry) {
         if (this.entry == null || this.entry.isEmpty()) {
-            this.entry = additionalEntry;
+            setEntry(additionalEntry);
         } else {
-            this.entry += "\n\n" + additionalEntry;
+            setEntry(this.entry + "\n\n" + additionalEntry);
         }
     }
 
