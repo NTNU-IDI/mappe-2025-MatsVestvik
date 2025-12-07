@@ -2,33 +2,4 @@
 <checkstyle version="9.3">
 <file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\CreateDay\EnterDay.java">
 </file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\CreateDay\ValidEntry.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\CreateDay\ValidRating.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\CreateDay\ValidTitle.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\Admin.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\DiaryEntryHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\LoginHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\SettingsHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\menu\UserMenuHandler.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\objects\Author.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\objects\AuthorRegister.java">
-<error line="259" severity="error" message="Line is longer than 120 characters (found 132)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\objects\Day.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\service\Save.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\util\DateUtils.java">
-</file>
-<file name="C:\Users\matso\Desktop\IDATT1003\Mappe\src\main\java\edu\ntnu\idi\idatt\util\IntCheck.java">
-</file>
 </checkstyle>

@@ -74,7 +74,6 @@ public class Day {
                 System.out.println("----------------------------------------"); 
     }
 
-
     /**
      * Returns true if the day's content contains the given keyword (case-insensitive).
      * Returns false for null/empty keyword or null content.
