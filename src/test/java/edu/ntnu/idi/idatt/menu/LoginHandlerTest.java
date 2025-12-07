@@ -11,6 +11,13 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for {@link edu.ntnu.idi.idatt.menu.LoginHandler}.
+ *
+ * Tests simulate user input via a {@link java.util.Scanner} and replace the
+ * global {@link edu.ntnu.idi.idatt.util.ScannerManager} scanner so that
+ * interactive menus can be exercised deterministically.
+ */
 public class LoginHandlerTest {
 
     private AuthorRegister register;
@@ -49,6 +56,10 @@ public class LoginHandlerTest {
     }
 
     @Test
+    /**
+     * When the user enters a correct PIN and then selects the logout option,
+     * {@code loginHandling()} should return false (no save/exit).
+     */
     void loginHandling_correctPin_logoutReturnsFalse() {
         Scanner scanner = new Scanner("1234\n5\n"); // correct pin -> user menu -> logout
         // Inject scanner into ScannerManager used by UserMenuHandler
@@ -61,6 +72,10 @@ public class LoginHandlerTest {
     }
 
     @Test
+    /**
+     * When the user enters a correct PIN and chooses save & exit, the method
+     * should return true to indicate the application should exit.
+     */
     void loginHandling_correctPin_saveAndQuitReturnsTrue() {
         Scanner scanner = new Scanner("1234\n6\n"); // correct pin -> user menu -> save & exit
         resetScannerManager(scanner);
@@ -72,6 +87,9 @@ public class LoginHandlerTest {
     }
 
     @Test
+    /**
+     * An incorrect PIN should cause {@code loginHandling()} to return false.
+     */
     void loginHandling_incorrectPin_returnsFalse() {
         Scanner scanner = new Scanner("0000\n"); // incorrect pin
         resetScannerManager(scanner);

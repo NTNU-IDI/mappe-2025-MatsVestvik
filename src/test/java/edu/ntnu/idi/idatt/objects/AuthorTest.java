@@ -6,6 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Unit tests for {@link edu.ntnu.idi.idatt.objects.Author}.
+ *
+ * Covers basic author operations: PIN validation, name/pin setters, day
+ * management and search utilities.
+ */
 public class AuthorTest {
 
     private Author author;
@@ -28,6 +34,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * Constructor should initialize fields and an empty day list.
+     */
     void testConstructorAndGetters() {
         assertEquals("Mats", author.getName());
         assertEquals(1234, author.getPin());
@@ -36,11 +45,17 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * Correct PIN should be recognized by {@link Author#checkPin}.
+     */
     void testCheckPin_CorrectPin_ReturnsTrue() {
         assertTrue(author.checkPin(1234));
     }
 
     @Test
+    /**
+     * Incorrect PINs are rejected.
+     */
     void testCheckPin_IncorrectPin_ReturnsFalse() {
         assertFalse(author.checkPin(9999));
         assertFalse(author.checkPin(0));
@@ -48,6 +63,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * setPin should update the stored PIN and affect checkPin accordingly.
+     */
     void testSetPin() {
         author.setPin(5678);
         assertEquals(5678, author.getPin());
@@ -56,12 +74,18 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * setName updates the author's name.
+     */
     void testSetName() {
         author.setName("NewUserName");
         assertEquals("NewUserName", author.getName());
     }
 
     @Test
+    /**
+     * Adding a new Day increases the days size and makes it searchable.
+     */
     void testAddDay_NewDay() {
         author.addDay(testDay2);
         assertEquals(1, author.getDaysSize());
@@ -69,6 +93,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * Adding a Day with an existing date overwrites previous entry.
+     */
     void testAddDay_OverwriteExistingDay() {
         // Add first day
         author.addDay(testDay2);
@@ -85,6 +112,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * Multiple distinct days can be added and queried.
+     */
     void testAddDay_MultipleDifferentDays() {
         author.addDay(testDay1);
         author.addDay(testDay2);
@@ -94,6 +124,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * Searching for non-existing dates returns false.
+     */
     void testSearchDays_NonExistingDay_ReturnsFalse() {
         author.addDay(testDay1);
         assertFalse(author.searchDays("2024-01-03"));
@@ -102,6 +135,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * getDayByDate returns the Day when present.
+     */
     void testGetDayByDate_ExistingDay() {
         author.addDay(testDay1);
         Day foundDay = author.getDayByDate(LocalDate.now().toString());
@@ -111,6 +147,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * getDayByDate returns null for missing dates.
+     */
     void testGetDayByDate_NonExistingDay() {
         author.addDay(testDay1);
         assertNull(author.getDayByDate("2024-01-03"));
@@ -119,12 +158,18 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * readDay returns the entry text for an existing day.
+     */
     void testReadDay_ExistingDay() {
         author.addDay(testDay1);
         assertEquals("Mats is pretty cool", author.readDay(LocalDate.now().toString()));
     }
 
     @Test
+    /**
+     * readDay returns null for missing days.
+     */
     void testReadDay_NonExistingDay() {
         author.addDay(testDay1);
         assertNull(author.readDay("2024-01-03"));
@@ -133,6 +178,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * getSortDays sorts days by date.
+     */
     void testGetSortDays_UnsortedList() {
         // Add days in non-chronological order
         Day day3 = new Day("2003-01-01", testEntry, testRating, testTitle);
@@ -153,12 +201,18 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * getSortDays handles empty lists.
+     */
     void testGetSortDays_EmptyList() {
         List<Day> sortedDays = author.getSortDays(author.getListDays());
         assertTrue(sortedDays.isEmpty());
     }
 
     @Test
+    /**
+     * getListDays returns a mutable list reference in current implementation.
+     */
     void testGetListDays_ReturnsCopyNotReference() {
         author.addDay(testDay1);
         List<Day> daysList = author.getListDays();
@@ -174,6 +228,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * printAll should not throw even though it prints to stdout.
+     */
     void testPrintAll_NoExceptionThrown() {
         // This test just ensures printAll doesn't throw exceptions
         // Since it's a void method that prints to console, we mainly test it doesn't crash
@@ -184,6 +241,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * findDaysByKeyword returns Day objects matching the keyword.
+     */
     void findDaysByKeyword_returnsMatchingDays() {
         Day day1 = new Day( "2024-01-01", "I drank coffee in the morning", 5, testTitle);
         Day day2 = new Day("2024-01-02", "Had tea in the vodka", 7, testTitle);
@@ -196,6 +256,9 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * findDatesByKeyword returns only date strings for matching days.
+     */
     void findDatesByKeyword_returnsOnlyDates() {
         Day day1 = new Day("2024-01-01", "I drank coffee in the morning", 5, testTitle);
         Day day2 = new Day( "2024-01-02", "Had tea in the afternoon", 6, testTitle);
@@ -208,6 +271,10 @@ public class AuthorTest {
     }
 
     @Test
+    /**
+     * findDaysByKeywordInRange returns days within the inclusive date range
+     * and can filter by keyword when supplied.
+     */
     void findDaysByKeywordInRange_returnsDaysInRange_andOptionalKeyword() {
         Day day1 = new Day("2024-01-01", "Coffee", 5, testTitle);
         Day day2 = new Day("2024-01-02", "Tea", 6, testTitle);
